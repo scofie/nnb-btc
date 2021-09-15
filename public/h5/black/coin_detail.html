@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport"
+		content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="../lib/bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" href="../fonts/iconfont.css">
+	<link rel="stylesheet" type="text/css" href="../css/common.css">
+	<link rel="stylesheet" type="text/css" href="../css/coin_detail.css" />
+	<link rel="stylesheet" type="text/css" href="../css/footer.css" />
+	<style>
+        .sell_out{
+            height: 118px;
+            overflow-y:scroll;
+                overflow-x: hidden;
+        }	
+    	.relative{
+	        position: relative;
+	        z-index: 5;
+	        height: 27px;
+	    }
+    	.quotes-bg-buy{
+	        position: absolute;
+	        background: #deeedc;
+	        top: 0;
+            right: -8%;
+            height: 27px;
+            z-index: -1;
+	    }
+	    .quotes-bg-sell{
+	        position: absolute;
+            background: #f7d8e0;
+            top: 0;
+            right: -8%;
+            height: 27px;
+            z-index: -1;
+	    }
+		.borrow{
+			width: 100%;
+			display: none;
+		}
+		.borrow-title{
+			display: flex;
+			flex-direction: row;
+			justify-content: space-between;
+			align-items: center;
+			padding: 10px 5%;
+		}
+		.borrow-title h1{
+			font-size: 14px;
+		}
+		.borrow-title img{
+			width: 20px;
+		}
+		.borrow-total{
+			padding: 10px 5%;
+			display: flex;
+			flex-direction: column;
+		}
+		.borrow-total article:last-child{
+			border-bottom:0;
+		}
+		.borrow-total article{
+			padding: 10px 0;
+			display: flex;
+			flex-direction: row;
+			justify-content: space-between;
+		}
+		.borrow-total article h1{
+			font-size: 14px;
+			word-break: break-all;
+			width: 50%;
+		}
+		.borrow-total article span{
+			font-size: 14px;
+		}
+		.borrow-line{
+			width: 100%;
+			height: 15px;
+			background: #f7f6fb;
+		}
+		.borrow-jie{
+			padding: 15px 5% 0;
+		}
+		.borrow-jie h1{
+			font-size: 16px;
+		}
+		.borrow-content{
+			padding: 0 5% 10px;
+		}
+		.borrow-bi{
+			display: flex;
+			flex-direction: row;
+			padding: 10px 0;
+		    border-bottom: 1px solid #f7f6fb;
+		}
+		.borrow-bi span{
+			color: #97a6ae;
+			font-size: 14px;
+			width: 50%;
+		}
+		.borrow-bi span:last-child,.borrow-list span:last-child{
+			text-align: right;
+		}
+		.borrow-list span:first-child{
+			color: #97a6ae;
+		}
+		.borrow-list span{
+			font-size: 14px;
+			width: 50%;
+		}
+		.borrow-list{
+			display: flex;
+			flex-direction: row;
+			padding: 10px 0;
+			border-bottom: 1px solid #f7f6fb;
+		}
+		.borrow-list:last-child{
+			border-bottom: 0;
+		}
+		.borrow-btn{
+			display: flex;
+			flex-direction: row;
+		    padding: 0px 5% 20px;
+		    justify-content: space-between;
+		}
+		.borrow-btn button{
+			color:#fff;
+			padding: 10px 0;
+		    background: #00c087;
+		    border: 0;
+		    width: 30%;
+		    border-radius: 5px;
+		    font-size: 16px;
+		}
+		.btn-borrow .layui-layer-btn {
+		    text-align: center;
+		    display: flex;
+		    width: 100%;
+		    padding-top: 5px!important;
+		    padding: 0 15px 20px;
+		}
+		.btn-borrow .layui-layer-btn .layui-layer-btn1{
+			width: calc(33.33% - 8px);
+			background:#049ddc;
+			color:#fff
+		}
+		.btn-borrow .layui-layer-btn .layui-layer-btn2{
+			width: calc(33.33% - 8px);
+			background:#049ddc;
+			color:#fff
+		}
+		.btn-borrow .layui-layer-btn .layui-layer-btn0{
+			width: calc(33.33% - 8px); 
+			background:#f7f6fb;
+			color:#333
+		}
+		.btn-borrow .layui-layer-btn a{
+			padding: 0;
+		    margin: 0;
+		    line-height: 44px;
+		    height: 44px;
+		    border: none;
+		    font-size: 16px;
+		    margin-right: 10px;
+		}
+		.control-that input::placeholder{
+			color:#000;
+		}
+		.equal{
+			display: none;
+			width: 100%;
+			word-break: break-all;
+			font-size: 12px;
+			color:#999;
+			margin-top: 5px;
+		}
+		.currency-price{
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+			width: 100%;
+		    line-height: 26px;
+		    border-radius: 2px;
+		    border: 1px solid #f1f1f1;
+		    margin-top: 15px;
+		    padding: 5px 10px;
+		    font-size: 12px;
+		    justify-content: space-between;
+		}
+		.use_legal_num{
+			font-size: 12px;
+		}
+		.currencyRate{
+			display: flex;
+			flex-direction: row;
+			margin: 10px 0;
+		}
+		.currencyRate span:nth-child(4){
+			margin-right: 0;
+		}
+		.currencyRate span{
+			margin-right: 4%;
+		    border: 1px solid #ddd;
+		    width: 22%;
+		    text-align: center;
+		    font-size: 12px;
+		}
+		.use_deal_price_active{
+			color:#fff;
+			background: #00c087;
+			border: 1px solid #00c087;
+		}
+		.use_deal_price{
+			font-size: 12px;
+		}
+		.coinDeal{
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+			margin-bottom: 10px;
+		}
+		.coinDeal-img{
+			border: 1px solid #ddd;
+		    width: 30px;
+		    margin-right: 5px;
+		}
+		.list-item-title{
+			    display: flex;
+			    flex-direction: row;
+			    justify-content: space-between;
+			}
+			.list-item-title article time{
+			    color:#999;
+			}
+			.list-item-content{
+			     display: flex;
+			    flex-direction: row;
+			   flex-wrap: wrap;
+			}
+			.list-item-content article span{
+			    margin-bottom: 3px;
+			    color:#999;
+			}
+			.list-item-content article:nth-child(2),.list-item-content article:nth-child(5){
+			    text-align: center;
+			}
+			.list-item-content article:nth-child(3),.list-item-content article:nth-child(6){
+			    text-align: right;
+			}
+			.list-item-content article:nth-child(3n){
+			    margin-right: 0;
+			}
+			.list-item-content article{
+			    word-break: break-all;
+			    font-size: 12px;
+			    margin-top: 10px;
+			    width: 32.5%;
+			    margin-right: 1%;
+			    display: flex;
+			    flex-direction: column;
+			}
+			.list-item{
+			    padding: 10px 0 ;
+			    border-bottom: 1px solid #ddd;
+			}
+			.clickMore{
+			    margin-top: 10px;
+			}
+			.selectTradeView{
+		    display: flex;
+		    flex-direction: row;
+		}
+		.selectTradeTitle-sj{
+		    border: 1px solid #eee;
+            display: block;
+            padding: 5px 5%;
+            width: 100%;
+            /*margin-right: 5%;*/
+		    position: relative;
+		}
+		.selectTradeTitle-bs{
+		    color:#e3394e;
+		    border: 1px solid #eee;
+            display: block;
+            padding: 5px 5%;
+            width: 48%;
+		}
+		.selectTradeTitle-sj-title{
+		    display: flex;
+		    flex-direction: row;
+		    align-items: center;
+		    justify-content: space-between;
+		}
+		.selectTradeTitle-sj-title img{
+		    width: 15px;
+		}
+		.selectTradeTitle-sj-ps span{
+		    color: #333;
+		    display: block;
+	        padding: 7px 10px;
+	        border-radius: 5px;
+		}
+		.selectTradeTitle-sj-ps span img{
+		    width: 15px;
+		    margin-left: 10px;
+		}
+		.selectTradeTitle-sj-ps{
+		    position: absolute;
+		    top: 30px;
+		    left: 0;
+		    padding: 10px 3%;
+		    background: #eee;
+		    width: 100%;
+		}
+		.bgBalck .control input{
+		    border: 1px solid #f1f1f1;
+		}
+	</style>
+</head>
+
+<body class="bgBalck">
+	<div id="app" v-cloak>
+		<!--<div class="borrow">-->
+		<!--	<div class="borrow-title">-->
+		<!--		<h1>余币宝账户</h1>-->
+		<!--		<img src="images/new/doubt.png">-->
+		<!--	</div>-->
+		<!--	<div class="borrow-total">-->
+		<!--		<article>-->
+		<!--			<h1>余币宝账户总资产</h1>-->
+		<!--			<span>≈{{zhiyaList.usdt_balance || 0}} USDT</span>-->
+		<!--		</article>-->
+		<!--		<article>-->
+					<!--<h1>余币宝总负债（借币+币息）</h1>-->
+		<!--			<h1>余币宝总负债（总借款+总利息）- 已还金额）</h1>-->
+		<!--			<span>≈{{zhiyaList.total_loan || 0}} USDT</span>-->
+		<!--		</article>-->
+		<!--	</div>-->
+		<!--	<div class="borrow-line"></div>-->
+		<!--	<div class="borrow-jie"><h1>USDT交易对借币</h1></div>-->
+		<!--	<div class="borrow-content">-->
+		<!--		<div class="borrow-bi">-->
+		<!--			<span></span>-->
+					<!--<span>BTC</span>-->
+		<!--			<span>USDT</span>-->
+		<!--		</div>-->
+		<!--		<div class="borrow-list">-->
+		<!--			<span>可借额度</span>-->
+					<!--<span>0.00</span>-->
+		<!--			<span>{{zhiyaList.can_loan || 0}}</span>-->
+		<!--		</div>-->
+				<!--<div class="borrow-list">-->
+				<!--	<span>已借</span>-->
+					<!--<span>0.00</span>-->
+				<!--	<span>0.000000</span>-->
+				<!--</div>-->
+		<!--		<div class="borrow-list">-->
+		<!--			<span>币息</span>-->
+					<!--<span>0.00</span>-->
+		<!--			<span>0.003%</span>-->
+		<!--		</div>-->
+		<!--	</div>-->
+			<!--<div class="borrow-btn">-->
+			<!--	<button style="background:#f7f6fb;color:#333">划转</button>-->
+			<!--	<button>借币</button>-->
+			<!--	<button>还币</button>-->
+			<!--</div>-->
+		<!--</div>-->
+		<div id="header" >
+			<div class="header ">
+				<p class="pull-left sideOpen" @click="leftShows">
+					<img class="mt10 leval-header-img" src="../images/list3.png" />
+					<span class="trade-name">{{leverDatas.currencyName}}/{{leverDatas.legalName}}</span>
+				</p>
+				<p class="pull-right right">
+					<img class="lever-detail" @click="linkLine" src="../images/datamap1.png" alt="">
+					<!-- <img class="recordList" src="images/record1.png" alt=""> -->
+				</p>
+				<!--<div style="float: right;border-radius: 5px;border: 1px solid #00c087;padding: 0 10px;height: 30px;line-height: 30px;margin-top: 4px;color: #00c087;margin-right: 55px;" @click="borrow()">质押</div>-->
+			</div>
+			<!-- <div class="header-center bgColor">
+				<div>
+					<span class="legal_title active place">开仓</span>
+					<span class="currency_title positions">持仓</span>
+				</div>
+			</div> -->
+			<!-- <div class="header-spaces"></div> -->
+			<div class="header-space"></div>
+		</div>
+		<div id="place">
+			<div id="data" class=" pb10">
+				<div class="pull-left active">
+					<div class="deal flex between">
+						<span :class="type=='buy'?'pull-left buy business bor':'pull-left buy business'">
+							<a data-localize="transaction.buy" :class="type=='buy'?'col':''" @click="selectType('buy')">买入</a>
+							<em></em>
+						</span>
+						<span :class="type=='sell'?'sell business bor2':'sell business'">
+							<a data-localize="transaction.sell" :class="type=='sell'?'col2':''" @click="selectType('sell')">卖出</a>
+						</span>
+					</div>
+					<div class="selectTradeView">
+					    <div class="selectTradeTitle-sj">
+					        <div class="selectTradeTitle-sj-title" @click="selectShow()">
+					            <span>{{leverDatas.selectStatus===0?getlg('xianjia'):getlg('shijia')}}</span>
+					            <img src="../images/new/btm_select.png">
+					        </div>
+					        <div class="selectTradeTitle-sj-ps" v-show="select_tab">
+					            <span @click="selectTrade(0)" :style="leverDatas.selectStatus===0?'background:#fff':''" data-localize="transaction.limit">限价<img v-show="leverDatas.selectStatus===0" src="../images/new/select_sj.png"></span>
+					            <span @click="selectTrade(1)" data-localize="transaction.marketprice" :style="leverDatas.selectStatus===1?'background:#fff':''">市价<img v-show="leverDatas.selectStatus===1" src="../images/new/select_sj.png"></span>
+					        </div>
+					    </div>
+					</div>
+					<!--<div class="select-price clearfix">-->
+					<!--	<span class="fl active" data-id="0" data-localize="transaction.limit" @click="selectTrade(0)">限价</span>-->
+					<!--	<span class="fr " data-id="1" data-localize="transaction.marketprice"-->
+					<!--		@click="selectTrade(1)">市价</span>-->
+					<!--</div>-->
+					<div class="control control-that" style="display:none"><input type="number"  placeholder="以当前最优价格交易" readonly="readonly" data-localize="deals.you"></div>
+					<div class="control control-num"  style="display:block"><input type="number" v-model="leverDatas.controlPrice" @input="inputPrice"
+							data-localize="deals.inputprice" placeholder="输入价格"></div>
+					<div class="equal">≈{{leverDatas.controlPrice * leverDatas.rmbRate || '0.00' | toFixed4}}CNY</div>
+					<div class="currency-price">
+						<input type="number" placeholder="数量" @input="currencyNumInput()" v-model="leverDatas.currencyNum">
+						<span>{{leverDatas.currencyName}}</span>
+					</div>
+					<p class="use_legal_num mt5 colorGrey" v-if="type=='buy'"><span data-localize="transaction.avaiable">可用</span> {{leverDatas.useLegalNum}} {{leverDatas.legalName}}</p>
+					<p class="use_legal_num mt5 colorGrey" v-if="type=='sell'"><span data-localize="transaction.avaiable">可用</span> {{leverDatas.usebibiNum}} {{leverDatas.currencyName}}</p>
+					<div class="currencyRate">
+						<span v-for="(item,index) in currencyRate" @click="currencyRateTab(index)" :class="currencyRateIndex===index?'use_deal_price_active':'use_deal_price'">{{item.title}}</span>
+					</div>
+					<div class="use_deal_price"><span data-localize="transaction.turnover">交易额</span> {{leverDatas.resultPrice | toFixed8}} USDT</div>
+					<div class="transactionAmount mb10" @click="submitBtn">
+						<button class="buy_sell" :class="type=='sell'?'activesell':''"><span
+								>{{type=='buy'?getlg('buy'):getlg('sell')}}</span><span
+								class="legal_title"></span></button>
+					</div>
+				</div>
+
+				<div class="pull-right active1">
+					<div v-if="coinDealIndex==0">
+					<!--卖出-->
+					<div class="ft10color1">
+						<div class="flex alcenter around pb10  ft12 colorGrey">
+							<!-- <div class="flex1 tl">盘口</div> -->
+							<div class="flex1 mr5" data-localize="transaction.price">价格</div>
+							<div class="flex1 tr" data-localize="assets.num">数量</div>
+						</div>
+						<div>
+							<div class="sell_out">
+								<div class="flex alcenter around relative" v-for="(item,index) in sellOut">
+								    <div class="quotes-bg-sell" :style="item.bg?'width:'+item.bg+'%':''"></div>
+									<!-- <div class="gray ft12 widths1">{{sellOut.length - index}}</div> -->
+									<div class="red ft12 flex2"  @click="ckPrice(item[0])">{{item[0] || '0.0000' | toFixed4}}</div>
+									<div class="flex2 tr gray ft12">{{item[1] * 255 || '0.00' | toFixeds}}</div>
+								</div>
+							</div>
+							<!-- <p style="font-size:16px;color:#e3046f;margin-top: 10px;" class="new_price"></p>
+							<p style="margin-bottom:10px;"><span class="cny_price colorGrey ft12"></span></p> -->
+							<p class="new_price red mt10" @click="ckPrice(leverDatas.lastprice)">{{leverDatas.lastprice || '0.0000' | toFixed4}}</p>
+							<p style="margin-bottom:10px;"><span
+									class="cny_price colorGrey ft12">≈{{leverDatas.lastprice * leverDatas.rmbRate || '0.00' | toFixed4}}CNY</span>
+							</p>
+						</div>
+					</div>
+					<!--买入-->
+					<div class="ft10color1">
+						<div class="buyIn">
+							<div class="flex alcenter around relative" v-for="(item,index) in buyOut" v-if="index < 5">
+							    <div class="quotes-bg-buy" :style="item.bg?'width:'+item.bg+'%':''"></div>
+								<!-- <div class=" gray ft12 widths1">{{index + 1}}</div> -->
+								<div class="gre flex2 ft12" @click="ckPrice(item[0])">{{item[0] || '0.0000' | toFixed4}}</div>
+								<div class="flex2 tr gray ft12">{{item[1] * 255 || '0.00' | toFixeds}}</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div v-if="coinDealIndex==1">
+					<p class="new_price red mt10" @click="ckPrice(leverDatas.lastprice)">{{leverDatas.lastprice || '0.0000' | toFixed4}}</p>
+					<p style="margin-bottom:10px;"><span
+							class="cny_price colorGrey ft12">≈{{leverDatas.lastprice * leverDatas.rmbRate || '0.00' | toFixed4}}CNY</span>
+					</p>
+					<div class="flex alcenter around pb10  ft12 colorGrey">
+						<!-- <div class="flex1 tl">盘口</div> -->
+						<div class="flex1 mr5" data-localize="transaction.price">价格</div>
+						<div class="flex1 tr" data-localize="assets.num">数量</div>
+					</div>
+					<!--买入-->
+					<div class="ft10color1">
+						<div class="buyIn">
+							<div class="flex alcenter around relative" v-for="(item,index) in buyOut" v-if="index < 5">
+							    <div class="quotes-bg-buy" :style="item.bg?'width:'+item.bg+'%':''"></div>
+								<!-- <div class=" gray ft12 widths1">{{index + 1}}</div> -->
+								<div class="gre flex2 ft12" @click="ckPrice(item[0])">{{item[0] || '0.0000' | toFixed4}}</div>
+								<div class="flex2 tr gray ft12">{{item[1] * 255 || '0.00' | toFixeds}}</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div v-if="coinDealIndex==2">
+					<!--卖出-->
+					<div class="ft10color1">
+						<div class="flex alcenter around pb10  ft12 colorGrey">
+							<!-- <div class="flex1 tl">盘口</div> -->
+							<div class="flex1 mr5" data-localize="transaction.price">价格</div>
+							<div class="flex1 tr" data-localize="assets.num">数量</div>
+						</div>
+						<div>
+							<div class="sell_out">
+								<div class="flex alcenter around relative" v-for="(item,index) in sellOut">
+								    <div class="quotes-bg-sell" :style="item.bg?'width:'+item.bg+'%':''"></div>
+									<!-- <div class="gray ft12 widths1">{{sellOut.length - index}}</div> -->
+									<div class="red ft12 flex2"  @click="ckPrice(item[0])">{{item[0] || '0.0000' | toFixed4}}</div>
+									<div class="flex2 tr gray ft12">{{item[1] * 255 || '0.00' | toFixeds}}</div>
+								</div>
+							</div>
+							<!-- <p style="font-size:16px;color:#e3046f;margin-top: 10px;" class="new_price"></p>
+							<p style="margin-bottom:10px;"><span class="cny_price colorGrey ft12"></span></p> -->
+							<p class="new_price red mt10" @click="ckPrice(leverDatas.lastprice)">{{leverDatas.lastprice || '0.0000' | toFixed4}}</p>
+							<p style="margin-bottom:10px;"><span
+									class="cny_price colorGrey ft12">≈{{leverDatas.lastprice * leverDatas.rmbRate || '0.00' | toFixed4}}CNY</span>
+							</p>
+						</div>
+					</div>
+				</div>
+				<!--<div class="coinDeal">-->
+				<!--	<img src="images/coin/all_deal.png" :style="coinDealIndex==0?'border:1px solid #337ab7':'border:1px solid #ddd'" class="coinDeal-img" @click="coinDeal(0)">-->
+				<!--	<img src="images/coin/deal_green.png" :style="coinDealIndex==1?'border:1px solid #337ab7':'border:1px solid #ddd'" class="coinDeal-img" @click="coinDeal(1)">-->
+				<!--	<img src="images/coin/deal_red.png" :style="coinDealIndex==2?'border:1px solid #337ab7':'border:1px solid #ddd'" class="coinDeal-img" @click="coinDeal(2)">-->
+				<!--</div>-->
+				</div>
+			</div>
+			<div id="mask1" @click="close">
+				<div id="Limited">
+					<ul>
+						<li></li>
+						<li class="cancel" data-localize="transaction.cancel">取消</li>
+					</ul>
+				</div>
+			</div>
+			<div id="entrust" style="margin-bottom: 50px;" class=" mt10">
+				<div>
+					<h3 class="pull-left " data-localize="deals.current">
+						当前委托
+					</h3>
+					<p class="pull-right filtrate all">
+						 <img src="../images/record1.png" /> 
+						<span data-localize="deals.all" @click="recordList">
+							全部
+						</span>
+					</p>
+					<ul class="list_ul" style="margin-top:35px;">
+						<!--<li class="ft12 clearfix colorGrey bdb">-->
+						<!--	<span class="width1 tc fl pb5" data-localize="deals.type">类型</span>-->
+						<!--	<span class="width2 tc fl pb5" data-localize="assets.time">时间</span>-->
+						<!--	<span class="width2 tc fl pb5" data-localize="transaction.price">价格</span>-->
+						<!--	<span class="width2 tc fl pb5" data-localize="assets.num">数量</span>-->
+						<!--	<span class="width11 tc fl pb5" data-localize="transaction.option">操作</span>-->
+						<!--</li>-->
+						<!--<li>-->
+						<!--	<ul class="conplete_list colorGrey ft12" style="padding: 10px 0;">-->
+						<!--		<li class="clearfix" v-for="item in completeList" :key="item.id" style="padding:5px 0;">-->
+						<!--			<span class="width1 tc fl">{{item.type == 1 ? getlg('kd'):getlg('zk')}}</span>-->
+						<!--			<span class="width2 tc fl">{{item.time}}</span>-->
+						<!--			<span class="width2 tc fl" v-if="item.type==1">{{item.price || '0.0000' | toFixed4}}<img style="width:10px;margin-left:3px" src="images/buy.png" alt=""></span>-->
+						<!--			<span class="width2 tc fl" v-if="item.type!=1">{{item.price || '0.0000' | toFixed4}}<img style="width:10px;margin-left:3px" src="images/sell.png" alt=""></span>-->
+						<!--			<span class="width2 tc fl">{{item.number || '0.00' | toFixeds}}</span>-->
+						<!--			<a class='pingcang white tc width1 fl' @click="sellLoss(item.id)">{{getlg('pcang')}}</a>-->
+						<!--		</li>-->
+						<!--	</ul>-->
+						<!--</li>-->
+						<div class="list-item" v-for="(item,index) in weituoList">
+        			        <div class="list-item-title">
+        			            <article>
+        			                <span :style="item.type==1?'color:#00c087':'color:#e3046f'">{{item.type==1?getlg('buy'):getlg('sell')}}</span>
+        			                <em>{{item.symbol}}</em>
+        			                <time>{{item.created_at}}</time>
+        			            </article>
+        			            <aside v-if="item.status===3" style="color:#999">{{getlg('revoked')}}</aside>
+        			            <aside v-if="item.status===2" style="color:#00c087">{{getlg('finished')}}</aside>
+        			            <aside v-if="item.status===1" style="color:#f0b90b" @click="closeOrder(item.id,index)">{{getlg('quxiaoweituo')}}</aside>
+        			        </div>
+        			        <div class="list-item-content">
+        			            <article>
+        			                <span>{{getlg('fee')}}</span>
+        			                <em>{{item.trade_amount*item.target_price*item.charge_fee | toFixed4}}</em>
+        			            </article>
+        			            <article>
+        			                <span>{{getlg('entrustPrice')}}({{item.symbol_two}})</span>
+        			                <em>{{item.target_price | toFixeds}}</em>
+        			            </article>
+        			            <article>
+        			                <span>{{getlg('weituoliang')}}({{item.symbol_one}})</span>
+        			                <em>{{item.trade_amount | toFixed4}}</em>
+        			            </article>
+        			            <article>
+        			                <span>{{getlg('cgze')}}({{item.symbol_two}})</span>
+        			                <em>{{item.status==2?item.target_price*item.trade_amount:'0.0000'| toFixed4}}</em>
+        			            </article>
+        			            <article>
+        			                <span>{{getlg('cgjj')}}({{item.symbol_two}})</span>
+        			                <em>{{item.status==2?item.target_price:'' | toFixeds}}</em>
+        			            </article>
+        			            <article>
+        			                <span>{{getlg('cgl')}}({{item.symbol_one}})</span>
+        			                <em>{{item.status==2?item.trade_amount:'' | toFixed4}}</em>
+        			            </article>
+        			        </div>
+        			     </div>
+						<li class="clickMore tc colorGrey" data-localize="deals.clickLoad" @click="reload">点击加载</li>
+					</ul>
+
+				</div>
+				<div class="no_record" style="display:none;">
+					<p>
+						<img src="../images/anonymous.png" />
+					</p>
+					<p data-localize="transaction.nodata">暂无记录</p>
+				</div>
+			</div>
+		</div>
+
+
+		<div id="sideColumn" class="bgBalck" >
+			<h4>
+				<!-- <span class="side">HBG</span> -->
+				<!-- <img src="images/arrows.png" class="pull-right sideclose" /> -->
+			</h4>
+			<div class="ft20 bold bdb pl20 texts-lever" data-localize="contract.bibi">币币</div>
+			<!-- <ol class="tabs hide">
+			</ol>
+			<ul class="ul" style="display:block">
+
+			</ul> -->
+			<div class="tabs">
+				<div class="currency_name" v-for="(item,index) in leftData" :key="item.id" @click="legalTab(item.id)">
+					<!-- <div :class="['pb10 tc blue',{'side side2':leverDatas.legalId==item.id}]">{{item.name}}</div> -->
+					<ul class="ul" style="display:block" v-if="item.id == leverDatas.legalId">
+						<li :class="['legal_name flex between',{'bg_active':leverDatas.currencyId==part.currency_id}]"
+							v-for="part in item.quotation" v-if="part.is_display == 1&&part.open_coin_trade == 1"
+							@click="currencyTab(part.legal_name,part.currency_id,part.currency_name,part.lever_share_num,part.spread,part.lever_trade_fee,part.rmb_relation)">
+							<strong><span>{{part.currency_name}}</span><b>/{{part.legal_name}}</b></strong>
+							<p :class="part.change < 0 ? 'fontC' : 'gre'">
+								<span>{{part.now_price || '0.00' | toFixed4}}</span>
+								<!-- <span class="pull-right">{{part.change || '0.000' | toFixeds}}%</span> -->
+							</p>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="modal-submit" v-show='modalShow'>
+			<ul class="comfirm-modal">
+				<li>
+					<p class="name">{{leverDatas.currencyName}}/{{leverDatas.legalName}}</p>
+				</li>
+				<li>
+					<p>{{getlg('ttype')}}</p>
+					<p class="type">{{type=='buy'?getlg('buy'):getlg('sell')}}</p>
+				</li>
+				<li>
+					<p>{{getlg('orderQuantity')}}</p>
+					<p class="share">{{leverDatas.currencyNum}} {{leverDatas.currencyName}}</p>
+				</li>
+				<li>
+					<p>{{getlg('commissionPrice')}}</p>
+					<p class="muit">{{leverDatas.selectStatus===0?leverDatas.controlPrice:leverDatas.bestPrice}}</p>
+				</li>
+				<li>
+					<p>{{getlg('ttotal')}}</p>
+					<p class="bondPrice">{{leverDatas.resultPrice | toFixed4}}</p>
+				</li>
+				<li>
+					<p>{{getlg('fee')}}</p>
+					<p class="bondPrice">{{leverDatas.resultPrice*leverDatas.usebibiFee | toFixed4}}</p>
+				</li>
+				
+			</ul>
+		</div>
+		<!-- 持仓列表  -->
+		<!-- <div class="position" style="display:none;">
+			<h4 class="position-name bgColor"></h4>
+			<p class='fengxian' data-localize="deals.risk">风险率：</p>
+			<ul class="position-list">
+
+			</ul>
+			<button style="text-align:center;background-color: rgba(0, 0, 0, 0);border: none;outline: none;width: 100%;" class="more mt15" data-localize="transaction.getmore">加载更多</button>
+			<div class="no_records" style="display:none;">
+				<p>
+					<img src="images/anonymous.png" />
+				</p>
+				<p data-localize="transaction.nodata">暂无记录</p>
+			</div>
+		</div> -->
+	</div>
+	<!-- 一键平仓 -->
+	<!-- <div class="stop-trade clearfix">
+		<p class="fl"><span data-localize="deals.total">持仓总盈亏：</span> <span class="total-pro"></span></p>
+		<button class="fr total-btn" type="button" data-localize="deals.onekey">一键平仓</button>
+	</div> -->
+	<!-- 修改弹窗 -->
+	<div style="height:50px;"></div>
+	 <footer>
+		<a href="index.html">
+			<div>
+				<p class="img img0"></p>
+				<!-- <i class="iconfont icon-yemian-copy"></i> -->
+				<span data-localize="footer.home">首页</span>
+			</div>
+		</a>
+		<!-- <a href="market.html">
+            <div>
+                <p class="img img1"></p>
+                <span data-localize="footer.quotation">行情</span>
+            </div>
+        </a> -->
+		<a href="assets.html">
+			<div>
+				<p class="img img1"></p>
+				<!-- <i class="iconfont icon-jiaoyihangqing"></i> -->
+				<span data-localize="footer.assets">资产</span>
+			</div>
+		</a> <a href="trades.html">
+			<div>
+				<p class="img img3"></p>
+				<span data-localize="footer.transaction">交易</span>
+			</div>
+		</a>
+		<!-- <a href="LeveragedDeals.html">
+            <div>
+                <p class="img img3"></p>
+                <span data-localize="contract.contract">合约</span>
+            </div>
+        </a> -->
+		<a href="fiatrad.html">
+			<div>
+				<p class="img img2"></p>
+				<!-- <i class="iconfont icon-jiaoyiguanli"></i> -->
+				<span data-localize="index.legal">法币交易</span>
+			</div>
+		</a> <a href="personal.html">
+			<div>
+				<p class="img img4"></p>
+				<!-- <i class="iconfont icon-wode"></i> -->
+				<span data-localize="footer.personal">我的</span>
+			</div>
+		</a>
+	</footer>
+	<script type="text/javascript" src="../lib/jquery-2.1.1.min.js"></script>
+	<script type="text/javascript" src="../lib/vue.min.js"></script>
+	<script type="text/javascript" src="../javascripts/socket.io.js"></script>
+	<script type="text/javascript" src="../javascripts/jquery.cookie.js"></script>
+	<script type="text/javascript" src="../lib/layer_mobile/layer.js"></script>
+	<script type="text/javascript" src="../lib/jquery.localize.min.js?v=10"></script>
+	<script type="text/javascript" src="../lib/language_cookie.js"></script>
+	<script type="text/javascript" src="../javascripts/main.js"></script>
+	<script type="text/javascript" src="../javascripts/coin_detail.js"></script>
+</body>
+
+</html>

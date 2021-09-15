@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="css/common.css">
+		<title>委托</title>
+		<style type="text/css">
+		.mask{
+			    position: fixed;
+			    top: 0;
+			    left: 0;
+			    width: 100%;
+			    height: 100%;
+			    background: rgba(0,0,0,0.5);
+			}
+			.weituo{
+			    margin-bottom: 15px;
+				display: flex;
+				flex-direction: row;
+				justify-content: space-between;
+			}
+			.weituo-list span{
+				margin-right: 5px;
+			}
+			.container{
+				padding: 10px 3%;
+			}
+			.fixed{
+				position: fixed;
+				top: 0;
+				left: 0;
+				height: 100%;
+				width: 100%;
+			}
+			.fixed-content{
+				position: fixed;
+				background: #fff;
+				width: 94%;
+				margin: 0 3%;
+				bottom: 2%;
+				z-index: 99;
+				text-align: center;
+			}
+			.fixed-bg{
+				height: 10px;
+				background: #ddd;
+				width: 100%;
+			}
+			.fixed-buy{
+				border-bottom: 1px solid #ddd;
+			}
+			.fixed-buy,.fixed-sell,.fixed-close{
+				padding: 10px 0;
+			}
+			.weituo-buy{
+				display: flex;
+				flex-direction: row;
+				align-items: center;
+			}
+			.weituo-buy img{
+				width: 20px;
+			}
+			.tabActive{
+				font-size: 16px;
+				color:#f0b90b;
+			}
+			.nodata{
+				text-align: center;
+				margin-top: 30%;
+			}
+			.nodata p{
+				color:#999;
+			}
+			.nodata img{
+				width: 100px;
+			}
+			.header{
+			    border-bottom: 0;
+			}
+			.list-item-title{
+			    display: flex;
+			    flex-direction: row;
+			    justify-content: space-between;
+			}
+			.list-item-title article time{
+			    color:#999;
+			}
+			.list-item-content{
+			     display: flex;
+			    flex-direction: row;
+			   flex-wrap: wrap;
+			}
+			.list-item-content article span{
+			    margin-bottom: 3px;
+			    color:#999;
+			}
+			.list-item-content article:nth-child(2),.list-item-content article:nth-child(5){
+			    text-align: center;
+			}
+			.list-item-content article:nth-child(3),.list-item-content article:nth-child(6){
+			    text-align: right;
+			}
+			.list-item-content article:nth-child(3n){
+			    margin-right: 0;
+			}
+			.list-item-content article{
+			    word-break: break-all;
+			    font-size: 12px;
+			    margin-top: 10px;
+			    width: 32.5%;
+			    margin-right: 1%;
+			    display: flex;
+			    flex-direction: column;
+			}
+			.list-item{
+			    padding: 10px 0 ;
+			    border-bottom: 1px solid #ddd;
+			}
+		</style>
+	</head>
+	<body class="bgWhite">
+		<div id="app" v-cloak>
+		<header class="header">
+            <a class="back mt5" href="javascript:history.go(-1)">
+               
+            </a>
+            <h4 class="ft20 blod"></h4>
+		</header>
+		<div class="header-space"></div>
+		<div class="container">
+			<div class="weituo">
+				<div class="weituo-list">
+					<span v-for="(item,index) in menuList" @click="tabMenu(index)" :class="tabIndex==index?'tabActive':''">{{item}}</span>
+				</div>
+				<div class="weituo-buy" @click="openMask()" v-show="tabIndex==1">
+					<span>{{maskIndex?sellTitle:buyTitle}}</span>
+					<img src="images/coin/arrow_btm.png">
+				</div>
+			</div>
+			<div class="list-item" v-for="(item,index) in weituoList" v-show="tabIndex===0">
+		        <div class="list-item-title">
+		            <article>
+		                <span :style="item.type==1?'color:#00c087':'color:#e3046f'">{{item.type==1?getlg('buy'):getlg('sell')}}</span>
+		                <em>{{item.symbol}}</em>
+		                <time>{{item.created_at}}</time>
+		            </article>
+		            <aside v-if="item.status===3" style="color:#999">{{getlg('revoked')}}</aside>
+		            <aside v-if="item.status===2" style="color:#00c087">{{getlg('finished')}}</aside>
+		            <aside v-if="item.status===1" style="color:#f0b90b" @click="closeOrder(item.id,index)">{{getlg('quxiaoweituo')}}</aside>
+		        </div>
+		        <div class="list-item-content">
+		            <article>
+		                <span>{{getlg('fee')}}</span>
+		                <em>{{item.trade_amount*item.target_price*item.charge_fee | toFixed4}}</em>
+		            </article>
+		            <article>
+		                <span>{{getlg('entrustPrice')}}({{item.symbol_two}})</span>
+		                <em>{{item.target_price | toFixeds}}</em>
+		            </article>
+		            <article>
+		                <span>{{getlg('weituoliang')}}({{item.symbol_one}})</span>
+		                <em>{{item.trade_amount | toFixed4}}</em>
+		            </article>
+		            <article>
+		                <span>{{getlg('cgze')}}({{item.symbol_two}})</span>
+		                <em>{{item.status==2?item.target_price*item.trade_amount:'0.0000'| toFixed4}}</em>
+		            </article>
+		            <article>
+		                <span>{{getlg('cgjj')}}({{item.symbol_two}})</span>
+		                <em>{{item.status==2?item.target_price:'' | toFixeds}}</em>
+		            </article>
+		            <article>
+		                <span>{{getlg('cgl')}}({{item.symbol_one}})</span>
+		                <em>{{item.status==2?item.trade_amount:'' | toFixed4}}</em>
+		            </article>
+		        </div>
+		     </div>
+		     <div class="list-item" v-for="(item,index) in weituoList" v-show="tabIndex===1  && maskIndex===0 && item.type===1">
+		        <div class="list-item-title">
+		            <article>
+		                <span :style="item.type==1?'color:#00c087':'color:#e3046f'">{{item.type==1?getlg('buy'):getlg('sell')}}</span>
+		                <em>{{item.symbol}}</em>
+		                <time>{{item.created_at}}</time>
+		            </article>
+		            <aside v-if="item.status===3" style="color:#999">{{getlg('revoked')}}</aside>
+		            <aside v-if="item.status===2" style="color:#00c087">{{getlg('finished')}}</aside>
+		            <aside v-if="item.status===1" style="color:#f0b90b" @click="closeOrder(item.id,index)">{{getlg('quxiaoweituo')}}</aside>
+		        </div>
+		        <div class="list-item-content">
+		            <article>
+		                <span>{{getlg('fee')}}</span>
+		                <em>{{item.trade_amount*item.target_price*item.charge_fee | toFixed4}}</em>
+		            </article>
+		            <article>
+		                <span>{{getlg('entrustPrice')}}({{item.symbol_two}})</span>
+		                <em>{{item.target_price | toFixeds}}</em>
+		            </article>
+		            <article>
+		                <span>{{getlg('weituoliang')}}({{item.symbol_one}})</span>
+		                <em>{{item.trade_amount | toFixed4}}</em>
+		            </article>
+		            <article>
+		                <span>{{getlg('cgze')}}({{item.symbol_two}})</span>
+		                <em>{{item.status==2?item.target_price*item.trade_amount:'0.0000'| toFixed4}}</em>
+		            </article>
+		            <article>
+		                <span>{{getlg('cgjj')}}({{item.symbol_two}})</span>
+		                <em>{{item.status==2?item.target_price:'' | toFixeds}}</em>
+		            </article>
+		            <article>
+		                <span>{{getlg('cgl')}}({{item.symbol_one}})</span>
+		                <em>{{item.status==2?item.trade_amount:'' | toFixed4}}</em>
+		            </article>
+		        </div>
+		     </div>
+		     <div class="list-item" v-for="(item,index) in weituoList" v-show="tabIndex===1 && maskIndex===1 && item.type===2">
+		       <div class="list-item-title">
+		            <article>
+		                <span :style="item.type==1?'color:#00c087':'color:#e3046f'">{{item.type==1?getlg('buy'):getlg('sell')}}</span>
+		                <em>{{item.symbol}}</em>
+		                <time>{{item.created_at}}</time>
+		            </article>
+		            <aside v-if="item.status===3" style="color:#999">{{getlg('revoked')}}</aside>
+		            <aside v-if="item.status===2" style="color:#00c087">{{getlg('finished')}}</aside>
+		            <aside v-if="item.status===1" style="color:#f0b90b" @click="closeOrder(item.id,index)">{{getlg('quxiaoweituo')}}</aside>
+		        </div>
+		        <div class="list-item-content">
+		            <article>
+		                <span>{{getlg('fee')}}</span>
+		                <em>{{item.trade_amount*item.target_price*item.charge_fee | toFixed4}}</em>
+		            </article>
+		            <article>
+		                <span>{{getlg('entrustPrice')}}({{item.symbol_two}})</span>
+		                <em>{{item.target_price | toFixeds}}</em>
+		            </article>
+		            <article>
+		                <span>{{getlg('weituoliang')}}({{item.symbol_one}})</span>
+		                <em>{{item.trade_amount | toFixed4}}</em>
+		            </article>
+		            <article>
+		                <span>{{getlg('cgze')}}({{item.symbol_two}})</span>
+		                <em>{{item.status==2?item.target_price*item.trade_amount:'0.0000'| toFixed4}}</em>
+		            </article>
+		            <article>
+		                <span>{{getlg('cgjj')}}({{item.symbol_two}})</span>
+		                <em>{{item.status==2?item.target_price:'' | toFixeds}}</em>
+		            </article>
+		            <article>
+		                <span>{{getlg('cgl')}}({{item.symbol_one}})</span>
+		                <em>{{item.status==2?item.trade_amount:'' | toFixed4}}</em>
+		            </article>
+		        </div>
+		     </div>
+			<div class="nodata" v-if="!weituoList.length">
+			   	<img src="images/anonymous.png">
+				<p data-localize="transaction.nodata">暂无记录</p>
+			</div>
+		</div>
+		<div class="fixed" v-show="msBool">
+			<div class="mask"></div>
+			<div class="fixed-content">
+				<div class="fixed-buy" @click="maskBuy()">买入</div>
+				<div class="fixed-sell" @click="maskSell()">卖出</div>
+				<div class="fixed-bg"></div>
+				<div class="fixed-close" @click="maskClose()">取消</div>
+			</div>
+		</div>
+		</div>
+		<script type="text/javascript" src="lib/jquery-2.1.1.min.js"></script>
+		<script type="text/javascript" src="lib/vue.min.js"></script>
+		<script type="text/javascript" src="lib/jquery.localize.min.js?v=10"></script>
+		<script type="text/javascript" src="lib/language_cookie.js"></script>
+		<script type="text/javascript" src="lib/layer_mobile/layer.js"></script>
+		<script type="text/javascript" src="javascripts/main.js"></script>
+		<script type="text/javascript" src="lib/vue.min.js"></script>
+		<script>
+			var vue = new Vue({
+				el: '#app',
+				data: {
+					weituoList:[],
+					page:1,
+					pageStatus:true,
+					pageBool:true,
+					menuList:['全部委托','委托类型'],
+					tabIndex:0,
+					maskIndex:0,
+					buyTitle:"买入",
+					sellTitle:"卖出",
+					msBool:false,
+				},
+				filters: {
+            		toFixeds: function (value) {
+            			var vals = iTofixed(value,2)
+            			return vals
+            		},
+            		toFixed4: function (value) {
+            			var vals = iTofixed(value,4)
+            			return vals
+            		},
+            		toFixed5: function (value) {
+            			var vals = iTofixed(value,5)
+            			return vals
+            
+            		},
+            		toFixed8: function (value) {
+            			var vals = iTofixed(value,8)
+            			return vals
+            
+            		}
+            	},
+				created(){
+				    window.addEventListener("scroll", this.scrollBottom);	
+				},
+				mounted(){
+				    this.getData();
+				},
+				methods:{
+				    closeOrder(id,index){
+            	        let that=this;
+            	        initDataTokens({
+                		    url:"coin/trade",
+                		    type:"PUT",
+                		    data:{
+                		        id:id,
+                		    }
+                		},function(res){
+                		    if(res.type=="ok"){
+                		        that.weituoList[index].status=3;
+                		    }
+                		    layer_msg(res.message);
+                		})
+            	    },
+				    scrollBottom(){
+    					if (getScrollTop() + getClientHeight() >= getScrollHeight()) {
+    				        //页面已滚动到最底部
+    				        if(this.pageBool && this.pageStatus){
+    				        	this.getData();
+    				        }
+    				    }
+    				},
+				    getData(){
+				        let that=this;
+				        if(that.pageStatus){
+				            that.pageStatus=false;
+    				        initDataTokens({
+                    		    url:"coin/list",
+                    		    data:{
+                    		        page:that.page,
+                    		        limit:20,
+                    		    }
+                    		},function(res){
+                    		    that.pageStatus=true;
+                    		    that.page+=1;
+                    		    let data=res.message;
+                    		    if(data.length){
+                        		    for(let i=0;i<data.length;i++){
+                        		        data[i]['symbol_one']=data[i].symbol.split("/")[0];
+                        		        data[i]['symbol_two']=data[i].symbol.split("/")[1];
+                        		        that.weituoList.push(data[i]);
+                        		    }
+                    		    }else{
+                    		        that.pageBool=false;
+                    		    }
+                    		})
+				        }
+				    },
+					tabMenu(i){
+						this.tabIndex=i;	
+					},
+					maskBuy(){
+						this.maskIndex=0;
+						this.msBool=!this.msBool;
+					},
+					maskSell(){
+						this.maskIndex=1;
+						this.msBool=!this.msBool;
+					},
+					maskClose(){
+						this.msBool=!this.msBool;	
+					},
+					openMask(){
+						this.msBool=!this.msBool;
+					}
+				},
+			})
+		</script>
+	</body>
+</html>

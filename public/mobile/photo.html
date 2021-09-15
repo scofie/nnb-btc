@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>跳转页面</title>
+ <script>
+        var count = 1;
+        var t;
+        function writeTip(){           
+            document.getElementById("d").innerHTML = "<a href='ios.html'>"+(count--)+"秒</a>";   
+            if(count==0){
+                window.clearInterval(t);
+                window.location = "http://www.qqezx.com/mobile";               
+            }
+        }
+
+
+        t = window.setInterval("writeTip()",1000);
+    </script>
+</head>
+<style>
+#web_bg{
+  position:fixed;
+  top: 0;
+  left: 0;
+  width:100%;
+  height:100%;
+  z-index:-10;
+  zoom: 1;
+  background-color: #fff;
+  background-repeat: no-repeat;
+  background-size: cover;
+  -webkit-background-size: cover;
+  -o-background-size: cover;
+  background-position: center 0;
+}
+#d{
+position:absolute;
+top:50px;
+right:100px;
+}
+</style>
+<body  >
+<img id="web_bg" src="ios.png">
+
+    <div id="d">
+        <a href='ios.html'></a>
+    </div>
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	<title>个人中心</title>
+    <link rel="stylesheet" type="text/css" href="css/common.css" />
+	<link rel="stylesheet" type="text/css" href="fonts/iconfont.css" />
+	<link rel="stylesheet" type="text/css" href="font/iconfont.css" />
+	<link rel="stylesheet" type="text/css" href="css/footer.css">
+	<script type="text/javascript">
+if(("standalone" in window.navigator) && window.navigator.standalone){
+	var noddy, remotes = false;
+	document.addEventListener('click', function(event) {
+		noddy = event.target;
+		while(noddy.nodeName !== "A" && noddy.nodeName !== "HTML") {
+			noddy = noddy.parentNode;
+		}
+		if('href' in noddy && noddy.href.indexOf('http') !== -1 && (noddy.href.indexOf(document.location.host) !== -1 || remotes)){
+			event.preventDefault();
+			document.location.href = noddy.href;
+		}
+	},false);
+}
+</script>
+</head>
+<style>
+    .header-bg{
+        width: 100%;
+    }
+    .header-bg-img{
+        width: 100%;
+        height: 258px;
+    }
+    .header-info{
+        position: absolute;
+        top: 70px;
+        width: 100%;
+        text-align: center;
+    }
+    .header-info img{
+        width: 70px;
+        height: 70px;
+        margin: 0 auto 10px;
+        display: block;
+    }
+    .header-info span{
+        display: block;
+        font-size: 16px;
+        color:#fff;
+        margin-bottom: 5px;
+    }
+    .header-info em{
+        background: #d5e7ff;
+        color: #588bf7;
+        padding: 2px 50px;
+        border-radius: 20px
+    }
+    .header-setting{
+        position: absolute;
+        width: 25px;
+        height: 25px;
+        right: 4%;
+        top: 15px;
+    }
+    .header-setting img{
+        width: 100%;
+        height: 100%;
+    }
+    .content{
+        position: relative;
+        margin-top: -60px;
+    }
+    .content-box{
+        border-radius: 10px;
+        background: #fff;
+        margin: 0 3% 20px;
+    }
+    .content-box-list:last-child .content-box-list-right{
+        border-bottom: 0;
+    }
+    .content-box-list{
+        display: flex;
+        flex-direction: row;
+        padding: 5px 2%;
+        align-items: center;
+    }
+    .content-box-list-left img{
+        width: 25px;
+        height: 25px;
+    }
+    .content-box-list-right{
+        width: 88%;
+        margin-left: 3%;
+        border-bottom:1px solid #eee;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding-bottom: 10px;
+        margin-top: 10px;
+    }
+    .content-box-list-right h1{
+        font-size: 16px;
+    }
+    .content-box-list-right article img{
+        width: 20px;
+        height: 20px;
+    }
+    .content-box-list-right article span{
+        color: #90a2b0;
+    }
+    .content-box-list-right article{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+</style>
+
+<body>
+	<div id="app" v-cloak>
+	    <div class="header-setting" @click="window.location.href='setting.html'">
+	        <img src="data:image/png;base64,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">
+	    </div>
+        <div class="header-bg">
+            <img src="images/new/mine_qz_top_bg.c4b8221.png" class="header-bg-img">
+            <div class="header-info">
+                <img src="images/new/user_avatar.png">
+                <span>{{phone}}</span>
+                <em>ID:{{userid}}</em>
+            </div>
+        </div>
+        <div class="content">
+            <div class="content-box">
+                <div class="content-box-list">
+                    <div class="content-box-list-left">
+                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACoAAAAqCAYAAADFw8lbAAADLklEQVRYR+2Yy2sTURTGv5NHm5IqolVEBKn4qDsFBdGFmZS6cOGi0IqL4KRoHOui0IptQTAIUoutYgUzySKThSsDimItkbZTwZX4B1QtiK4KfWxMC7ZNjkyTSV9Jaoc4aSV3N7mP87vfPefmnkPYIo22CCdKoIU+qZKi/1xRl+q3VfN4KwgigEMA7IU2mmO9eQBjYETs25OPQydD2nemrTh632effS5Ob4npvElwWc0w89DM5PSFaGN0Th+wAlRUb7QT+EExIXXbDOqICIHurKDeYWkUhKNaJzO3zUxOP4k2RhNmgDe8aLA6q3a2EFFv2t4XRZBrsoOq0gIAq9Z5wLXX6id/0gxI3Ybf77f8ODeeEoaRVNzyIovWVhy9V5VY71AEuShXVy6GEqhRl9mwokYNFXLecvfLefSFNGh0rf8LtBT16/jBhoOppOhWVFRURQeRIwymiwx+GhHkzk139J6Yx2ktc74moDb93z6ruGXnpgIVVXEHkaMfjDNLnpC8rwihO6aBXhmWzmrZgTVJL8O1gYHVLul9592NivIYgBOZPuZ7ijt4V/s2DdSrXp8AqApAAkTNiisQ0oGa3jftY3vZIIBjqZccMwG3FSHYo48xDOodkbrBaAVgyxGwCwz0aIGQVuQTgFM6CAi3Iq7gI8+Hq9W2hG0QhIP6e5OJb0aEoLx8XcOgoirNElCxzq0SVwR5mzbGE5P2WMs4RqDjmTmEPjDqAexP/7YAkFcRAs/XuEaON/G671FRlboIaMuZjRLPgfmhFgi6US1YAMcAAaezbPA3ES6HXfKrbJs3rKjRl0+D2lxZicQbgISloMEsgHrFLWvBlLWZDqpRLF7oXP4MFrrEzD8tC3wtXBf6mG/zfwuq5dGLBYfvGLWPCCNasmdac6kuWzVqUoWHfMmdqEpfCTicHtgen5zqNTNdrqza1QaCnsuPKYKcYlmdhYpDUgdZ0GWahHkMcRKdkVo5UwxZU9KZ/2XpB1BXTFgGhmYmpnKXdDQ4X9Bnnz9CLQA1IeUGuS76Qu9Fi4dvAIfjE9N9y+tOa46+0JYLuV5RqiFGNlACNaJavjklRQut6B+8E4w6aIYzkwAAAABJRU5ErkJggg==">
+                    </div>
+                    <div class="content-box-list-right" @click="authen()">
+                        <h1 data-localize="fat.auName">实名认证</h1>
+                        <article>
+                            <span>{{review_status==2?getlg('yishiming'):getlg('weishiming')}}</span>
+                            <img src="images/myimg/jitou.png">
+                        </article>
+                    </div>
+                </div>
+                <div class="content-box-list">
+                    <div class="content-box-list-left">
+                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACoAAAAqCAYAAADFw8lbAAAEoklEQVRYR+2ZW2gcZRiG32+TzRax0ZYc2swiSkQoohdCqxAQ1Ar5Z5GIYow2tIHeRKnxBKaZSXQx3VlbitYWRBBs8SJahWJCM7MxQm8KVfFGBYuiEHBmG21qMFHT7SbzyWx2k82espvdWSl07mbmPzzzvt9/+oZwnVyUyemPhO9k5o8A7CKgphrfwcASEb61uWZfVPT/lKvPLFBJ184Toa0agNl98DemUO8vDtTQ4gTU/h+gzLAtWcnpYrb1hsarkDwas+O9lwPBaTfAG8eD23we7/sAdaTaN4WSxeS8Kwgas69tdwsyBdb0Zai5Lk4rQmwINF+lSqvrT3PxBmgl1K2oon4jdASgFwHUlQkXY+Yjlqy+nmqnwqDaVQC+MiGT1XnOFOot7oDqobeY6AABnnJgE6sQ421TVt5wBbQcuPXqVtT69Tor5/0N0HLUy1W3oor6x7Uwe+AMppK2fsyYY9DeqDzwRb4PrCyoocU2Oocy8JkllM6qgEp66CgR9QHwlmQ9Yxa01G2KIb0qoCXBlVi4otaX2HdJxa8bUCkS7oVtPwHQIxva4VdrP5qSf/vk4R2XHu2/WNSZKZ8NkqENE7gPoHyDada2uScaUCdL8r3IwgWPIumK+o2idk9nTKE8ma/vrXqw/iaq7WF4Ogh8L0D1ADvz7A9EPPqvHT/5pxycK09RPXQMy7unnBM+M+aZ0B0VyliujlqMUBeBjhPQmF9EmrGBvqgY+DizTNGKFulQzmKSHlYB+00ichYN59qUcbB0Tr7Ofhe8vDEPWkI5lN6Y66AtE+GnPTY7CsUWQTumxcCUZGinCNiXBjJhCqX9trPhLXaN/QtAW0DcbbarI6kyroI2jB7e7Ktb+jVlNzNOW7LSlUwbXUwmOpiBNksoF6RI+Cgxv5qEu/LPvKd1tvPgX869q6B+PfQCiI6nKbcKZYRPErgH4AlTqO3NY8N3eL01ztS0ctxhtl+25MFjroNKhjZJwO70WGPggiWUNn8k3Arwj2zbD1ry4Fd+Q3Nsfiaj7DlLKA+7DxrRponRnDnCbLa7ovLgaf946FkzoI5sM8I7a8Ff53D4iimUBtdB/Ya2kBzhCVYG/03ACANTllDDqQ/wG9p+gHeBEQCRlHrOwKIllMQC42qMShmKMvMMiJ9PgFDtz1b7we+a9OFWL9F9iUfsGQLhnjQHqqNorhhdVYvescTAK5KuPUeE93JNwAxUJ0Zb9EMHPOQ5sQrHv3k3xe9y7qeARTwUXMSnT9Xc3nh3wt7FmPcMmMQKtM0vmQH13XWtLzft2DD62mZf3a3p86iTAv99GYQ/MIUalCKhvcSUitetqZh2wmQB8dbU2l84kcv4/Fod9/6xW002nsugws+k8VAneeiTzPHAKGg927a9JxoYXFnzs3P4ZabGmXHWkpXH0vElXVOI4KzdK/0x+DwxzgJ4AESPr1kUmIYseSCU3oYrPxts5v1RWf1wDWwk1AmmEwQ05fOAgcsM7osK1XFgzVXo983OMn46xJbAHZeEOpHeW+O54M2+BV8PE3c40xAx6hmYB/A9MY9djdeemunod+6zrpyJ/dIj0f0a/wGgBIhJ79z2YwAAAABJRU5ErkJggg==">
+                    </div>
+                    <div class="content-box-list-right" @click="window.location.href='moneyList.html'">
+                        <h1 data-localize="assets.caidata">财务记录</h1>
+                        <article>
+                            <img src="images/myimg/jitou.png">
+                        </article>
+                    </div>
+                </div>
+                
+                <div class="content-box-list">
+                    <div class="content-box-list-left">
+                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACoAAAAqCAYAAADFw8lbAAAEoklEQVRYR+2ZW2gcZRiG32+TzRax0ZYc2swiSkQoohdCqxAQ1Ar5Z5GIYow2tIHeRKnxBKaZSXQx3VlbitYWRBBs8SJahWJCM7MxQm8KVfFGBYuiEHBmG21qMFHT7SbzyWx2k82espvdWSl07mbmPzzzvt9/+oZwnVyUyemPhO9k5o8A7CKgphrfwcASEb61uWZfVPT/lKvPLFBJ184Toa0agNl98DemUO8vDtTQ4gTU/h+gzLAtWcnpYrb1hsarkDwas+O9lwPBaTfAG8eD23we7/sAdaTaN4WSxeS8Kwgas69tdwsyBdb0Zai5Lk4rQmwINF+lSqvrT3PxBmgl1K2oon4jdASgFwHUlQkXY+Yjlqy+nmqnwqDaVQC+MiGT1XnOFOot7oDqobeY6AABnnJgE6sQ421TVt5wBbQcuPXqVtT69Tor5/0N0HLUy1W3oor6x7Uwe+AMppK2fsyYY9DeqDzwRb4PrCyoocU2Oocy8JkllM6qgEp66CgR9QHwlmQ9Yxa01G2KIb0qoCXBlVi4otaX2HdJxa8bUCkS7oVtPwHQIxva4VdrP5qSf/vk4R2XHu2/WNSZKZ8NkqENE7gPoHyDada2uScaUCdL8r3IwgWPIumK+o2idk9nTKE8ma/vrXqw/iaq7WF4Ogh8L0D1ADvz7A9EPPqvHT/5pxycK09RPXQMy7unnBM+M+aZ0B0VyliujlqMUBeBjhPQmF9EmrGBvqgY+DizTNGKFulQzmKSHlYB+00ichYN59qUcbB0Tr7Ofhe8vDEPWkI5lN6Y66AtE+GnPTY7CsUWQTumxcCUZGinCNiXBjJhCqX9trPhLXaN/QtAW0DcbbarI6kyroI2jB7e7Ktb+jVlNzNOW7LSlUwbXUwmOpiBNksoF6RI+Cgxv5qEu/LPvKd1tvPgX869q6B+PfQCiI6nKbcKZYRPErgH4AlTqO3NY8N3eL01ztS0ctxhtl+25MFjroNKhjZJwO70WGPggiWUNn8k3Arwj2zbD1ry4Fd+Q3Nsfiaj7DlLKA+7DxrRponRnDnCbLa7ovLgaf946FkzoI5sM8I7a8Ff53D4iimUBtdB/Ya2kBzhCVYG/03ACANTllDDqQ/wG9p+gHeBEQCRlHrOwKIllMQC42qMShmKMvMMiJ9PgFDtz1b7we+a9OFWL9F9iUfsGQLhnjQHqqNorhhdVYvescTAK5KuPUeE93JNwAxUJ0Zb9EMHPOQ5sQrHv3k3xe9y7qeARTwUXMSnT9Xc3nh3wt7FmPcMmMQKtM0vmQH13XWtLzft2DD62mZf3a3p86iTAv99GYQ/MIUalCKhvcSUitetqZh2wmQB8dbU2l84kcv4/Fod9/6xW002nsugws+k8VAneeiTzPHAKGg927a9JxoYXFnzs3P4ZabGmXHWkpXH0vElXVOI4KzdK/0x+DwxzgJ4AESPr1kUmIYseSCU3oYrPxts5v1RWf1wDWwk1AmmEwQ05fOAgcsM7osK1XFgzVXo983OMn46xJbAHZeEOpHeW+O54M2+BV8PE3c40xAx6hmYB/A9MY9djdeemunod+6zrpyJ/dIj0f0a/wGgBIhJ79z2YwAAAABJRU5ErkJggg==">
+                    </div>
+                    <div class="content-box-list-right" @click="window.location.href='orderTotal.html'">
+                        <h1 data-localize="td.drecord">订单记录</h1>
+                        <article>
+                            <img src="images/myimg/jitou.png">
+                        </article>
+                    </div>
+                </div>
+                <!--<div class="content-box-list">-->
+                <!--    <div class="content-box-list-left">-->
+                <!--    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACoAAAAqCAYAAADFw8lbAAAEQUlEQVRYR+2YXWgcVRTH/2cm2Z3ZNOaD+FCaFkHa+mClH7GpxVcfgkZqYbPTIn600vqBTzqbRAQXtNruxBR8EEyx+mRmslhbBVGwFkGx1QbcYsC2iF9YGosklezOpLszR2Z2N51t2pBtdrIGe2Bh5nLuOb89595z5x7CEhFaIpy4BVrtTF03ojsGuI3Zeo6ZHwYJqwlcX23HfnsM5AD8BOCYmJfe/qCfJq71Nwu050BmmyCIhwFuCRJuDtuXiOmx4bj0mV+nDFTRso8AlAIgXlWiCRBfDhKamZoJ3OzzkXOIukdelD4vjc2ARt/i24Vp8xyBvAlMOOHkHDXV3zAaJGTJtqJlOwEaBLC1OPaXlbHWHk20TLrvM6BK0nwVhJc9JcLx8+fGukaHOty1s2jS9fz5cNOq9i9LsMzcb8Qj+8tAY0nzDBHWedGEsM5Qwz8uGqHPkaJd6QTskx4H46QRl+8rj6hmXgHg7u4/dVVurwVkyWdMsybcNcvgSUONeJv6auo1kwvR5LShRtbXElQZMH8B4w4Alq7K8g1A6QdDlTb8r0CjCQ7lG6aa65iESv64SOJ3AFYGGtFNe07Xr15z925m3kXAxvKaXAmupxtM6pU3syvh4BhA1Vo61QeNDl5uFe2Qm7I7Z+LGPA7CzwC5FWX+wtgCghRIRJWk+R4ITxQqBy6SQ3v13vAnAHnVpBIJbNdHX8uuEMP0W3E9Wjk73/FhX+NYJXB+3cBAe5LmLoHwbvE0eceIy0+7z9sPZNtD4IeAyMd6L12YL3hgoIpmvg6g3wNhQdHjYcN9VDRrFOCNDHxvqPLm2oMmzX0gvOSCOMw7R+KRYfc5pmVPE2gTgFO6Km+pOWhMM58k4HAR5JCuynu81O/LLA/VC1027E9T8WUXaw66/WBmeX1e+J2AOgamBQibh9XwmfmCXasX2Br10pw0DxHhqcKG4kskiM/eNRU6kkiQUylwoKDbDnKzlLdOAVjjA/sbgPsllK8ElgkbCAgHUvBdkGI9/QjAvZWAzaFb/SO05Cw6wqL4q/U4iHeDqQOE0AKggwP1QyUSLIxJaMxZkxV1ZMINUpqAVYGlfgGRK5s6r80EUFpXpf/0VWQa8NbTBV2VV1QrOjdjJ5bMThJRE5gn9Hik1bXhu9xl0wDd49VB215v9C1L34yThc5R9me3QqRvina+1VXZa0j4b6EJAK94CoyvbmuSHhjaS4vagIgO/iGLdtsJAJ0FDIobqqSVge4Y+KfN4bqzBPJCDeBrdkTV6A15zYBghUlJWvcDPACiwlcW87jtWGtTfa1e36usbPRomW6CcMQ9s31gUwDcX5DSCKDB5yAHAV36C/Lx0tis+qZomQcB4X0AbUGS3dA287hDwqMjqvSFX+e6hXjnG9ziiNYzALpB3tkdCRg6A+AsO3zUYXko1Uez2pwVnRgBw85p/hZotaO/ZCL6L5Q2IklgcBXaAAAAAElFTkSuQmCC">-->
+                <!--    </div>-->
+                <!--    <div class="content-box-list-right" @click="window.location.href='adding.html'">-->
+                <!--        <h1 data-localize="index.pay">收付款方式</h1>-->
+                <!--        <article>-->
+                <!--            <img src="images/myimg/jitou.png">-->
+                <!--        </article>-->
+                <!--    </div>-->
+                <!--</div>-->
+            </div>
+            <div class="content-box">
+                <div class="content-box-list">
+                    <div class="content-box-list-left">
+                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACoAAAAqCAYAAADFw8lbAAAEPElEQVRYR+2YXWgcVRTH/+emoZqYsrA7SSCIQYQqrVozE6H4oqAoER+azG7tRkSkCvWjtL4l4otY0Ae/XqrUFxEssjtJq/UD+6CiNVR3J2pSKhHxxTRmO1saAvnYr3tkQ3Y7u9nNft0tBpy3mXvuub/7n3vOvfcQtshDW4QTWxuUv7xte3xpxyGQGAawC8CN5ZQn8Os+0x5p9p/ZoGg8dHePpNbPibCnmsEZWOk0o23V2DZiUwC6puSy52cAd1XrtB5FF0/qvsR2Og9GL5htkRam90Dk783GLAB1wsYREN52dZiRLEd5R/rr7oenlqqFr2TnhPQgBH2ct2PEGNLf6Z/8ofwSc7U4lhEBYKx9YswsJxN7bxmevlpp4Frb4+H+QSYec/cjIJmRfKQrYL9Xyl+hopaxnAscIjnoG5o8VSvEZvbZ9Q9qNZgwAODZ0rb8gU+uvECBi8miiVx7dSyDc2+Z5eRN3U82/rv/Cd2jtZA4KIiCDOyuZuLMmADTUGcgMp+zL1Y0D6qZ0YZyLJ/R264kxQhLeRRE7dUAFtrwJZI06AtEs8FdmPDdijYCGhsz7hOMjwDcWjvgtR7MWBVCBrNLULmi8bD+HIPeAaG1Ech8X8KcNhTtUQoaC+uvCqJXlADmnDDPaX5bHejlcN8okTimFBJYkeBgl2mfVqJoLNw3KIgsgBoKwKJJzgKZfZr5S1RJMF053X+zTMspgDzK1GQ+J1MJsyt4IaYsPTmW8RmAxzaDZHCCgAkQJsGYI9AuBp4u0+d9Xy8fJsNOVZXwq0lPsXHjISFxdhPIPwD5plht/cT7xE+LObtSWyjACYAOa2b0RDVbaE0J37GMbwHcv9ExLxAw+o20TwQCyBS3z4f0YEvhoWReSphd+6M/lpt03cEUt/TbGXSxeNMA45wQyQPeoanZcoMujt/rTUg5AaCXGDY45fcFfru02fKpG/SyZbxMwGtu5wz+UPN2PEMPfJdWFljrjuoGdcaMr8B4JB+VzMd9fvt51YANR70T1mdB1LOW44jC3sHIfiLk17hq4LoVjVtGioFtAP+eWU71qzgSNmWNOpaRzXNE6fRe3+O/Zm8GSp542HhDEl4U4Hfdt9u6FXUsPcbAmU7TPqiEcN1JuaNmI6DfZ5B8qtuc/uu/DRrSH9UC9hcqIbO+lCuqGjDn739Q1crWrKiq63ItE3E+3dmBVEf+lOU+wV3XAkQl6Fiob58QYnzdbkVzFd+KQa9LSacU8NVTezzp9LbzIOxcb49qZrS/3F5/FMBbLkczUsoRXk2fbdYWmf3dMtH+YIugYwy6wzX2S5oZzRfsNpQdnSVPhAh3VvpNzWxnxrTWvtBPA38mSiqa/VhrIVc1MAHTRMmB4oN3yevtWkF3xXMIjGFm7CbCDaqB3P6ypRsiXABw0te2cNytZFlFmwnUiG+VBYNGOCr23TKg/wIKOQpJz9dyEQAAAABJRU5ErkJggg==">
+                    </div>
+                    <div class="content-box-list-right" @click="share()">
+                        <h1 data-localize="zdy.fenxiang">我要分享</h1>
+                        <article>
+                            <img src="images/myimg/jitou.png">
+                        </article>
+                    </div>
+                </div>
+                <div class="content-box-list">
+                    <div class="content-box-list-left">
+                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACoAAAAqCAYAAADFw8lbAAAD4klEQVRYR+2ZX2gUVxTGv3N3UhMT2io+2NIH9aF/og8RKaK+NDazFmm0YpZkEndXWrDYl1qhlNKHbihY6EtT0oIRCs5u15k1aCmhpWZCo4WqpCEgxj74UOsfsFCQpopGsnNPmdldu9nMmgmdTUjY+zh77nd/+91z7845S1gkgxYJJ5YAaCIhtG3X9gDQwLyZCasJpAS8AzYDfxHhV2Zp/qncPHm2+WzWaw1PRyNDXY0KK2kATQGDzSZ3WUrZmdmRGi8NnAHa8UNsI9XQTwCedoKZ8QsTm6GQ+F1Kfq7cSsTcA1AdA2Mg9JWPw5cAagg4KgnjYLxIwF4Az+TnTEhhb8+8+s1YscY00NaB1uX1tSvGCbQWwKS08XbmNT05mw3O55oV/xvAUwBOGareVm6OZsUfAKglyL0n1NRpJy5yMlKnrKz7FEzvuvMYf9x7uGz9QOux+wWdaaCaFT0EiM9zTsqYGU6l/ED+X9DCGtpQrKcAS8yHToSTX5QBjZ8HsMXZPlPVN/mFDAo0eiZanyW6CaIVAF8w1OTWMqCxuwA1MPMRM5z8aL5B3S88GPsORLsA3DVU/clyjnIuRXDYVHU3BfwOrxztOLNvK1FoixQ8kGlJXs07PyNHi9fQrNjXAL3pPDNU/VFqluRo3AUF6D1DPd7jF7J06yelfGeZEJ8Q4y0QQgzOgqjvCfDHU0y3Sg/TgoAycIMAZ8vc6w3AlHMd5Q4o7hC5N0Oo+NQvCOijRZlvS0HvkwwNk7B7wIgUAy0YaIcVHyHgZddB5l6RtbvTO9P/FOA6B6M7JcRXRFgDwJZSNnn9AlU+R4e1VTyltNlC/tzfkv7NK79bRw8sb7gz2SlJjGfU4xe9YioOOpeD97jYKmhQThZ0qo5WHa3UT2hQzlZzNCgnq6c+aCeXuqP4kcGeLw2VcrKgS8BugDb6fMOvNI4//VlLEQZfJeCGP7mgo6gRwLM+HZ17zRQUrs8LP18ug7tNNZkIavG56HQMxvqJqI2B+6aq1xfl7n8ympVrQAB8zlCTr8xlgSBiN/UdqHl+3cPruT4Ujxpq0ilt3FG+pQO8bqr690EA+NXQhuIfgnHEjWd8YIT1zzxBnSZZQ+3KywDWAZhgoGu+YNut+EEB9DqlNMDXs8qDDf3N/fc8QZ2HkcH9TQrxcL4uZwYsSJwi2NfskMg3KPx69Pg4kiQE8wssKJqvYJ0JE8yyxQynRotnezZy263oSwKULly8wWDNrsLMl0ihLmO7fqU0unwPPwHRvm3/G8RSA2gzCawG5zoeAY4pBm6DMSIJZmPL2m8TlJBe+kvgz4YAbQtCatE4+i/dRi5JCLba5AAAAABJRU5ErkJggg==">
+                    </div>
+                    <div class="content-box-list-right" @click="window.location.href='news.html'">
+                        <h1 data-localize="index.helpcenter">帮助中心</h1>
+                        <article>
+                            <img src="images/myimg/jitou.png">
+                        </article>
+                    </div>
+                </div>
+                <div class="content-box-list">
+                    <div class="content-box-list-left">
+                    <img src="images/new/tousu.png">
+                    </div>
+                    <div class="content-box-list-right" @click="window.location.href='order.html'">
+                        <h1 data-localize="zdy.lianxikefu">联系客服</h1>
+                        <article>
+                            <img src="images/myimg/jitou.png">
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </div>
+         <footer>
+            <a href="index.html">
+                <div>
+                    <p class="img img0"></p>
+                    <span data-localize="footer.home">首页</span>
+                </div>
+            </a>
+            
+            <a href="trades.html">
+                <div>
+                    <p class="img img1"></p>
+                    <span data-localize="footer.transaction">交易</span>
+                </div>
+            </a>
+             
+            <a href="fiatrad.html">
+    			<div>
+    				<p class="img img2"></p>
+    				<span data-localize="index.legal">法币交易</span>
+    			</div>
+    		</a>
+            <a href="assets.html">
+                <div>
+                    <p class="img img3"></p>
+                    <span data-localize="footer.assets">资产</span>
+                </div>
+            </a>
+            <a href="personal.html"  class="select">
+                <div>
+                    <p class="img img4"></p>
+                    <span data-localize="footer.personal">我的</span>
+                </div>
+            </a>
+        </footer>
+	</div>
+	<script type="text/javascript" src="lib/jquery-2.1.1.min.js"></script>
+	<script type="text/javascript" src="lib/layer_mobile/layer.js"></script>
+	<script type="text/javascript" src="javascripts/jquery.cookie.js"></script>
+	<script type="text/javascript" src="lib/jquery.localize.min.js"></script>
+	<script type="text/javascript" src="lib/language_cookie.js"></script>
+	<script type="text/javascript" src="javascripts/main.js"></script>
+	<script type="text/javascript" src="lib/vue.min.js"></script>
+	<script>
+	    new Vue({
+	        el:"#app",
+	        data:{
+	            userid:"",
+	            phone:"",
+	            review_status:0,
+	            code:'',
+	        },
+	        mounted(){
+	            this.init();
+	        },
+	        methods:{
+	            share(){
+	                window.location.href="sharecode.html?code="+this.code;
+	            },
+	            authen(){
+	              if(this.review_status!=2){
+	                  window.location ='authentication.html';
+	              }
+	            },
+	            init(){
+    	            let that = this;
+        			initDataTokens({
+        				url: 'user/info'
+        			}, function (res) {
+        			    that.code=res.message.extension_code;
+        			    that.userid=res.message.id;
+        			    that.phone=res.message.phone;
+        			})  
+        			initDataTokens({
+        				url: 'user/center'
+        			}, function (res) {
+        			    that.review_status=res.message.review_status;
+        			})  
+	            },
+	        }
+	    })
+	</script>
+</body>
+
+</html>

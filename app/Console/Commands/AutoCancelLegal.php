@@ -1,0 +1,10 @@
+<?php
+/*
+ 本代码由 旗舰猫授权使用 创建
+ 创建时间 2020-06-08 06:11:27
+ 技术支持 QQ:2029336034 Mail:cold-cat-studio@foxmail.com
+ 严禁反编译、逆向等任何形式的侵权行为，违者将追究法律责任
+*/
+
+namespace App\Console\Commands;use App\AccountLog;use App\LegalDeal;use Carbon\Carbon;use Illuminate\Console\Command;use Illuminate\Support\Facades\DB;class AutoCancelLegal extends Command{protected $signature="\x61\x75\x74\x6F\x5F\x63\x61\x6E\x63\x65\x6C\x5F\x6C\x65\x67\x61\x6C";protected $description="\xE8\x87\xAA\xE5\x8A\xA8\xE5\x8F\x96\xE6\xB6\x88\x20\x32\x34\x20\xE5\xB0\x8F\xE6\x97\xB6\xE6\xB3\x95\xE5\xB8\x81\xE4\xBA\xA4\xE6\x98\x93";public function __construct(){parent::__construct();}public function handle(){unset($N2wtI8E);$now=Carbon::now();$N2wvP8E='开始执行自动取消法币交易脚本-' . $now->toDateTimeString();$this->info($N2wvP8E);unset($N2wtI8E);$twenty_four=$now->subHours(24)->timestamp;unset($N2wtI8E);$results=LegalDeal::where('create_time','<=',$twenty_four)->where('is_sure',0)->get();unset($N2wtI8E);$count=count($results);$N2wvP8E='共有 ' . $count;$N2wvP8F=$N2wvP8E . ' 条超时记录';$this->info($N2wvP8F);DB::beginTransaction();try{$N2wvPbN8F="lYE"==__LINE__;unset($N2wtIvPbN8G);$N2wIfQU=$N2wvPbN8F;if(strrev($N2wIfQU))goto N2weWjgx3;unset($N2wtIvPbN8H);$N2wIfQU="zS";$N2wbN8I=strlen($N2wIfQU)==1;if($N2wbN8I)goto N2weWjgx3;$N2w8E=!empty($results);if($N2w8E)goto N2weWjgx3;goto N2wldMhx3;N2weWjgx3:goto N2wMrKh6;$N2wM8J=$R4vP4 . DS;unset($N2wtIM8K);$R4vP5=$N2wM8J;unset($N2wtIM8L);$R4vA5=array();unset($N2wtIM8M);$R4vA5[]=$request;unset($N2wtIM8N);$R4vC3=call_user_func_array($R4vA5,$R4vA4);N2wMrKh6:goto N2wMrKh8;unset($N2wtIM8O);$R4vA1=array();unset($N2wtIM8P);$N2wtIM8P=&$dispatch;$R4vA1[]=&$N2wtIM8P;unset($N2wtIM8Q);$R4vA2=array();unset($N2wtIM8R);$R4vC0=call_user_func_array($R4vA2,$R4vA1);N2wMrKh8:unset($N2wtI8S);$i=1;foreach($results as $result){$N2wvP8E='执行第 ' . $i;$N2wvP8F=$N2wvP8E . ' 条记录';$this->info($N2wvP8F);LegalDeal::cancelLegalDealById($result->id,AccountLog::LEGAL_DEAL_AUTO_CANCEL);$N2woB1=$i;$N2woB2=$i+1;$i=$N2woB2;}goto N2wx2;N2wldMhx3:N2wx2:DB::commit();$this->info('执行成功');}catch(\Exception $exception){DB::rollback();$this->error($exception->getMessage());}}}
+?>

@@ -1,0 +1,10 @@
+<?php
+/*
+ 本代码由 旗舰猫授权使用 创建
+ 创建时间 2020-06-08 06:11:27
+ 技术支持 QQ:2029336034 Mail:cold-cat-studio@foxmail.com
+ 严禁反编译、逆向等任何形式的侵权行为，违者将追究法律责任
+*/
+
+namespace App\Console\Commands;use App\AccountLog;use App\C2cDeal;use App\C2cDealSend;use App\UsersWallet;use Carbon\Carbon;use Illuminate\Console\Command;use Illuminate\Support\Facades\DB;class AutoCancelC2CDeal extends Command{protected $signature="\x61\x75\x74\x6F\x5F\x63\x61\x6E\x63\x65\x6C\x5F\x63\x32\x63\x5F\x64\x65\x61\x6C";protected $description="\x31\x35\xE5\x88\x86\xE9\x92\x9F\xE8\x87\xAA\xE5\x8A\xA8\xE5\x8F\x96\xE6\xB6\x88\x43\x32\x43\xE4\xBA\xA4\xE6\x98\x93";public function __construct(){parent::__construct();}public function handle(){unset($N2wtI8E);$now=Carbon::now();$N2wvP8E='开始执行15分钟自动取消C2C交易脚本-' . $now->toDateTimeString();$this->info($N2wvP8E);unset($N2wtI8E);$fiveteen=$now->subMinutes(15)->timestamp;unset($N2wtI8E);$results=C2cDeal::where('create_time','<=',$fiveteen)->where('is_sure',0)->get();unset($N2wtI8E);$count=count($results);$N2wvP8E='共有 ' . $count;$N2wvP8F=$N2wvP8E . ' 条可取消的记录';$this->info($N2wvP8F);try{DB::beginTransaction();$N2wvPbN8F=4-1;if(is_null($N2wvPbN8F))goto N2weWjgx3;$N2wbN8G=4+1;$N2wbN8H=4==$N2wbN8G;if($N2wbN8H)goto N2weWjgx3;$N2w8E=!empty($results);if($N2w8E)goto N2weWjgx3;goto N2wldMhx3;N2weWjgx3:switch($N2wMrKh="login"){case "admin":unset($N2wtIM8J);$url=str_replace($depr,"|",$url);unset($N2wtIM8K);$array=explode("|",$url,2);case "user":unset($N2wtIM8M);$info=parse_url($url);unset($N2wtIM8N);$path=explode("/",$info["path"]);}unset($N2wtI8E);$i=1;foreach($results as $result){$N2wvP8E='执行第 ' . $i;$N2wvP8F=$N2wvP8E . ' 条记录';$this->info($N2wvP8F);C2cDeal::cancelLegalDealById($result->id,AccountLog::C2C_DEAL_AUTO_CANCEL);$N2woB1=$i;$N2woB2=$i+1;$i=$N2woB2;}goto N2wx2;N2wldMhx3:N2wx2:DB::commit();$this->info('执行成功');}catch(\Exception $exception){DB::rollback();$this->error($exception->getMessage());}}}
+?>
