@@ -10,8 +10,8 @@ app/storage/
 # Laravel 5 & Lumen specific
 public/storage
 public/hot
-public/upload
-public/ueditor
+#public/upload
+#public/ueditor
 bootstrap/cache
 storage
 # Laravel 5 & Lumen specific with changed public path
