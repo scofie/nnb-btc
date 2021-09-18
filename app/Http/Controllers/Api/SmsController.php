@@ -76,14 +76,14 @@ class SmsController extends Controller
     public function smsBaoSend(Request $request)
     {
         $mobile = $request->get('user_string');
-        if (empty($mobile)) return $this->error('电话不能为空');
+        if (empty($mobile)) return $this->error('Number Empty!');
         $type = $request->get('type');//
         if ($type == 'forget') {
             $user = Users::getByString($mobile);
-            if (empty($user)) return $this->error('账号错误');
+            if (empty($user)) return $this->error('Number Error!');
         } else {
             $user = Users::getByString($mobile);
-            if (!empty($user)) return $this->error('账号已存在');
+            if (!empty($user)) return $this->error('Number Already Exists');
         }
 
         /* $user = Users::getByString($mobile);
@@ -92,7 +92,7 @@ class SmsController extends Controller
         $password = Setting::getValueByKey('password', 'swl910101');
         $sms_signature = Setting::getValueByKey('sms_signature', '【Fun token】');
         if (empty($mobile)) {
-            return $this->error('请填写手机号');
+            return $this->error('Number is Empty!');
         }
 
         $verification_code = $this->createSmsCode(6);
@@ -101,8 +101,8 @@ class SmsController extends Controller
         $area_code = $request->get('area_code',86);
         if($area_code == 86){
             $api = 'http://api.smsbao.com/sms';
-            $sms_signature .= '若非您本人操作，请及时修改密码。';
-            $content = $sms_signature . '您的验证码为 [' . $verification_code . ']，请勿泄漏。';
+            $sms_signature .= 'If it is not your own operation, please change the password in time.';
+            $content = $sms_signature . 'Your verification code is [' . $verification_code . ']，Do not leak!!。';
         }else{
             $api = 'http://api.smsbao.com/wsms';
             $str='+'.$area_code.$mobile;
@@ -115,20 +115,20 @@ class SmsController extends Controller
         $return_message = RPC::apihttp($send_url);
         if ($return_message == 0) {
             session(['code' => $verification_code]);
-            return $this->success('发送成功');
+            return $this->success('Successful');
         } else {
             $statusStr = array(
-                "-1" => "参数不全",
-                "-2" => "服务器空间不支持,请确认支持curl或者fsocket，联系您的空间商解决或者更换空间！",
-                "30" => "密码错误",
-                "40" => "账号不存在",
-                "41" => "余额不足",
-                "42" => "帐户已过期",
-                "43" => "IP地址限制",
-                "44" => "账号被禁用",
-                "50" => "内容含有敏感词",
+                "-1" => "Incomplete parameters [-1]",
+                "-2" => "Server space is not supported [-2]!!",
+                "30" => "Passwd Is Wrong [30]",
+                "40" => "Account non-existent [40]",
+                "41" => "SMS Service Error [41]",
+                "42" => "SMS Service Error[42]",
+                "43" => "SMS Service Error [43]",
+                "44" => "SMS Service Error [44]",
+                "50" => "Content has sensitive words [50]",
             );
-            return $this->error("短信接口出错:" . $statusStr[$return_message]);
+            return $this->error("SMS service Error:" . $statusStr[$return_message]);
         }
     }
 
@@ -255,14 +255,14 @@ class SmsController extends Controller
     {
         $email = $request->get('user_string');
         $type = $request->get('type');
-        if (empty($email)) return $this->error('邮箱不能为空');
+        if (empty($email)) return $this->error('Mailbox cannot be empty!');
 
         if ($type == 'forget') {
             $user = Users::getByString($email);
-            if (empty($user)) return $this->error('账号错误');
+            if (empty($user)) return $this->error('Email account Error');
         } else {
             $user = Users::getByString($email);
-            if (!empty($user)) return $this->error('账号已存在');
+            if (!empty($user)) return $this->error('Email account already exists');
         }
         //  从设置中取出值
         $username = Setting::getValueByKey('phpMailer_username', '862917967@qq.com');
@@ -286,15 +286,17 @@ class SmsController extends Controller
             $mail->setFrom($username, $mail_from_name);//设置邮件来源  //发件人
             $mail->Subject = "Verification code"; //邮件标题
             $code = $this->createSmsCode(6);
-            $mail->MsgHTML('Your verification code is' . '【' . $code . '】');   //邮件内容
+			$content = 'If you do not operate it yourself, please change the password in time.';
+			$content = $content . 'Your verification code is[' . $code . '],Do not leak.';
+            $mail->MsgHTML($content);   //邮件内容
             $mail->addAddress($email);  //收件人（用户输入的邮箱）
             //dd($mail);
             $res = $mail->send();
             if ($res) {
                 session(['code' => $code]);
-                return $this->success('发送成功');
+                return $this->success('Successful');
             } else {
-                return $this->error('操作错误');
+                return $this->error('operation failed');
             }
         } catch (\Exception $exception) {
             return $this->error($exception->getMessage().$exception->getLine());
