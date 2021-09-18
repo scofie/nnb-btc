@@ -35,7 +35,7 @@ class LoginController extends Controller
             return $this->error('Please Enter Passwd！');
         }
         // 手机、邮箱、交易账号登录
-        $user = Users::getByString($user_string);
+        $user = Users::getByAccount($user_string);
         if (empty($user)) {
             return $this->error('Account Number Empty!');
         }
@@ -48,13 +48,13 @@ class LoginController extends Controller
         }
         if ($type == 2) {
             if ($password != $user->gesture_password) {
-                return $this->error('Gesture Password Error');
+                return $this->error('两次密码不一致');
             }
         }
         
         // 是否锁定
         if ($user->status == 1) {
-            return $this->error('Sorry ,Account has been Frozen，Please consult Customer。');
+            return $this->error('您的账户已被冻结，详情请咨询客服。');
         }
         // session(['user_id' => $user->id]);
         Token::clearToken($user->id);
@@ -76,28 +76,28 @@ class LoginController extends Controller
         $re_password = Input::get('re_password', '');
         $code = Input::get('code', '');
         if (empty($type) || empty($user_string) || empty($password) || empty($re_password)) {
-            return $this->error('Inputs Error!');
+            return $this->error('参数错误');
         }
         $extension_code = Input::get('extension_code', '');
         if ($password != $re_password) {
-            return $this->error('Inconsistent Passwords');
+            return $this->error('两次密码不一致');
         }
         if (mb_strlen($password) < 6 || mb_strlen($password) > 16) {
-            return $this->error('Password Length only be between 6 and 16 bits');
+            return $this->error('密码只能在6-16位之间');
         }
         if ($code != session('code') && $code != '9988') {
-            return $this->error('Verification Code Error');
+            return $this->error('验证码错误');
         }
         $user = Users::getByString($user_string);
         if (! empty($user)) {
-            return $this->error('Account already exists');
+            return $this->error('账号已存在');
         }
         $parent_id = 0;
         
         if (! empty($extension_code)) {
             $p = Users::where("extension_code", $extension_code)->first();
             if (empty($p)) {
-                return $this->error("Invitation Code Error");
+                return $this->error("请填写正确的邀请码");
             } else {
                 $parent_id = $p->id;
             }
@@ -135,7 +135,7 @@ class LoginController extends Controller
             });
             
             DB::commit();
-            return $this->success("Successful,BTC Statys：" . $test);
+            return $this->success("注册成功,钱包状态：" . $test);
         } catch (\Exception $ex) {
             DB::rollBack();
             return $this->error('File:' . $ex->getFile() . ',Line:' . $ex->getLine() . ',Message:' . $ex->getMessage());
@@ -152,27 +152,27 @@ class LoginController extends Controller
         $code = Input::get('code', '');
         
         if (empty($account)) {
-            return $this->error('Please Input Nnumber');
+            return $this->error('请输入账号');
         }
         if (empty($password) || empty($repassword)) {
-            return $this->error('Please Input Password');
+            return $this->error('请输入密码或确认密码');
         }
         
         if ($repassword != $password) {
-            return $this->error('Inconsistent Passwords');
+            return $this->error('输入两次密码不一致');
         }
         
         $code_string = session('code');
         
         if ($code != '9988') {
             if (empty($code) || ($code != $code_string)) {
-                return $this->error('Verification code Error');
+                return $this->error('验证码不正确');
             }
         }
         
         $user = Users::getByString($account);
         if (empty($user)) {
-            return $this->error('Account non-existent');
+            return $this->error('账号不存在');
         }
         
         $user->password = Users::MakePassword($password);
@@ -182,7 +182,7 @@ class LoginController extends Controller
             session([
                 'code' => ''
             ]); // 销毁
-            return $this->success("Reload Password successful");
+            return $this->success("修改密码成功");
         } catch (\Exception $ex) {
             return $this->error($ex->getMessage());
         }
@@ -192,11 +192,11 @@ class LoginController extends Controller
     {
         $email_code = Input::get('email_code', '');
         if (empty($email_code))
-            return $this->error('Please Input Verification Code');
+            return $this->error('请输入验证码');
         $session_code = session('code');
         if ($email_code != $session_code && $email_code != '9988')
-            return $this->error('Verification Code Error');
-        return $this->success('Successful');
+            return $this->error('验证码错误');
+        return $this->success('验证成功');
     }
 
     public function checkMobileCode()
@@ -204,13 +204,13 @@ class LoginController extends Controller
         $mobile_code = Input::get('mobile_code', '');
         // var_dump($mobile_code);
         if (empty($mobile_code)) {
-            return $this->error('Please Input Verification Code');
+            return $this->error('请输入验证码');
         }
         $session_mobile = session('code');
         // var_dump($session_mobile);
         if ($session_mobile != $mobile_code && $mobile_code != '9988') {
-            return $this->error('Verification Code Error');
+            return $this->error('验证码错误');
         }
-        return $this->success('Successful');
+        return $this->success('验证成功');
     }
 }

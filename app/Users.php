@@ -195,6 +195,11 @@ class Users extends Model
         return self::where('account_number', $account_number)->first();
     }
 
+	public static function getByAccount($login_name)
+	{
+		return self::where("phone", $login_name)->orwhere('email', $login_name)->orWhere('account_number', $login_name)->first();
+	}
+
     public static function getByString($string)
     {
         if (empty($string)) {
