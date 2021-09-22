@@ -1320,7 +1320,6 @@ class UserController extends Controller
     public function updateBalance(){
         exit('close');
         $user_id = Users::getUserId();
-        // $this->updateWalletAddress();
         try{
             DB::beginTransaction();
             $user_wallets = UsersWallet::lockForUpdate()->where('user_id',$user_id)->where('gl_time','<',time()-60*60)->get();

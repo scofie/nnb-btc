@@ -64,23 +64,23 @@ class Currency extends Model
     {
         $rate = Setting::getValueByKey('USDTRate', 7.08);
         $usdt = Currency::where('name', 'USDT')->select(['id'])->first();
+        if ($currency_id == $usdt->id) {
+            return 1 * $rate;
+        }
         $last = MarketHour::orderBy('id', 'desc')
             ->where("currency_id", $currency_id)
             ->where("legal_id", $usdt->id)->first();
+        $cny_Price = 1; //如果不存在交易对，默认为1
         if (!empty($last)) {
             $cny_Price = $last->highest * $rate; //行情表里面最近的数据的最高值
         } else {
-            //$cny_Price = 1; //如果不存在交易对，默认为1
+            //
             //如果不存在行情，取币种默认价格
             $currency = Currency::where('id', $currency_id)->first();
-
-            $cny_Price = $currency->price * $rate;
-
+            if( !is_null($currency->price) ){
+                $cny_Price = $currency->price * $rate;
+            }
         }
-        if ($currency_id == $usdt->id) {
-            $cny_Price = 1 * $rate;
-        }
-
         return $cny_Price;
     }
 

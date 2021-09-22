@@ -24,26 +24,25 @@ Route::group([ 'middleware' => ['lang', /*'check_user'*/]], function () {
         return view('admin/login');
     });
     Route::get('/admin', function () {
-        
         return redirect('/login');
     });
 
-    Route::get('/phpinfo', function () {
-        phpinfo();
-    });
+//    Route::get('/phpinfo', function () {
+//        phpinfo();
+//    });
 
     Route::get('/', function () {
         return redirect('/dist');
     });
 
-    Route::get('/gzip', function (\Illuminate\Http\Request $request) {
-        dump($request->getScheme());
-        $protocol = $request->getScheme();
-        $host = $request->getHost();
-
-        dump($request->getSchemeAndHttpHost());
-        dump(gzencode('hehe'));
-    });
+//    Route::get('/gzip', function (\Illuminate\Http\Request $request) {
+//        dump($request->getScheme());
+//        $protocol = $request->getScheme();
+//        $host = $request->getHost();
+//
+//        dump($request->getSchemeAndHttpHost());
+//        dump(gzencode('hehe'));
+//    });
 
 //******************************api接口不需要登录的**********************
 //<--LDH-->
@@ -113,9 +112,9 @@ Route::group([ 'middleware' => ['lang', /*'check_user'*/]], function () {
     Route::get('api/currency/lever', 'Api\CurrencyController@lever');//行情详情
     Route::any('api/user/into_users', 'Api\UserController@into_users');//导入用户
     Route::any('api/user/into_tra', 'Api\UserController@into_tra');//美丽链转入的接口(imc)
-    Route::any('api/user/test', 'Api\UserController@test');//美丽链转入的接口(imc)
+//    Route::any('api/user/test', 'Api\UserController@test');//美丽链转入的接口(imc)
     Route::any('api/user/e_pwd', 'Api\UserController@e_pwd');//修改密码
-    Route::any('api/currency/update_date', 'Api\CurrencyController@update_date');//测试
+//    Route::any('api/currency/update_date', 'Api\CurrencyController@update_date');//测试
     Route::any('user/walletaddress', 'Api\UserController@walletaddress');//钱包地址
 
     Route::any('/test555', 'Api\PrizePoolController@test555');
@@ -226,15 +225,9 @@ Route::group([ 'middleware' => ['lang', /*'check_user'*/]], function () {
         Route::post('transaction_del', 'Api\TransactionController@TransactionDel');//取消交易
 
         //<--LDHend-->
-
-
         Route::get('/test', 'Api\UserController@test');
-
-
         Route::get('/index', 'Api\DefaultController@index');
-        // Route::get('/get_version','Api\DefaultController@getVersion');
         //发送短信
-
         Route::post('/user/vip', 'Api\UserController@vip');
 
         //<--LDH-->
@@ -248,11 +241,8 @@ Route::group([ 'middleware' => ['lang', /*'check_user'*/]], function () {
 
 
         Route::post('/historical_data', 'Api\DefaultController@historicalData');
-
-
         Route::post('/quotation', 'Api\DefaultController@quotation');
         Route::post('/quotation/info', 'Api\DefaultController@quotationInfo');
-
         Route::post('/transaction/revoke', 'Api\TransactionController@revoke');//撤销委托
 
         Route::post('/transaction/entrust', 'Api\TransactionController@entrust');//当前委托
@@ -487,9 +477,6 @@ Route::group([ 'middleware' => ['lang', /*'check_user'*/]], function () {
     Route::get('api/ltcGet', 'Api\WalletController@ltcGet');//钱包获取交易所的转账
     Route::post('/admin/login', 'Admin\DefaultController@login');
     Route::get('new/walletList', 'Api\WalletOneController@walletList');//
-
-    Route::post('/admin/login', 'Admin\DefaultController@login');
-//Route::get('/admin/login1', 'Admin\DefaultController@login1');
 //管理后台
     Route::group(['prefix' => 'winadmin', 'middleware' => ['admin_auth']], function () {
         Route::get('/index', 'Admin\DefaultController@index');
