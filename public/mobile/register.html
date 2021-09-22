@@ -246,7 +246,7 @@
     <div class="header-space"></div>
     <div id="register">
         <!--手机注册-->
-        <div id="telregis">
+        <div id="telregis" style="display:none;">
             <div class="teltit">
                 <span><img src="images/regi.png" /><b data-localize="lg.noset">注册后不能修改</b></span>
             </div>
@@ -277,7 +277,7 @@
                     data-localize="lg.lgs">登录</a></div>
         </div>
         <!--邮箱注册-->
-        <div id="emailregis" style="display:none;">
+        <div id="emailregis" >
             <div class="teltit">
                 <!-- <h5>邮箱注册</h5> -->
                 <span><img src="images/regi.png" /><b data-localize="lg.noset">注册后不能修改</b></span>
@@ -293,8 +293,7 @@
                     <a class="btn btn-default emailbtn" data-toggle="modal" data-target="#emailnext"
                         data-localize="safe.next">下一步</a>
                     <!-- <p id="mess" style="color:#cc704b;font-size: 12px;margin:5px 0 0 10px;"></p> -->
-
-                    <a class="help-block tl" href="javascript:;" id="registel" data-localize="lg.phregister">手机注册</a>
+<!--                    <a class="help-block tl" href="javascript:;" id="registel" data-localize="lg.phregister">手机注册</a>-->
                 </form>
             </div>
             <div class="yecount"><span data-localize="lg.have">已有GEMINI账号?</span> <a href="login.html"
@@ -471,14 +470,14 @@
                 //     $(".emailbtn").css("background","#3e536b")
                 // }
             })
-            $("#regismail").click(function () {
-                $("#telregis").hide();
-                $("#emailregis").show();
-            })
-            $("#registel").click(function () {
-                $("#telregis").show();
-                $("#emailregis").hide();
-            });
+            // $("#regismail").click(function () {
+            //     $("#telregis").hide();
+            //     $("#emailregis").show();
+            // })
+            // $("#registel").click(function () {
+            //     $("#telregis").show();
+            //     $("#emailregis").hide();
+            // });
             $(".focu").focus(function () {
                 $(this).css("border-bottom", "1px solid #f1f1f1")
             })

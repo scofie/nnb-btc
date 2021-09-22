@@ -52,8 +52,8 @@ function changeLg() {
     }else if (getLocal('language') && getLocal('language') == 'th') {
         lang = getLocal('language')
     } else {
-        lang = 'zh';
-        setLocal('language', 'zh');
+        lang = 'en';
+        setLocal('language', 'en');
     }
     var urls = JSON.stringify(window.location);
     if (urls.indexOf('black') != -1) {
@@ -79,12 +79,12 @@ $(function () {
 })
 var ts = {
     zh: {
-        zwjt:"中文简体",
+        yy:"英语",
         zwft:"中文繁体",
         hy:"韩语",
         ry:"日语",
-        yy:"英语",
         ty:"泰语",
+        zwjt:"中文简体",
         tiaojiegg:"调节杠杆",
         xianjia:"限价",
         shijia:"市价",
@@ -94,12 +94,11 @@ var ts = {
         yishiming:"已实名",
         weishiming:"未实名",
         voltxtNum:"量",
-        phoneandemail:"请输入手机号或邮箱",
+        phoneandemail:"请输入登陆邮箱",
         fatbalance: '商家余额',
         voltxt: '24H量',
         buy: '买入',
         sell: '卖出',
-        revoke: '撤销',
         times: '倍',
         hand: '手',
         phand: '请输入购买手数',
@@ -321,18 +320,15 @@ var ts = {
         emregister1: "邮箱登录",
         phregister1: "手机登录",
         text10:"基于YMT的实时价格"
-
-
-
     },
     hk: {
-         zwjt:"中文簡體",
+        yy:"英語",
+        zwjt:"中文簡體",
         zwft:"中文繁體",
         hy:"韓語",
         ry:"日語",
-        yy:"英語",
         ty:"泰語",
-         tiaojiegg:"調節槓桿",
+        tiaojiegg:"調節槓桿",
         xianjia:"限價",
         shijia:"市價",
         xiaoshi:"小時",
@@ -341,12 +337,11 @@ var ts = {
         yishiming:"已實名",
         weishiming:"未實名",
         voltxtNum:"量",
-        phoneandemail:"請輸入手機號或郵箱",
+        phoneandemail:"請輸入登入郵箱",
         fatbalance: '商家餘額',
         voltxt: '24H量',
         buy: '買入',
         sell: '賣出',
-        revoke: '撤銷',
         times: '倍',
         hand: '手',
         phand: '請輸入購買手數',
@@ -573,14 +568,14 @@ var ts = {
 
     },
     en: {
-        zwjt:"Simplified Chinese",
+        yy:"English",
         zwft:"traditional Chinese",
         hy:"Korean",
         ry:"Japanese",
-        yy:"English",
         ty:"Thai",
+        zwjt:"Simplified Chinese",
         tiaojiegg:"Adjustment multiple",
-         xianjia:"Limit price",
+        xianjia:"Limit price",
         shijia:"Market price",
         xiaoshi:"minute",
         fenzhong:"hour",
@@ -815,13 +810,13 @@ var ts = {
         phregister1: "Mobile login",
         text10:"Real-time Price Based on YMT"
     },
-       jp: {
-           zwjt:"簡体字中国語",
+   jp: {
+        yy:"英語",
         zwft:"繁体字中国語",
         hy:"韓国語",
         ry:"日本人",
-        yy:"英語",
         ty:"タイ人",
+        zwjt:"簡体字中国語",
         tiaojiegg:"レバーの調節",
         xianjia:"指し値",
         shijia:"市場価格",
@@ -835,7 +830,7 @@ var ts = {
         yishiming:"すでに実名",
         weishiming:"未実名",
         voltxtNum:"量",
-        phoneandemail:"携帯電話番号またはメールボックスを入力してください",
+        phoneandemail:"ログインメールアドレスを入力してください",
         fatbalance: 'マーチャントバランス',
         voltxt: '24時間ボリューム',
         buy: 'で買う',
@@ -1063,12 +1058,12 @@ var ts = {
         text10:"YMTに基づくリアルタイム価格"
     },
      kor: {
-           zwjt:"중국어 번체",
+        yy:"영어",
         zwft:"중국어 간체",
         hy:"한국어",
         ry:"일본어",
-        yy:"영어",
         ty:"타이",
+         zwjt:"중국어 번체",
         tiaojiegg: "레버 조절", 
 		xianjia: "가격제한", 
 		shijia: "시장가격", 
@@ -1082,7 +1077,7 @@ var ts = {
 		yishiming: "이미 실명", 
 		weishiming: "미실명", 
 		voltxtNum: "양", 
-		phoneandemail: "핸드폰 번호나 메일을 입력해 주세요." ,
+		phoneandemail: "로그 인 메 일 을 입력 하 세 요." ,
         fatbalance: '판매자 잔액',
         voltxt: '24 시간',
         buy: '구매',
@@ -1309,13 +1304,13 @@ var ts = {
         phregister1: "전화로 로그인",
         text10:"YMT 기반 실시간 가격"
     },
-       th: {
-        zwjt:"จีนตัวย่อ",
+   th: {
+        yy:"ภาษาอังกฤษ",
         zwft:"ภาษาจีนดั้งเดิม",
         hy:"เกาหลี",
         ry:"ญี่ปุ่น",
-        yy:"ภาษาอังกฤษ",
         ty:"ไทย",
+        zwjt:"จีนตัวย่อ",
         tiaojiegg: "ปรับคันโยก", 
 		xianjia:" จำกัด ราคา", 
 		shijia: "ราคาตลาด", 
@@ -1329,7 +1324,7 @@ var ts = {
 		yishiming: "ชื่อจริง" ,
 		weishiming: "ชื่อจริง" ,
 		voltxtNum : "ปริมาณ" ,
-		phoneandemail: "โปรดป้อนหมายเลขโทรศัพท์มือถือหรือที่อยู่อีเมล" ,
+		phoneandemail: "กรุณาระบุกล่องจดหมายขาเข้า" ,
         fatbalance: "ยอดคงเหลือของผู้ขาย",
         voltxt: "24H ปริมาณ",
         buy: "ซื้อ",
@@ -1558,7 +1553,7 @@ var ts = {
 
 
 };
-var lg = getLocal('language') || 'zh';
+var lg = getLocal('language') || 'en';
 
 function getlg(keys) {
     var keys = keys;
