@@ -77,7 +77,7 @@ class Currency extends Model
             //
             //如果不存在行情，取币种默认价格
             $currency = Currency::where('id', $currency_id)->first();
-            if( !is_null($currency->price) ){
+            if( !is_null($currency) ){
                 $cny_Price = $currency->price * $rate;
             }
         }
