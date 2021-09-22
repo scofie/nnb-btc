@@ -425,9 +425,29 @@ class WalletController extends Controller
             return $this->error($ex->getMessage());
         }
     }
+
+    /**
+     * @return \Illuminate\Http\JsonResponse
+     * @desc pc充币地址
+     */
+    public function getWalletRechargeAddress()
+    {
+        $user_id = Users::getUserId();
+        $currency_id = Input::get("currency", '');
+        if (empty($user_id) || empty($currency_id)) {
+            return $this->error('参数错误');
+        }
+        $currencyInfo = Currency::find($currency_id);
+        if (!$currencyInfo) {
+            return $this->error('参数错误');
+        }
+        $rechargeType = Input::get('recharge_type','version');
+        $echoAddress = Setting::getValueByKey($rechargeType,getenv("WALLET_ADDRESS_USDT"));
+
+        return $this->success($echoAddress);
+    }
     //充币地址
-    //充币地址
-public function getWalletAddressIn()
+    public function getWalletAddressIn()
     {
         $user_id = Users::getUserId();
 
