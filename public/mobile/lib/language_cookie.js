@@ -39,7 +39,7 @@ function getLocal(name) {
 }
 
 function changeLg() {
-    var lang = '';
+    var lang = "en";
     if (getLocal('language') && getLocal('language') == 'zh') {
         lang = getLocal('language')
     } else if (getLocal('language') && getLocal('language') == 'hk') {
@@ -51,7 +51,6 @@ function changeLg() {
     }else if (getLocal('language') && getLocal('language') == 'th') {
         lang = getLocal('language')
     } else {
-        lang = 'en';
         setLocal('language', 'en');
     }
     var urls = JSON.stringify(window.location);
