@@ -737,7 +737,7 @@ var ts = {
         balance: "balance:",
         oneHanded: "Please enter the number of one-handed",
         buyUp: "Buy up",
-        buyAll: "Buy or fall",
+        buyAll: "Buy fall",
         chooseTime: "Please choose the time",
         selectQuantities: "Please select or enter quantities",
         multipleTen: "Please enter a multiple of 10",
