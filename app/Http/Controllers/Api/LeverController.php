@@ -101,6 +101,27 @@ class LeverController extends Controller
         ]);
     }
 
+    public function userDeal()
+    {
+        $user_id = Users::getUserId();
+        $legal_id = Input::get("legal_id");
+        $currency_id = Input::get("currency_id");
+        if (empty($legal_id) || empty($currency_id)) {
+            return $this->error("参数错误:(");
+        }
+        $limit = Input::get("limit", 10);
+        $my_transaction = LeverTransaction::with('user')
+            ->orderBy('id', 'desc')
+            ->where("user_id", $user_id)
+            ->where("status", LeverTransaction::TRANSACTION)
+            ->where("currency", $currency_id)
+            ->where("legal", $legal_id)
+            ->orderBy("id", "desc")
+            ->paginate($limit);
+
+        return $this->success($my_transaction);
+    }
+
     /**
      * 交易列表
      *

@@ -31,7 +31,7 @@
                     <li>
                         <a v-for="item in detailList.quotation" :key="item.id"
                             v-if="item.is_display == 1&&item.open_lever == 1"
-                            :href="'dataMap.html?legal_id='+item.legal_id+'&currency_id='+item.currency_id+'&symbol='+item.currency_name+'/'+item.legal_name+''"
+                            :href="'dataMap.html?tradeId=0&legal_id='+item.legal_id+'&currency_id='+item.currency_id+'&symbol='+item.currency_name+'/'+item.legal_name+''"
                             class="main-asset" data-currentId="item.id">
                             <div class="flex between">
                                 <!-- <div class="logos flex alcenter">

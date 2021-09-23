@@ -197,7 +197,6 @@
 					<div class="flex warps1 currency-list mt10">
 						<p :class="[{'active':tradeCurrencyId == item.id}]" v-for="item in tradeCurrency" :key="item.id"
 							@click="tradeCurrencyClick(item.id,item.name)">{{item.name}}</p>
-
 					</div>
 
 				</div>
@@ -364,7 +363,6 @@
 				status: 1,
 				currencyName: "",
 				orderList: [],
-				set: null,
 				secods: '',
 				bmbBalance: '',
 				sets: null,
@@ -501,15 +499,21 @@
 					var that = this;
 					// that.orderList = [];
 					var arr = [];
+					var orderUrl = "lever/user_deal";
+					if( that.tradeId > 0 ){
+                        orderUrl = "microtrade/lists"
+                    }
 					clearTimeout(that.set);
 					clearInterval(that.sets);
 					initDataTokenNo({
-						url: 'microtrade/lists',
+						url: orderUrl,
 						data: {
 							page: 1,
 							status: that.status,
 							limit: 20,
-							match_id: that.tradeId
+							match_id: that.tradeId,
+                            legal_id:that.legal_id,
+                            currency_id:that.currency_id,
 						}
 					}, function (res, status, xhr) {
 						if (res.type == 'ok') {
@@ -523,7 +527,7 @@
 								that.Djs_time();
 								that.set = setTimeout(that.countDown, 200);
 							}
-       setTimeout(function(){
+                        setTimeout(function(){
 								that.widget.setSymbol(that.couponSelected,5, function onReadyCallback() {});
 								}, 1200);
                             //
