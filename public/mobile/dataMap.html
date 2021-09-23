@@ -123,11 +123,11 @@
 
         <div class="order-list" v-show="!tradeId">
             <p v-show="false">{{CountDown}}</p>
-            <div class="flex order-list-header between">
+            <div class="flex order-list-header between" style="border-bottom:1px solid #f1f1f1; ">
                 <p class="tc"   data-localize="contract.inPosition" style="width:100%;text-align:left;margin-left: 10px;">持仓中</p>
             </div>
             <div class="flex order-list-header between " v-show="status==1">
-                <p style="padding-right: 10px;"><span>{{getlg('balance')}}{{useLegalNum}}{{legal_name}} </p>
+                <p style="padding-left: 10px;"><span>{{getlg('balance')}}{{useLegalNum}}{{legal_name}} </p>
                 <p style="text-align: right;padding-right: 10px;"><span data-localize="deals.total">持仓总盈亏：</span>{{totalRate|| '0.00' | toFixeds}}</p>
             </div>
             <ul class="list bgColor">
