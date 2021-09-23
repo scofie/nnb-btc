@@ -35,7 +35,6 @@ function setLocal(name, value) {
 }
 
 function getLocal(name) {
-	
     return window.localStorage.getItem(name) || '';
 }
 

@@ -92,7 +92,7 @@ var vue = new Vue({
                 txt="zh";
             }
              if(txt==1){
-                txt="cht";
+                txt="hk";
             }
             if(txt==2){
                 txt="en";
