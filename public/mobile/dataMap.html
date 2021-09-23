@@ -63,7 +63,7 @@
 		</div>
 		<div id="tv_chart_container" style="width:100%;height:55.0vh;margin-top: 5px;padding-bottom: 10px;"></div>
 		<!--订单列表 -->
-		<div class="order-list" v-show="tradeId">
+		<div class="order-list" v-show="orderList.length > 0 || tradeId ">
 			<p v-show="false">{{CountDown}}</p>
 			<div class="flex order-list-header between">
 				<p class="tc" :class="[{'active':status == 1}]" @click="selectOrder(1)" data-localize="contract.positionList">持仓列表</p>
@@ -497,10 +497,11 @@
 				},
 				getList() {
 					var that = this;
-					// that.orderList = [];
+					var is_show = false;
 					var arr = [];
 					var orderUrl = "lever/user_deal";
 					if( that.tradeId > 0 ){
+                        is_show = true
                         orderUrl = "microtrade/lists"
                     }
 					clearTimeout(that.set);
@@ -524,6 +525,7 @@
 									arr[i].endTime = (nowTime - 0) + (arr[i].remain_milli_seconds - 0);
 								}
 								that.orderList = arr;
+                                is_show = true
 								that.Djs_time();
 								that.set = setTimeout(that.countDown, 200);
 							}
