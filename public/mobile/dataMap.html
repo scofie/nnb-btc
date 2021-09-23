@@ -586,7 +586,7 @@
                 getUserTrade() {
                     let that = this;
                     initDataTokens({
-                        url: 'lever/my_trade',
+                        url: 'lever/user_deal',
                         type: 'post',
                         data: {
                             page: that.page,
@@ -607,11 +607,7 @@
                             that.tabList.map((item) => {
                                 that.ids = that.ids.concat(item.id);
                             })
-
                             that.more = getlg('more');
-                            if (that.status == 0 || that.status == 1) {
-                                that.getnew();
-                            }
                         } else if (that.tabList.length == 0) {
                             that.more = getlg('nodata');
                             that.nodataShow = true;
@@ -620,40 +616,6 @@
                             that.more = getlg('nomore')
                         }
                     }
-                },
-                getnew() {
-                    let that = this;
-                    var token = get_user_login();
-                    $.ajax({
-                        url: _API + "user/info",
-                        type: "GET",
-                        dataType: "json",
-                        async: true,
-                        beforeSend: function beforeSend(request) {
-                            request.setRequestHeader("Authorization", token);
-                        },
-                        success: function success(data) {
-                            if (data.type == 'ok') {
-                                var socket = io(socket_api);
-                                socket.emit('login', data.message.id);
-                                // 后端推送来消息时
-                                socket.on('lever_trade', function (msg) {
-                                    var lists = that.tabList;
-                                    if (msg.type == 'lever_trade') {
-                                        that.rate = msg.hazard_rate;
-                                        that.totalRate = msg.profits_all;
-                                        if (that.status == 0) {
-                                            var datas = JSON.parse(msg.trades_entrust);
-                                            that.tabList = datas;
-                                        } else if (that.status == 1) {
-                                            var datas = JSON.parse(msg.trades_all);
-                                            that.tabList = datas;
-                                        }
-                                    }
-                                })
-                            }
-                        }
-                    });
                 },
 				getList() {
 					var that = this;
