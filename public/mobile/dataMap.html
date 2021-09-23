@@ -63,7 +63,7 @@
 		</div>
 		<div id="tv_chart_container" style="width:100%;height:55.0vh;margin-top: 5px;padding-bottom: 10px;"></div>
 		<!--订单列表 -->
-		<div class="order-list" v-show="orderList.length > 0 || tradeId ">
+		<div class="order-list" v-show="tradeId ">
 			<p v-show="false">{{CountDown}}</p>
 			<div class="flex order-list-header between">
 				<p class="tc" :class="[{'active':status == 1}]" @click="selectOrder(1)" data-localize="contract.positionList">持仓列表</p>
@@ -120,6 +120,89 @@
 			</ul>
 			<div v-if="orderList.length == 0" class="tc mt10" data-localize="transaction.nodata">暂无记录</div>
 		</div>
+
+        <div class="order-list" v-show="!tradeId">
+            <p v-show="false">{{CountDown}}</p>
+            <div class="flex order-list-header between">
+                <p class="tc"   data-localize="contract.inPosition" style="width:100%;text-align:left;margin-left: 26px;">持仓中</p>
+            </div>
+            <div class="lever-rate flex between" v-show="status==1">
+                <p><span>{{getlg('balance')}}{{useLegalNum}}{{legal_name}} </p>
+                <p><span data-localize="deals.total">持仓总盈亏：</span>{{totalRate|| '0.00' | toFixeds}}</p>
+            </div>
+            <ul class="list bgColor">
+                <li v-for="(item,index) in tabList" class="bgColor pl10 pr10 pb10">
+                    <div @click="listShow = !listShow, showIndex=index">
+                        <div class="list-header flex between" :class="[{'bdt':status==1}]">
+                            <span>{{item.type == 1? getlg('buy'):getlg('sell')}} {{item.symbol}} x{{item.share}} (No.{{item.id}})</span>
+                            <p>
+                                <span :class="['red',{'green':item.profits > 0}]">{{item.profits || '0.0000' | toFixed4}}</span>
+                            </p>
+                        </div>
+                        <div class="flex between colorGrey ft12">
+                            <p v-else>{{item.price || '0.0000' | toFixed4}}-{{item.update_price || '0.0000' | toFixed4}}</p>
+                            <p v-if="!item.handle_time">{{item.time}}</p>
+                        </div>
+                        <div class="flex between colorGrey" v-if="item.handle_time">
+                            <p>{{item.time}}</p>
+                            <p>{{item.handle_time}}</p>
+                        </div>
+                    </div>
+
+                    <ul class="list-content mt10 pb10" v-show="listShow">
+                        <li class="flex between">
+                            <div class="tl flex" >
+                                <p class="colorGrey" data-localize="deals.weprice">{{getlg('entrustPrice')}}</p>：
+                                <p class="ftColor">{{item.origin_price || '0.0000' | toFixed4}}</p>
+                            </div>
+                            <div class="tl flex" >
+                                <p class="colorGrey" data-localize="deals.oprice">{{getlg('oprice')}}</p>：
+                                <p class="ftColor">{{item.price || '0.0000' | toFixed4}}</p>
+                            </div>
+                            <div class="tr flex">
+                                <p class="colorGrey" data-localize="deals.nowprice">{{getlg('tnowprice')}}</p>：
+                                <p class="ftColor now">{{item.update_price || '0.0000' | toFixed4}}</p>
+                            </div>
+                        </li>
+                        <li class="flex between mt5">
+                            <div class="tl flex">
+                                <p class="colorGrey" data-localize="deals.zyprice">{{getlg('zyprice')}}</p>：
+                                <p class="ftColor ying">{{item.target_profit_price || '0.0000' | toFixed4}}</p>
+                            </div>
+                            <div class="tr flex">
+                                <p class="colorGrey" data-localize="deals.bond">{{getlg('bond')}}</p>：
+                                <p class="ftColor">{{item.origin_caution_money || '0.0000' | toFixed4}}</p>
+                            </div>
+                        </li>
+                        <li class="flex between mt5">
+                            <div class="tl flex">
+                                <p class="colorGrey" data-localize="deals.zsprice">{{getlg('zsprice')}}</p>：
+                                <p class="ftColor zhi">{{item.stop_loss_price || '0.0000' | toFixed4}}</p>
+                            </div>
+                            <div class="tr flex" v-if="!item.handle_time">
+                                <p class="colorGrey" data-localize="deals.fee">{{getlg('fee')}}</p>：
+                                <p class="ftColor">{{item.trade_fee || '0.0000' | toFixed4}}</p>
+                            </div>
+                            <div class="tr flex" v-if="item.handle_time">
+                                <p class="colorGrey" data-localize="deals.fee">{{getlg('fee')}}</p>：
+                                <p class="ftColor">{{item.trade_fee || '0.0000' | toFixed4}}</p>
+                            </div>
+                        </li>
+                        <li class="flex between mt5">
+                            <div class="tl flex">
+                                <p class="colorGrey" data-localize="deals.gprice">{{getlg('gprice')}}</p>：
+                                <p class="ftColor">{{item.overnight_money || '0.0000' | toFixed4}}</p>
+                            </div>
+                            <div class="tr flex">
+                                <p class="colorGrey" data-localize="deals.znum">{{getlg('znum')}}</p>：
+                                <p class="ftColor">{{item.number || '0.0000' | toFixed4}}</p>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <div v-if="orderList.length == 0" class="tc mt10" data-localize="transaction.nodata">暂无记录</div>
+        </div>
 		<div style="height:160px;"></div>
 
 		<div id="bottom" class="flex between" v-if="tradeId">
@@ -358,6 +441,7 @@
 				orderData: {
 
 				},
+                tabList: [],
 				progress: 100,
 				set: null,
 				status: 1,
@@ -367,8 +451,8 @@
 				bmbBalance: '',
 				sets: null,
 				insurancType: [],
-				userInsurancId: ''
-				// ATMExQuoteChart: {},
+				userInsurancId: '',
+                useLegalNum:0.00
 
 			},
 			filters: {
@@ -415,9 +499,12 @@
 			},
 			mounted() {
 				this.createWidget();
-				// this.connects();
-				this.getList();
-
+                let that = this;
+				if( that.tradeId ){
+                    this.getList();
+                }else {
+				    this.getUserTrade()
+                }
 			},
 			destroyed() {
 				this.removeWidget();
@@ -425,7 +512,6 @@
 			beforeDestroy() {
 
 			},
-
 			methods: {
 				init() {
 					var that = this;
@@ -495,26 +581,57 @@
 						}
 					})
 				},
+                getUserTrade() {
+                    let that = this;
+                    initDataTokens({
+                        url: 'lever/my_trade',
+                        type: 'post',
+                        data: {
+                            page: that.page,
+                            legal_id:that.legal_id,
+                            currency_id:that.currency_id,
+                        }
+                    }, that.currencyQuotationSuccess);
+                },currencyQuotationSuccess(res) {
+                    let that = this;
+                    if (res.type == 'ok') {
+                        let datas = res.message.message.data;
+                        that.rate = res.message.rate_profits_total.hazard_rate;
+                        that.totalRate = res.message.rate_profits_total.profits_total;
+                        that.useLegalNum = res.message.user_lever;;
+                        if (datas.length > 0) {
+                            that.nodataShow = false;
+                            that.tabList = that.tabList.concat(datas);
+                            that.tabList.map((item) => {
+                                that.ids = that.ids.concat(item.id);
+                            })
+
+                            that.more = getlg('more');
+                            if (that.status == 0 || that.status == 1) {
+                                that.getnew();
+                            }
+                        } else if (that.tabList.length == 0) {
+                            that.more = getlg('nodata');
+                            that.nodataShow = true;
+                        } else {
+                            that.nodataShow = false;
+                            that.more = getlg('nomore')
+                        }
+                    }
+                },
 				getList() {
 					var that = this;
 					var is_show = false;
 					var arr = [];
-					var orderUrl = "lever/user_deal";
-					if( that.tradeId > 0 ){
-                        is_show = true
-                        orderUrl = "microtrade/lists"
-                    }
 					clearTimeout(that.set);
 					clearInterval(that.sets);
 					initDataTokenNo({
-						url: orderUrl,
+						url: "microtrade/lists",
 						data: {
 							page: 1,
 							status: that.status,
 							limit: 20,
 							match_id: that.tradeId,
-                            legal_id:that.legal_id,
-                            currency_id:that.currency_id,
 						}
 					}, function (res, status, xhr) {
 						if (res.type == 'ok') {
@@ -553,12 +670,6 @@
 						// 倒计时结束打开
 						// clearTimeout(that.set)
 						return 0.0;
-						// ATMExQuoteChart.remove_position_line(ids);
-						// that.getList();
-						// 或者刷新页面
-						// location.reload();
-
-
 					}
 
 
@@ -741,16 +852,12 @@
 											}
 										}
 									}
-
 								}
 							})
 							// that.orderList = [];
 							clearTimeout(that.set);
 							clearInterval(that.sets);
-							// // $('.order-lists').html('');
-							// $('.order-lists .times').text('');
 							that.getList();
-
 						}
 					})
 				},

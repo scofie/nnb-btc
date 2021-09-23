@@ -251,8 +251,7 @@
 							legal_id: that.legalId,
 						}
 					}, that.currencyQuotationSuccess);
-				},
-				currencyQuotationSuccess(res) {
+				},currencyQuotationSuccess(res) {
 					let that = this;
 					if (res.type == 'ok') {
 						let datas = res.message.message.data;

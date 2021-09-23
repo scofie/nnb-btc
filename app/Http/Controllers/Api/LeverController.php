@@ -104,22 +104,35 @@ class LeverController extends Controller
     public function userDeal()
     {
         $user_id = Users::getUserId();
-        $legal_id = Input::get("legal_id");
-        $currency_id = Input::get("currency_id");
-        if (empty($legal_id) || empty($currency_id)) {
-            return $this->error("参数错误:(");
-        }
+        $legal_id = Input::get("legal_id", 0);
+        $currency_id = Input::get("currency_id", 0);
+        $status = Input::get("status", -1);
         $limit = Input::get("limit", 10);
-        $my_transaction = LeverTransaction::with('user')
-            ->orderBy('id', 'desc')
-            ->where("user_id", $user_id)
-            ->where("status", LeverTransaction::TRANSACTION)
-            ->where("currency", $currency_id)
-            ->where("legal", $legal_id)
-            ->orderBy("id", "desc")
-            ->paginate($limit);
+        $user_wallet = UsersWallet::where("user_id", $user_id)->where("currency", $legal_id)->first();
+        $user_lever = 0;
+        if ($user_wallet) {
+            $user_lever = $user_wallet->lever_balance;
+        }
+        //取盈亏总额
+        list($caution_money_all,$origin_caution_money_all,$profits_all)
+                = LeverTransaction::getUserProfit($user_id, 3);
+        $hazard_rate = LeverTransaction::getWalletHazardRate($user_wallet);
+        $lever_transaction['rate_profits_total'] = [
+            'hazard_rate' => $hazard_rate,
+            'profits_total' => $profits_all,
+            "user_lever" => $user_lever,
+        ];
 
-        return $this->success($my_transaction);
+        $param = compact('status', 'legal_id', 'currency_id');
+        $lever_transaction['message'] = LeverTransaction::where(function ($query) use ($param,$status,$legal_id,$currency_id) {
+            extract($param);
+            $status != -1 && $query->where('status', $status);
+            $legal_id > 0 && $query->where('legal', $legal_id);
+            $currency_id > 0 && $query->where('currency', $currency_id);
+        })->where('user_id', $user_id)
+            ->orderBy('id', 'desc')
+            ->paginate($limit);
+        return $this->success($lever_transaction);
     }
 
     /**
@@ -171,7 +184,6 @@ class LeverController extends Controller
             'profits' => $profits,
             'order' => $lever_transaction,
         ];
-//        var_dump($lever_transaction->toArray());die;
         return $this->success($data);
     }
 
