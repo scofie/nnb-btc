@@ -41,7 +41,7 @@ function getLocal(name) {
 
 function changeLg() {
     var lang = '';
-    if (getLocal('language') && getLocal('language') == 'en') {
+    if (getLocal('language') && getLocal('language') == 'zh') {
         lang = getLocal('language')
     } else if (getLocal('language') && getLocal('language') == 'hk') {
         lang = getLocal('language')
@@ -563,9 +563,6 @@ var ts = {
         emregister1: "郵箱登錄",
         phregister1: "手機登入",
         text10:"基於YMT的實时價格"
-
-
-
     },
     en: {
         yy:"English",

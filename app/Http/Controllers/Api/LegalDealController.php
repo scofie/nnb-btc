@@ -35,14 +35,13 @@ class LegalDealController extends Controller
 //            var_dump($create_time+$userLegalDealCancel_time); var_dump($time);die;
         if(($create_time+$userLegalDealCancel_time)<=$time)
         {
-            $id =$result->id;
-            $ppp=LegalDeal::cancelLegalDealById($id);
+//            $id =$result->id;
+//            $ppp=LegalDeal::cancelLegalDealById($id);
             //取消订单数加一
-            $aaaa=Users::find($result->user_id);
-//            var_dump($result->user_id);die;
-            $aaaa->today_LegalDealCancel_num=$aaaa->today_LegalDealCancel_num+1;
-            $aaaa->LegalDealCancel_num__update_time=time();
-            $aaaa->save();
+            $user=Users::find($result->user_id);
+            $user->today_LegalDealCancel_num=$user->today_LegalDealCancel_num+1;
+            $user->LegalDealCancel_num__update_time=time();
+            $user->save();
             return $this->success('订单取消成功');
         }
 
@@ -220,19 +219,16 @@ class LegalDealController extends Controller
         $limit = $request->get('limit', 10);
         $currency_id = $request->get('currency_id', '');
         $type = $request->get('type', 'sell');
-        if (empty($currency_id)) return $this->error('参数错误');
-        if (empty($type)) return $this->error('参数错误2');
+        if (empty($currency_id) || empty($type)) return $this->error('参数错误');
         $currency = Currency::find($currency_id);
         if (empty($currency)) return $this->error('无此币种');
         if (empty($currency->is_legal)) return $this->error('该币不是法币');
-        if($type=="sell")
-        {
-            $results = LegalDealSend::where('currency_id', $currency_id)->where('is_done', 0)->where('is_shelves', 1)->where('type', $type)->orderBy('price', 'asc')->orderBy('id', 'desc')->paginate($limit);
-        }
-        else
-        {
-            $results = LegalDealSend::where('currency_id', $currency_id)->where('is_done', 0)->where('is_shelves', 1)->where('type', $type)->orderBy('price', 'desc')->orderBy('id', 'desc')->paginate($limit);
-        }
+        $results = LegalDealSend::where('currency_id', $currency_id)
+                                ->where('is_done', 0)
+                                ->where('is_shelves', 1)
+                                ->where('type', $type)
+                                ->orderBy('price', 'desc')
+                                ->orderBy('id', 'desc')->paginate($limit);
 
         return $this->pageData($results);
     }
