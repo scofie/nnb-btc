@@ -252,7 +252,7 @@ Route::group([ 'middleware' => ['lang', /*'check_user'*/]], function () {
         Route::post('/transaction/out', 'Api\TransactionController@out')->middleware('validate_locked');//卖出
 
         Route::post('/lever/deal', 'Api\LeverController@deal'); //杠杆deal
-        Route::get('/lever/user_deal', 'Api\LeverController@deal'); //持仓中deal
+        Route::get('/lever/user_deal', 'Api\LeverController@userDeal'); //持仓中deal
         Route::post('/lever/dealall', 'Api\LeverController@dealAll'); //杠杆全部
         Route::post('/lever/submit',
             ['uses' => 'Api\LeverController@submit', 'middleware' => ['validate_locked','check_user']]); //杠杆下单
