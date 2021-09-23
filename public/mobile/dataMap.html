@@ -402,6 +402,7 @@
 				newData: '',
 				symbol: '',
 				priceScale: 10000,
+                totalRate:0,
 				histime: '',
 				newprice: '0.00',
 				updown: '0.00',
@@ -452,8 +453,9 @@
 				sets: null,
 				insurancType: [],
 				userInsurancId: '',
-                useLegalNum:0.00
-
+                useLegalNum:0.00,
+                ids:[],
+                listShow: false,
 			},
 			filters: {
 				toFixeds: function (value) {
