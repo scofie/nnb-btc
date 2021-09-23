@@ -490,7 +490,7 @@ class Worker
 
 
         $unique_prefix = str_replace('/', '_', static::$_startFile);
-        $workmanPath = env('APP_WORKER_PATH',"/mnt/data/workerman");
+        $workmanPath = getenv('APP_WORKER_PATH',"/mnt/data/workerman");
         // Pid file.
         if (empty(static::$pidFile)) {
             static::$pidFile = $workmanPath . "/$unique_prefix.pid";
