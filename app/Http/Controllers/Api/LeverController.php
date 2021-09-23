@@ -114,8 +114,7 @@ class LeverController extends Controller
             $user_lever = $user_wallet->lever_balance;
         }
         //取盈亏总额
-        list($caution_money_all,$origin_caution_money_all,$profits_all)
-                = LeverTransaction::getUserProfit($user_id, 3);
+        list($caution_money_all,$origin_caution_money_all,$profits_all)= LeverTransaction::getUserProfit($user_id, $legal_id);
         $hazard_rate = LeverTransaction::getWalletHazardRate($user_wallet);
         $lever_transaction['rate_profits_total'] = [
             'hazard_rate' => $hazard_rate,
