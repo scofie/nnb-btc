@@ -22,7 +22,7 @@
             <!-- 合约 -->
             <div class="content-tab flex"> 
             	<p :class="[{'active':tabType == 'lever'}]" @click="selectTab('lever')" data-localize="contract.contract">合约</p>
-                <p :class="[{'active':tabType == 'microtrade'}]" @click="selectTab('microtrade')" data-localize="contract.secondContract">秒合约</p>
+                <p :class="[{'active':tabType == 'microtrade'}]" @click="selectTab('microtrade')" data-localize="contract.secondContract">期权</p>
                  <p :class="[{'active':tabType == 'bibi'}]" @click="selectTab('bibi')" data-localize="assets.currency">币币</p>
             </div>
             <div class="content-lever" v-show="tabType == 'bibi'">
@@ -99,7 +99,7 @@
                     </li>
                 </ul>
             </div>
-            <!-- 秒合约交易 -->
+            <!-- 期权交易 -->
             <div class="content-seconds" v-show="tabType == 'microtrade'">
                 <ul>
                     <li>

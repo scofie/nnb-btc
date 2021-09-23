@@ -507,7 +507,7 @@ var ts = {
         alreadyOpened: "已開啟",
         inviteCode: "邀請碼不能為空",
         contractAccount: "合約帳戶",
-        secondContractAccount: "秒合約帳戶",
+        secondContractAccount: "期權帳戶",
         Flashexchange: "幣幣帳戶",
         c2cAccount: "法幣帳戶",
         hands: "手數",

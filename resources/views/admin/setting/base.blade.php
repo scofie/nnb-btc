@@ -24,7 +24,7 @@
                     <li hidden>奖励设置</li>
                     <li hidden>工作室</li>
                     <li hidden>通证规则</li>
-                    <li>秒合约</li>
+                    <li>期权</li>
                 </ul>
                 <div class="layui-tab-content">
                     <!--通知设置开始-->
@@ -691,7 +691,7 @@
                                     <button class="layui-btn layui-btn-primary" type="button" id="add_number"><i class="layui-icon layui-icon-about"></i>数量设置</button>
                                     <button class="layui-btn layui-btn-primary" type="button" id="user"> <i class="layui-icon layui-icon-username"></i> 用户管理</button>
                                     <button class="layui-btn layui-btn-primary" type="button" id="currency_risk"> <i class="layui-icon layui-icon-dollar"></i>币种风控</button>
-                                    <button class="layui-btn layui-btn-primary" type="button" id="second_trade"> <i class="layui-icon layui-icon-form"></i>秒合约交易</button>
+                                    <button class="layui-btn layui-btn-primary" type="button" id="second_trade"> <i class="layui-icon layui-icon-form"></i>期权交易</button>
                                 </div>
                             </div>
                         </div>
@@ -842,7 +842,7 @@
                 parent.winui.window.open({
                     id: 'second_trade'  
                     ,type: 2
-                    ,title: '秒合约交易'
+                    ,title: '期权交易'
                     ,content: '/admin/micro_order'
                 });
             });

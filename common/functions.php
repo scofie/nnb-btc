@@ -77,7 +77,7 @@ function sctonum($num, $double = DECIMAL_SCALE)
  * 改变钱包余额
  *
  * @param \App\UsersWallet &$wallet 用户钱包模型实例
- * @param integer $balance_type 1.法币,2.币币交易,3.杠杆交易,4.秒合约,5.保险
+ * @param integer $balance_type 1.法币,2.币币交易,3.杠杆交易,4.期权,5.保险
  * @param float $change 添加传正数，减少传负数
  * @param integer $account_log_type 类似于之前的场景
  * @param string $memo 备注

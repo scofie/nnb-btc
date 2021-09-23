@@ -152,7 +152,7 @@
 		<div id="sideColumn" class="bgBlackColor" v-if="tradeId">
 			<h4>
 			</h4>
-			<div class="ft20 bold bdbs pl20 texts-lever" data-localize="contract.secondContract">秒合约</div>
+			<div class="ft20 bold bdbs pl20 texts-lever" data-localize="contract.secondContract">期权</div>
 			<ol class="tabs hide">
 				<li class="currency_name side side2" data-id="3">USDT</li>
 			</ol>
@@ -449,7 +449,7 @@
 						}
 					})
 				},
-				// 获取秒合约订单列表
+				// 获取期权订单列表
 				getList() {
 					var that = this;
 					// that.orderList = [];
@@ -515,7 +515,7 @@
 						this.CountDown = presentTime
 					}, 200);
 				},
-				// 选择秒合约订单类型
+				// 选择期权订单类型
 				selectOrder(types) {
 					var that = this;
 					that.status = types;

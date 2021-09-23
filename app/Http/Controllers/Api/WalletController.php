@@ -254,7 +254,7 @@ class WalletController extends Controller
     private $mome = [
         'legal' => 'c2c',
         'lever' => '合约',
-        'micro' => '秒合约',
+        'micro' => '期权',
         'change' => '闪兑',
     ];
 

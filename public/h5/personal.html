@@ -235,7 +235,7 @@
 		<div class="header-space"></div>
 		<div class="flex between">
 					<div class="personal-header tl ml15 flex1">
-							 <p class="username" data-localize="footer.secondAccountBalance">秒合约账户余额</p> 
+							 <p class="username" data-localize="footer.secondAccountBalance">期权账户余额</p>
 							  <p class="balance ft16"></p>  
 							 <ul> 
 							 	<li v-for="(item,index) in leverList" :key="item.id" v-if="item.is_micro == 1">{{item.micro_balance}} {{item.currency_name}}</li> 
@@ -325,7 +325,7 @@
 									<div class="flex between">
 										<div>
 											<i class="iconfont icon-dingdan2"></i>
-											<span data-localize="contract.SecondContractOrder">秒合约订单</span>
+											<span data-localize="contract.SecondContractOrder">期权订单</span>
 										</div>
 										<img src="images/myimg/jitou.png" alt="">
 									</div>

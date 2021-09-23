@@ -49,8 +49,8 @@
                                     ,{field:'currency_name',title: '币种',width: 150}
                                     ,{field:'address',title:'充币地址', width:200}
 
-                                    ,{field:'micro_balance',title:'秒合约余额', width:150}
-                                    ,{field:'lock_micro_balance',title:'秒合约锁定余额', width:150}
+                                    ,{field:'micro_balance',title:'期权余额', width:150}
+                                    ,{field:'lock_micro_balance',title:'期权锁定余额', width:150}
 
                                     ,{field:'lever_balance',title:'杠杆余额', width:150}
                                     ,{field:'lock_lever_balance',title:'杠杆锁定余额', width:150}

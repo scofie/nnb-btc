@@ -116,7 +116,7 @@ class Users extends Model
 
         return isset($wal->micro_balance) ? $wal->micro_balance : '0.00000';
     }
-    //秒合约账号
+    //期权账号
     public function getUsdtAttribute()
     {
         $value = $this->getAttributes['id'];

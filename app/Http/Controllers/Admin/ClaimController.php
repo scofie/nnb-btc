@@ -113,7 +113,7 @@ class ClaimController extends Controller
                     change_wallet_balance($user_wallet, 5, -$user_wallet->insurance_balance,
                         AccountLog::USER_CLAIM_COMPENSATION, '保险赔偿用户[清除受保金额]', false);
 
-                    //将保险受保金额给予用户的秒合约账户
+                    //将保险受保金额给予用户的期权账户
                     change_wallet_balance($user_wallet, 4, $claim_apply->compensate,
                         AccountLog::USER_CLAIM_COMPENSATION, '保险赔偿用户[赔偿受保金额]', false);
 

@@ -748,7 +748,7 @@ class UserController extends Controller
 //        $legal_wallet['CNY'] = '';
 
         //添加折合人民币end
-        //秒合约钱包
+        //期权钱包
         $micro_wallet['balance'] = UsersWallet::where('user_id', $user_id)
             ->whereHas('currencyCoin', function ($query) {
                 $query->where('is_micro', 1);

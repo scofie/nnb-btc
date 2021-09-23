@@ -97,7 +97,7 @@
           
         <span :class="[{'active': type== 'match'}]" @click="tabClick('match')" data-localize="assets.curAccount">币币账户</span>
         <span :class="[{'active': type== 'lever'}]" @click="tabClick('lever')" data-localize="assets.contractAccount">合约账户</span>
-        <span :class="[{'active': type== 'micro'}]" @click="tabClick('micro')" data-localize="assets.secondContractAccount">秒合约账户</span>
+        <span :class="[{'active': type== 'micro'}]" @click="tabClick('micro')" data-localize="assets.secondContractAccount">期权账户</span>
         <span :class="[{'active': type== 'legal'}]" @click="tabClick('legal')" data-localize="assets.legalAccount">法币账户</span>
       </div>
 
@@ -126,7 +126,7 @@
             <section class="levelbox level02">
               <div class="white flex between alcenter">
                 <div class="ft16">
-                  <span data-localize="assets.secondContractAccount">秒合约账户</span>
+                  <span data-localize="assets.secondContractAccount">期权账户</span>
                   <span class="ft12" data-localize="assets.total">总资产折合（$）</span>
                 </div>
                 <img :src="show==true?'images/shows.png':'images/hides.png'" alt="" @click='hide'>
@@ -203,7 +203,7 @@
             </a>
           </li>
         </ul>
-        <!-- 秒合约账户 -->
+        <!-- 期权账户 -->
         <ul class="deal_lists" v-show="type == 'micro'">
           <li v-for="item in Lists" :key="item.id" v-if="item.is_micro == 1 && item.currency!=12">
             <a href="javascript:;" @click="links(item.currency)">

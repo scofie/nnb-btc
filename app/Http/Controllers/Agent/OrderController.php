@@ -752,7 +752,7 @@ class OrderController extends Controller
 
         return $this->ajaxReturn($data);
     }
-     //秒合约订单
+     //期权订单
      public function microList(Request $request)
      {
          $currency_id = $request->input('currency_id', -1);

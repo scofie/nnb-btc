@@ -77,11 +77,11 @@ class MicroTradeLogic
                 $balance_type = 4;
             }
             $is_insurance = $use_insurance;
-            $result = change_wallet_balance($wallet, $balance_type, -$number, AccountLog::MICRO_TRADE_CLOSE_SETTLE, '秒合约下单扣除本金');
+            $result = change_wallet_balance($wallet, $balance_type, -$number, AccountLog::MICRO_TRADE_CLOSE_SETTLE, '期权下单扣除本金');
             throw_unless($result === true, new \Exception($result));
             //扣手续费
             $fee = bc_div(bc_mul($number, $currency->micro_trade_fee), 100);
-            $result = change_wallet_balance($wallet, $balance_type, -$fee, AccountLog::MICRO_TRADE_CLOSE_SETTLE, '秒合约下单扣除' . $currency->micro_trade_fee . '%手续费');
+            $result = change_wallet_balance($wallet, $balance_type, -$fee, AccountLog::MICRO_TRADE_CLOSE_SETTLE, '期权下单扣除' . $currency->micro_trade_fee . '%手续费');
             $level=Level::where('level',$user->level)->first();
 
 
@@ -699,19 +699,19 @@ class MicroTradeLogic
                     $capital = $value->number;
                     $fact_profit = bc_mul($capital, $profit_ratio); 
                     $change = bc_add($capital, $fact_profit);  
-                    $memo =  '秒合约订单平仓,盈利结算';
+                    $memo =  '期权订单平仓,盈利结算';
                 } elseif ($value->profit_type == 0) {
                     //结算本金,利息为0
                     $capital = $value->number;
                     $fact_profit = 0;
                     $change = $capital;  
-                    $memo =  '秒合约订单平仓结算,平局结算';
+                    $memo =  '期权订单平仓结算,平局结算';
                 } elseif ($value->profit_type == -1) {
                     //本金填补亏损
                     $capital = 0;
                     $fact_profit = -$value->number;
                     $change = $capital;
-                    $memo =  '秒合约订单,亏损结算';
+                    $memo =  '期权订单,亏损结算';
                 }
                 $value->profit_result = $value->profit_type;
                 $value->status = MicroOrder::STATUS_CLOSED;
@@ -739,7 +739,7 @@ class MicroTradeLogic
                     //如果是保险订单，并且该用户当前没有生效保险
                     if(!$user_insurance){
                         $change = 0;
-                        $memo =  '秒合约订单平仓结算，无生效保险，资金不变';
+                        $memo =  '期权订单平仓结算，无生效保险，资金不变';
                     }
                     $balance_type = 5;
                 }else{

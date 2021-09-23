@@ -210,7 +210,7 @@ class MicroOrderController extends Controller
     }
 
     /**
-     * 获得秒合约下单规则
+     * 获得期权下单规则
      */
     protected function getOrderRules($user_id, $currency_id, $user_insurance)
     {
@@ -231,7 +231,7 @@ class MicroOrderController extends Controller
     }
 
     /**
-     * 获得该币种交易中的秒合约订单
+     * 获得该币种交易中的期权订单
      */
     protected function getExistingOrderNumber($user_id, $currency_id){
         $count = MicroOrder::where('user_id', $user_id)

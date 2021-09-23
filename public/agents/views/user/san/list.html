@@ -76,7 +76,7 @@
                     </li>
                     <li class="layui-col-xs3">
                         <a href="javascript:;" onclick="layer.tips('可用总保证金', this, {tips: 3});" class="layadmin-backlog-body" style="color: #fff;background-color: #01AAED;">
-                            <h3>秒合约账户USDT余额：</h3>
+                            <h3>期权账户USDT余额：</h3>
                             <p><cite style="color:#fff" id="_usdt_mic">0.00000000</cite></p>
                         </a>
                     </li>
@@ -167,7 +167,7 @@
                 $("#_num").html(result.data._num);
                 $("#_daili").html(result.data._daili);
                 $("#_usdt").html(result.data._usdt);//合约
-                $("#_usdt_mic").html(result.data._usdt_mic);//秒合约
+                $("#_usdt_mic").html(result.data._usdt_mic);//期权
 
                 $("#_caution_money").html(result.data._caution_money);
 
@@ -208,7 +208,7 @@
 //                    , {field: 'card_id', title: '身份证号' , width : 180}
                     , {field: 'parent_name', title: '上级代理商' , width : 120}
                     , {field: 'usdt', title: 'USDT永续合约余额' , width:170}
-                    , {field: 'usdt_mic', title: 'USDT秒合约余额' , width:170}
+                    , {field: 'usdt_mic', title: 'USDT期权余额' , width:170}
 //                    , {field: 'rujin', title: '入金' , width:170}
 //                    , {field: 'chujin', title: '出金' , width:170}
                     //, {field: 'caution_money', title: '保证金', width:170}
@@ -270,7 +270,7 @@
                     $("#_num").html(result.data._num);
                     $("#_daili").html(result.data._daili);
                     $("#_usdt").html(result.data._usdt);
-                    $("#_usdt_mic").html(result.data._usdt_mic);//秒合约
+                    $("#_usdt_mic").html(result.data._usdt_mic);//期权
                     $("#_caution_money").html(result.data._caution_money);
 
 

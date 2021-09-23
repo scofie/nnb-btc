@@ -223,7 +223,7 @@
     });
 
 
-    //秒合约订单管理
+    //期权订单管理
     var data_table = table.render({
       elem: '#LAY-user-manage'
       , method: 'post'

@@ -193,9 +193,9 @@
       "id": 35
     },
     {
-      "title": "秒合约交易",
+      "title": "期权交易",
       "pageURL": "/admin/micro_order",
-      "name": "秒合约交易",
+      "name": "期权交易",
       "icon": "fa-user-plus",
       "openType": 2,
       "maxOpen": 1,

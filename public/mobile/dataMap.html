@@ -236,7 +236,7 @@
 		<div id="sideColumn" class="bgColor" v-if="tradeId">
 			<h4>
 			</h4>
-			<div class="ft20 bold bdb pl20 texts-lever" data-localize="contract.secondContract">秒合约</div>
+			<div class="ft20 bold bdb pl20 texts-lever" data-localize="contract.secondContract">期权</div>
 			<ol class="tabs hide">
 				<li class="currency_name side side2" data-id="3">USDT</li>
 			</ol>
@@ -679,7 +679,7 @@
 						this.CountDown = presentTime
 					}, 200);
 				},
-				// 选择秒合约订单类型
+				// 选择期权订单类型
 				selectOrder(types) {
 					var that = this;
 					that.status = types;

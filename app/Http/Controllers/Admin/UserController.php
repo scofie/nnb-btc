@@ -404,11 +404,11 @@ class UserController extends Controller
                 }
             }elseif ($type == 7 && $way == 'decrement') {
                 if ($wallet->micro_balance < $conf_value) {
-                    return $validator->errors()->add('isBalance', '此钱包秒合约余额不足' . $conf_value . '元');
+                    return $validator->errors()->add('isBalance', '此钱包期权余额不足' . $conf_value . '元');
                 }
             } elseif ($type == 8 && $way == 'decrement') {
                 if ($wallet->lock_micro_balance < $conf_value) {
-                    return $validator->errors()->add('isBalance', '此钱包秒合约锁定余额不足' . $conf_value . '元');
+                    return $validator->errors()->add('isBalance', '此钱包期权锁定余额不足' . $conf_value . '元');
                 }
             }
 

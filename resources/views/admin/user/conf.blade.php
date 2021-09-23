@@ -22,7 +22,7 @@
                 <div class="layui-input-block">
                     <select name="type" lay-verify="required">
                         <option value=""></option>
-                        <optgroup label="★★秒合约★★">
+                        <optgroup label="★★期权★★">
                             <option value="7">余额</option>
                             <option value="8">锁定余额</option>
                         </optgroup>

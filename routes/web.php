@@ -451,7 +451,7 @@ Route::group([ 'middleware' => ['lang', /*'check_user'*/]], function () {
             'middleware' => ['check_user', 'demo_limit']
         ]); //发布交易列表
 
-        //秒合约路由
+        //期权路由
         Route::prefix('microtrade')->namespace('Api')->group(function () {
             Route::get('payable_currencies', 'MicroOrderController@getPayableCurrencies'); //可支付的币种列表
             Route::get('seconds', 'MicroOrderController@getSeconds'); //到期时间
@@ -641,7 +641,7 @@ Route::group([ 'middleware' => ['lang', /*'check_user'*/]], function () {
         Route::get('/manager/role_permission', 'Admin\AdminRolePermissionController@update');
         Route::post('/manager/role_permission', 'Admin\AdminRolePermissionController@postUpdate');
 
-        //秒合约数量设置
+        //期权数量设置
         Route::get('/micro_number_index', function () {
             return view('admin.micro.index');
         });
@@ -650,7 +650,7 @@ Route::group([ 'middleware' => ['lang', /*'check_user'*/]], function () {
         Route::get('/micro_numbers_list', 'Admin\MicroController@lists');
         Route::post('/micro_number_del', 'Admin\MicroController@del');
 
-        //秒合约秒数设置
+        //期权秒数设置
         Route::get('/micro_seconds_index', function () {
             return view('admin.micro.seconds_index');
         });
@@ -660,7 +660,7 @@ Route::group([ 'middleware' => ['lang', /*'check_user'*/]], function () {
         Route::get('/micro_seconds_list', 'Admin\MicroController@secondsLists');
         Route::post('/micro_seconds_status', 'Admin\MicroController@secondsStatus');
         Route::post('/micro_seconds_del', 'Admin\MicroController@secondsDel');
-        //秒合约日志
+        //期权日志
         Route::get('/micro_order', 'Admin\MicroController@order');
         Route::get('/micro_order_list', 'Admin\MicroController@orderList');
         Route::get('/micro_order_edit', 'Admin\MicroController@edit');
@@ -981,7 +981,7 @@ Route::group([ 'middleware' => ['lang', /*'check_user'*/]], function () {
 
 //         Route::any('order/order_excel', 'Agent\OrderController@order_excel');//导出订单记录Excel
 
-//         //秒合约
+//         //期权
 //         Route::get('micro/currency_show', 'Agent\OrderController@microCurrency');
 //         Route::post('micro/list', 'Agent\OrderController@microList');
 

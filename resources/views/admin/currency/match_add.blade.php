@@ -51,7 +51,7 @@
                         </div>
                     </div>
                     <div class="layui-form-item">
-                        <label for="currency_id" class="layui-form-label">秒合约群控结果</label>
+                        <label for="currency_id" class="layui-form-label">期权群控结果</label>
                         <div class="layui-inline">
                             <input type="radio" name="risk_group_result" value="1" title="盈利" {{($currency_match->risk_group_result ?? 0) == 1 ? 'checked' : ''}} >
                             <input type="radio" name="risk_group_result" value="0" title="无" {{($currency_match->risk_group_result ?? 0) == 0 ? 'checked' : ''}} >
@@ -63,7 +63,7 @@
                         <div class="layui-input-block">
                             <input type="checkbox" name="open_transaction" value="1" title="撮合交易" @if (isset($currency_match)) {{ $currency_match->open_transaction == 1 ? 'checked' : '' }} @else checked @endif>
                             <input type="checkbox" name="open_lever" value="1" title="杠杆合约" @if (isset($currency_match)) {{ $currency_match->open_lever == 1 ? 'checked' : '' }} @else checked @endif>
-                            <input type="checkbox" name="open_microtrade" value="1" title="秒合约" @if (isset($currency_match)) {{ $currency_match->open_microtrade == 1 ? 'checked' : '' }} @else checked @endif>
+                            <input type="checkbox" name="open_microtrade" value="1" title="期权" @if (isset($currency_match)) {{ $currency_match->open_microtrade == 1 ? 'checked' : '' }} @else checked @endif>
                         </div>
                     </div>
                 </div>

@@ -15,7 +15,7 @@ class WsConnection
     protected $server_ping_freq = 5; //服务器ping检测周期,单位秒
     protected $server_time_out = 2; //服务器响应超时
     protected $send_freq = 2; //写入和发送数据的周期，单位秒
-    protected $micro_trade_freq = 1; //秒合约处理时间周期
+    protected $micro_trade_freq = 1; //期权处理时间周期
 
     protected $worker_id;
 
@@ -582,9 +582,9 @@ class WsConnection
         $market_data = self::$marketKlineData;
         foreach ($market_data as $period => $data) {
             foreach ($data as $key => $symbol) {
-//                echo '秒合约时间:' . time() . ', Symbol:' . $key . '.' . $period . '数据' . PHP_EOL;
+//                echo '期权时间:' . time() . ', Symbol:' . $key . '.' . $period . '数据' . PHP_EOL;
                 if ($period == '1min') {
-                    //处理秒合约
+                    //处理期权
                     // $match_id=$symbol['kline_data']['match_id'];
                     // $c_m=CurrencyMatch::find($match_id);
                     // if($c_m->open_microtrade == 1){

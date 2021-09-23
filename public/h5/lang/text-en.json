@@ -496,7 +496,7 @@
     "alipayCode":"Alipay payment code",
     "wechatCode":"Wechat Payment Code",
     "personalStores":"personal stores",
-    "secondContract":"Second contract",
+    "secondContract":"Decumulator",
     "transferRecord":"Transfer record",
     "realPrice":"Real time price",
     "currencyExchange":"Currency exchange",

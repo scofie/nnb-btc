@@ -72,7 +72,7 @@ Route::group(['prefix' => 'agent', 'middleware' => ['agent_auth']], function () 
     Route::post('order/list', 'Agent\OrderController@order_list');//团队所有订单
 
     Route::get('order/info', 'Agent\OrderController@order_info');//订单详情
-    //秒合约
+    //期权
     Route::get('order/micro_index', 'Agent\OrderController@microIndex');
     Route::get('micro/currency_show', 'Agent\OrderController@microCurrency');
     Route::post('micro/list', 'Agent\OrderController@microList');

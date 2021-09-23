@@ -43,7 +43,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('remove_queue')->hourly()->withoutOverlapping(); //移除积压
         $schedule->command('update_hash_status')->everyMinute()->withoutOverlapping(); //更新哈希值状态
         $schedule->command('lever:overnight')->dailyAt('00:01')->appendOutputTo('./storage/logs/lever_overnight.log'); //收取隔夜费
-        $schedule->command('update_user_fund')->daily()->appendOutputTo('./storage/logs/update_user_fund.log'); //更新秒合约资产
+        $schedule->command('update_user_fund')->daily()->appendOutputTo('./storage/logs/update_user_fund.log'); //更新期权资产
         // $schedule->command('update_user_level')->dailyAt('01:00')->appendOutputTo('./storage/logs/update_user_level.log'); //
         // $schedule->command('return:profit')->dailyAt('00:10')->appendOutputTo('./storage/logs/return_profit.log'); //历史盈亏释放 add by tian
         $schedule->command('cancel:c2cdeal')->everyMinute()->appendOutputTo('./storage/logs/cancel_c2cdeal.log'); //c2c取消订单倒计时执行 add by tian

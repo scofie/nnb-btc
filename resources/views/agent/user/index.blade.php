@@ -102,7 +102,7 @@
     <script type="text/html" id="table-useradmin-webuser">
         <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="wallet_info">查看资金</a>
         <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="order">查看合约订单</a>
-        <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="micro_risk">秒合约点控</a>
+        <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="micro_risk">期权点控</a>
     </script>
 
 

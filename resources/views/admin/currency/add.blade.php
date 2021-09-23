@@ -13,7 +13,7 @@
         <div class="layui-tab">
             <ul class="layui-tab-title">
                 <li class="layui-this">基础参数</li>
-                <li>秒合约参数</li>
+                <li>期权参数</li>
                 <li>提币参数</li>
                 <li>链上参数</li>
             </ul>
@@ -68,7 +68,7 @@
                 </div>
                 <div class="layui-tab-item">
                     <div id="micro_trade_fee" class="layui-form-item {{$result->is_micro == 1 ? '' : 'hide'}}">
-                        <label class="layui-form-label">秒合约手续费</label>
+                        <label class="layui-form-label">期权手续费</label>
                         <div class="layui-input-inline">
                             <input type="number" class="layui-input" id="" name="micro_trade_fee" value="{{$result->micro_trade_fee}}" placeholder="百分比">
                         </div>

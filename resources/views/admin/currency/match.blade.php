@@ -41,7 +41,7 @@
                 ,{field: 'is_display', title: '显示', width: 90, templet: '#is_display'}
                 ,{field: 'open_transaction', title: '撮合交易', width: 100, templet: '#open_transaction'}
                 ,{field: 'open_lever', title: '杠杆交易', width: 100, templet: '#open_lever'}
-                ,{field: 'open_microtrade', title: '秒合约', width: 100, templet: '#open_microtrade'}
+                ,{field: 'open_microtrade', title: '期权', width: 100, templet: '#open_microtrade'}
                 ,{field: 'market_from_name', title: '行情来自', width: 110}
                 ,{field: 'create_time', title: '创建时间', width: 180}
             ]]
