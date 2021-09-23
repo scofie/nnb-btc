@@ -600,7 +600,7 @@
                         let datas = res.message.message.data;
                         that.rate = res.message.rate_profits_total.hazard_rate;
                         that.totalRate = res.message.rate_profits_total.profits_total;
-                        that.useLegalNum = res.message.user_lever;;
+                        that.useLegalNum = res.message.rate_profits_total.user_lever;;
                         if (datas.length > 0) {
                             that.nodataShow = false;
                             that.tabList = that.tabList.concat(datas);
