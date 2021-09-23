@@ -189,7 +189,7 @@ Route::group([ 'middleware' => ['lang', /*'check_user'*/]], function () {
         Route::post('safe/email', 'Api\UserController@setEmail'); //绑定邮箱
         Route::get('mining', 'Api\UserController@mining'); //绑定邮箱
         //资产
-        Route::post('wallet/list', 'Api\WalletController@walletList');//用户账户资产信息
+        Route::any('wallet/list', 'Api\WalletController@walletList');//用户账户资产信息
         Route::post('wallet/detail', 'Api\WalletController@getWalletDetail');//用户账户资产详情
         //Route::post('wallet/change', 'Api\WalletController@changeWallet')->middleware(['demo_limit']);//账户划转
         Route::post('wallet/change', 'Api\WalletController@changeWallet');//账户划转
@@ -269,8 +269,6 @@ Route::group([ 'middleware' => ['lang', /*'check_user'*/]], function () {
 
         Route::get('/money/rechange', 'Api\WalletController@moneyRechange');
         Route::post('/wallet/add', 'Api\WalletController@add');
-        // Route::get('/wallet/list','Api\WalletController@list');
-        Route::get('/wallet/lista', 'Api\WalletController@lista');
 
         Route::post('/t/add', 'Api\TransactionController@tadd');//提交交易
 
