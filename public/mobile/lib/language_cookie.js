@@ -750,7 +750,7 @@ var ts = {
         alreadyOpened: "Already opened",
         inviteCode: "Invitation code cannot be empty",
         contractAccount: "Contract",
-        secondContractAccount: "Second Contract",
+        secondContractAccount: "Decumulator",
         Flashexchange: "Coin exchange",
         c2cAccount: "Fiat account",
         hands: "Number of hands",

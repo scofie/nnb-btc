@@ -137,7 +137,7 @@
     "legalAccount": "French account",
     "assetAccount":"Asset account",
     "contractAccount":"Contract",
-    "secondContractAccount":"Second Contract",
+    "secondContractAccount":"Decumulator",
     "Flashexchange":"Flash exchange",
     "avaiable": "available",
     "lock": "freeze",
@@ -484,7 +484,7 @@
     "surplus":"Surplus",
     "deficit":"Deficit",
     "contractOrder":"Contract order",
-    "SecondContractOrder":"Second Contract Order",
+    "SecondContractOrder":"Decumulator Order",
     "currencyFlash":"Coin currency flash",
     "contractInsurance":"Contract insurance",
     "reply":"Please write down your questions and we will reply to you as soon as possible...",
@@ -531,7 +531,7 @@
     "openQuantity":"Quantity of warehouse opening",
     "otherQuantities":"Other quantities",
     "accountBalance":"Account balance",
-    "secondAccountBalance":"Second contract account balance",
+    "secondAccountBalance":"Decumulator account balance",
     "leverAccountBalance":"Contract account balance",
     "legalAccountBalance":"Fiat account balance"
   }
