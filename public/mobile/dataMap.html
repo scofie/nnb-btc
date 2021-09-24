@@ -148,16 +148,11 @@
                             <p>{{item.handle_time}}</p>
                         </div>
                     </div>
-
-                    <ul class="list-content mt10 pb10" v-show="listShow">
+                    <ul class="list-content mt10 pb10 ft10" v-show="listShow">
                         <li class="flex between">
                             <div class="tl flex" >
                                 <p class="colorGrey" data-localize="deals.weprice">{{getlg('entrustPrice')}}</p>：
                                 <p class="ftColor">{{item.origin_price || '0.0000' | toFixed4}}</p>
-                            </div>
-                            <div class="tl flex" >
-                                <p class="colorGrey" data-localize="deals.oprice">{{getlg('oprice')}}</p>：
-                                <p class="ftColor">{{item.price || '0.0000' | toFixed4}}</p>
                             </div>
                             <div class="tr flex">
                                 <p class="colorGrey" data-localize="deals.nowprice">{{getlg('tnowprice')}}</p>：
