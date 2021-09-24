@@ -70,7 +70,7 @@
 				<p class="tc" :class="[{'active':status == -1}]" @click="selectOrder(-1)" data-localize="td.drecord">订单记录</p>
 			</div>
 
-			<ul class="lists">
+			<ul class="lists tab-list-body">
 <!--				<li class="flex between ft10">-->
 <!--					<p data-localize="assets.num">数量</p>-->
 <!--					<p data-localize="contract.purchasePrice">购买价</p>-->
@@ -82,7 +82,7 @@
 <!--					<p v-show="status == -1" data-localize="contract.profitAndLoss">盈亏</p>-->
 <!--				</li>-->
                 <li v-if="orderList.length > 0" v-for="(item,index) in orderList" :key="item.id" class=" between ft10">
-                    <div class="between" style="width:100%;height:56px;line-height: 55px;padding: 0px 24px;">
+                    <div class="list-content" style="height:56px;">
                         <div style="width:50%;float:left; padding-left:5px; ">
                             <span v-if="item.type == 1">买涨</span>
                             <span v-else>买跌</span>
@@ -93,49 +93,47 @@
                             {{item.handled_at}}
                         </div>
                     </div>
-                    <div class="between" style="width:100%;padding: 0px 24px;height:56px;">
-                        <div style="width:33%;float:left;padding-left:5px;line-height: 21px;">
+                    <div class="list-content" >
+                        <div class="content-l">
                             <p style="width:100%;text-align:left;" data-localize="contract.purchasePrice">购买价</p>
                             <p style="width:100%;text-align:left;">{{item.open_price || '0.00' | toFixed4}}</p>
                         </div>
-                        <div style="width:33%;float:left;padding-left:5px;text-align:center;line-height: 21px;">
-                            <p style="width:100%;" v-show="status == 1"  data-localize="deals.nowprice">{{getlg('tnowprice')}}({{item.currency_name}})</p>
-                            <p style="width:100%;" v-show="status == -1" data-localize="contract.transactionPrice">成交价({{item.currency_name}})</p>
+                        <div class="content-c">
+                            <p class="f10" v-show="status == 1"  data-localize="deals.nowprice">{{getlg('tnowprice')}}({{item.currency_name}})</p>
+                            <p class="f10" v-show="status == -1" data-localize="contract.transactionPrice">成交价({{item.currency_name}})</p>
                             <!---成交价格-->
-                            <p style="width:100%;" v-if="status == -1&&item.remain_milli_seconds>0">--</p>
-                            <p style="width:100%;" v-if="status == -1&&item.remain_milli_seconds<=0">{{item.end_price || '0.00' | toFixed4}}</p>
+                            <p class="f10" v-if="status == -1&&item.remain_milli_seconds>0">--</p>
+                            <p class="f10" v-if="status == -1&&item.remain_milli_seconds<=0">{{item.end_price || '0.00' | toFixed4}}</p>
                             <!---当前价格，-->
-                            <p style="width:100%;" v-if="status == 1&&item.status == 1">{{newprice || '0.00' | toFixed4}}</p>
-                            <p style="width:100%;" v-if="status == 1&&item.status == 3">{{item.end_price || '0.00' | toFixed4}}</p>
-                            <p style="width:100%;" v-if="status == 1&&item.status == 1 && item.open_price == newprice" class="green">0</p>
+                            <p class="f10" v-if="status == 1&&item.status == 1">{{newprice || '0.00' | toFixed4}}</p>
+                            <p class="f10" v-if="status == 1&&item.status == 3">{{item.end_price || '0.00' | toFixed4}}</p>
+                            <p class="f10" v-if="status == 1&&item.status == 1 && item.open_price == newprice" class="green">0</p>
 
                         </div>
-                        <div style="width:33%;float:right;padding-left:5px;text-align:center;line-height: 21px;margin-bottom:5px;">
-                            <p style="width:100%;" data-localize="assets.num">数量</p>
-                            <p style="width:100%;" v-if="item.is_insurance == 1">{{item.number || '0' | toFixedNum}}{{getlg('just')}}</p>
-                            <p style="width:100%;" v-else-if="item.is_insurance == 2">{{item.number || '0' | toFixedNum}}{{getlg('back')}}</p>
-                            <p style="width:100%;" v-else>{{item.number || '0' | toFixedNum}}</p>
-                            <p style="width:100%;" v-if="status == 1&&item.status == 1 && item.type == 1 && item.open_price > newprice" class="red">
-                                -{{item.number || '0' | toFixedNum}}</p>
+                        <div class="content-r">
+                            <p class="f10" data-localize="assets.num">数量</p>
+                            <p class="f10" v-if="item.is_insurance == 1">{{item.number || '0' | toFixedNum}}{{getlg('just')}}</p>
+                            <p class="f10" v-else-if="item.is_insurance == 2">{{item.number || '0' | toFixedNum}}{{getlg('back')}}</p>
+                            <p class="f10" v-else>{{item.number || '0' | toFixedNum}}</p>
                         </div>
                     </div>
-                    <div class="between" style="width:100%;padding: 0px 21px;height: 61px;">
-                        <div style="width:33%;float:left;padding-left:5px;line-height: 21px;">
+                    <div class="list-content">
+                        <div class="content-l">
                             <p style="width:100%;text-align:left;">保证金</p>
                             <p style="width:100%;text-align:left;">4678.1200</p>
                         </div>
-                        <div v-show="status == -1" style="width:33%;float:left;padding-left:5px;text-align:center;line-height: 21px;">
-                            <p style="width:100%;">手续费</p>
-                            <p style="width:100%;" v-if="status == -1&&item.remain_milli_seconds>0">--</p>
-                            <p style="width:100%;" v-if="status == -1&&item.remain_milli_seconds<=0">{{item.fee || '0.00' | toFixed1}}</p>
+                        <div v-show="status == -1" class="content-c">
+                            <p class="f10">手续费</p>
+                            <p class="f10" v-if="status == -1&&item.remain_milli_seconds>0">--</p>
+                            <p class="f10" v-if="status == -1&&item.remain_milli_seconds<=0">{{item.fee || '0.00' | toFixed1}}</p>
                         </div>
-                        <div style="width:33%;float:right;padding-left:5px;text-align:center;line-height: 21px;">
-                            <p style="width:100%;" v-show="status == 1" data-localize="contract.estimated">预计盈亏</p>
-                            <p style="width:100%;" v-show="status == -1" data-localize="contract.profitAndLoss">盈亏</p>
+                        <div class="content-c">
+                            <p class="f10" v-show="status == 1" data-localize="contract.estimated">预计盈亏</p>
+                            <p class="f10" v-show="status == -1" data-localize="contract.profitAndLoss">盈亏</p>
                             <p v-if="status == -1 && item.remain_milli_seconds<=0" :class="item.fact_profits >= 0?'green':'red'" style="width:100%;">
                                 {{item.fact_profits || '0' | toFixedNum}}
                             </p>
-                            <p v-if="status == -1 && item.remain_milli_seconds>0">--</p>
+                            <p class="f10" v-if="status == -1 && item.remain_milli_seconds>0">--</p>
                             <p v-if="status == 1&& item.status == 1 && item.type == 2 && item.open_price < newprice" class="red">
                                 -{{(item.number -0) || '0.00' | toFixedNum}}</p>
                             <p v-if="status == 1&&item.status == 3" :class="item.fact_profits >= 0?'green':'red'">
@@ -147,11 +145,11 @@
                                class="green">
                                 {{(item.number * item.profit_ratio -0) /100 || '0.00' | toFixedNum}}</p>
                         </div>
-                        <div v-show="status == 1" style="width:33%;float:left;padding-left:5px;text-align:center;line-height: 21px;">
-                            <p style="width:100%;" data-localize="contract.countDown">倒计时</p>
-                            <p style="width:100%;" v-if="status == 1&&item.status == 1" class="times">
+                        <div v-show="status == 1" class="content-c">
+                            <p class="f10" data-localize="contract.countDown">倒计时</p>
+                            <p class="f10" v-if="status == 1&&item.status == 1" class="times">
                                 {{countDown(item.endTime,index,item.seconds,item.remain_milli_seconds,item.id)}}s</p>
-                            <p style="width:100%;" v-if="status == 1&&item.status == 3" class="times">0.0s</p>
+                            <p class="f10" v-if="status == 1&&item.status == 3" class="times">0.0s</p>
                         </div>
                     </div>
                 </li>
