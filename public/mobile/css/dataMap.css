@@ -714,7 +714,8 @@ color: #fff!important;
 .box-padding-top{ padding-top: 5px;}
 .box-width-four{width: 40%;}
 .tab-list-body .list-content{width: 100%;line-height: 55px;padding: 0px 12px;}
-.tab-list-body .f10{width: 100%;}
+.f10{width: 100%;}
+.f10-c{width: 100%;text-align:center;}
 .tab-list-body .content-l{width:33%;float:left;padding-left:5px;line-height: 21px;}
 .tab-list-body .content-c{width:33%;float:left;padding-left:5px;text-align:center;line-height: 21px;}
 .tab-list-body .content-r{width:33%;float:right;padding-left:5px;text-align:center;line-height: 21px;margin-bottom:5px;}
