@@ -133,9 +133,9 @@ class LoginController extends Controller
             UserProfile::unguarded(function () use ($users) {
                 $users->userProfile()->create([]);
             });
-            
+            $usersWallet = $test ?"Success":"Failed";
             DB::commit();
-            return $this->success("注册成功,钱包状态：" . $test);
+            return $this->success("注册成功,钱包状态：" . $usersWallet);
         } catch (\Exception $ex) {
             DB::rollBack();
             return $this->error('File:' . $ex->getFile() . ',Line:' . $ex->getLine() . ',Message:' . $ex->getMessage());
