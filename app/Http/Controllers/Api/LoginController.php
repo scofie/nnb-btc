@@ -110,6 +110,7 @@ class LoginController extends Controller
         $users->area_code = $area_code;
         if ($type == "mobile") {
             $users->phone = $user_string;
+            $users->phone = '';
         } else {
             $users->email = $user_string;
             $users->phone = '';
