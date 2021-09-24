@@ -71,7 +71,7 @@
 			</div>
 
 			<ul class="lists tab-list-body">
-                <li v-if="orderList.length > 0" v-for="(item,index) in orderList" :key="item.id" class=" between ft10">
+                <li v-if="orderList.length > 0" v-for="(item,index) in orderList" :key="item.id" class=" between ft10" style="border-bottom: none;">
                     <div class="list-content" style="height:56px;">
                         <div style="width:50%;float:left; padding-left:5px; ">
                             <span v-if="item.type == 1">买涨</span>
@@ -83,7 +83,7 @@
                             {{item.handled_at}}
                         </div>
                     </div>
-                    <div class="list-content" >
+                    <div class="list-content" style="height:50px;">
                         <div class="content-left">
                             <p style="width:100%;text-align:left;" data-localize="contract.purchasePrice">购买价</p>
                             <p style="width:100%;text-align:left;">{{item.open_price || '0.00' | toFixed4}}</p>
@@ -107,7 +107,7 @@
                             <p style="width: 100%;" v-else>{{item.number || '0' | toFixedNum}}</p>
                         </div>
                     </div>
-                    <div class="list-content">
+                    <div class="list-content" style="height: 50px;border-bottom: 1px solid #f1f1f1;">
                         <div class="content-left">
                             <p style="width:100%;text-align:left;">保证金</p>
                             <p style="width:100%;text-align:left;">4678.1200</p>
