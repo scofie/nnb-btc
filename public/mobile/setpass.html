@@ -110,43 +110,45 @@
 			//注册
 			var registerStatus = true; 
 			$('#sendSet').click(function() {
-				var s = function() {	return true;
-					var ps = /^[a-zA-Z0-9]{6,16}$/;
-					if (!ps.test($('#setpassword').val())) {
-						layer_msg(getlg('plength'));
-					} else {
-						return true;
-					}
-				}
+                var s = function () {
+                    return true;
+                    var ps = /^[a-zA-Z0-9]{6,16}$/;
+                    if (!ps.test($('#setpassword').val())) {
+                        layer_msg(getlg('plength'));
+                    } else {
+                        return true;
+                    }
+                }
 
-				var ss = function() {	return true;
-					if ($('#verifypassword').val() == $('#setpassword').val()) {
-						return true;
-					} else {
-						layer_msg(getlg('twonot'));
-					}
-				}
-				var areaCode = get_param('areaCode');
-				var areaCodeId = get_param('areaCodeId');
-				var name = $('#name').val();
-				var verify = $("#verificate").val();
-				var pass = $('#setpassword').val();
-				var repass = $("#verifypassword").val();
-				var extensionCode = $("#invite").val();
-				var emreg = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
-				if (!extensionCode) {
-					layer_msg(getlg('inviteCode'));
-					return false;
-				} 
-				if (s() == true && ss() == true) {
-                    if(registerStatus && emreg ){
+                var ss = function () {
+                    return true;
+                    if ($('#verifypassword').val() == $('#setpassword').val()) {
+                        return true;
+                    } else {
+                        layer_msg(getlg('twonot'));
+                    }
+                }
+                var areaCode = get_param('areaCode');
+                var areaCodeId = get_param('areaCodeId');
+                var name = $('#name').val();
+                var verify = $("#verificate").val();
+                var pass = $('#setpassword').val();
+                var repass = $("#verifypassword").val();
+                var extensionCode = $("#invite").val();
+                var emreg = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
+                if (!extensionCode) {
+                    layer_msg(getlg('inviteCode'));
+                    return false;
+                }
+                if (s() == true && ss() == true) {
+                    if (registerStatus && emreg) {
                         registerStatus = false;
                         $.ajax({
                             type: "post",
                             url: _API + "user/register",
                             data: {
-                                "area_code":areaCode,
-                                "area_code_id":areaCodeId,
+                                "area_code": areaCode,
+                                "area_code_id": areaCodeId,
                                 "user_string": name,
                                 "password": pass,
                                 "extension_code": extensionCode,
@@ -155,26 +157,27 @@
                                 "code": verify
                             },
                             datatype: "json",
-                            success: function(data) {
+                            success: function (data) {
                                 registerStatus = true;
                                 if (data.type == "ok") {
                                     layer_msg(data.message);
                                     $("#sendSet").attr("disabled", "true");
-                                    setTimeout(function() {
+                                    setTimeout(function () {
                                         $("#sendSet").removeAttr("disabled");
-                                        if(get_param('cod') && get_param('cod') != 'null') {
+                                        if (get_param('cod') && get_param('cod') != 'null') {
                                             window.location.href = "https://www.coinbott.com/";
                                         } else {
                                             window.location.href = "login.html";
                                         }
                                     }, 3000);
-                                }else{
+                                } else {
                                     layer_msg(data.message);
                                 }
                             }
                         });
-					}
-			    }
+                    }
+                }
+            }
 			//
 			function maVals() {
 				var url = window.location.search;
