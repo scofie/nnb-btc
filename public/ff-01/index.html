@@ -1,0 +1,367 @@
+<!doctype html>
+<html>
+<head design-width="750">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
+<title>NNBBTC</title>
+<link rel="stylesheet" href="css/reset.css">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/swiper.min.css">
+<script src="js/auto-size.js"></script>
+</head>
+<style>
+    .wechat-ios, .wechat-android{
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 9999;
+        display: none;
+        overflow: hidden;
+    }
+    .wechat-ios img, .wechat-android img{
+        width: 100%;
+        height: 100%;
+    }
+    .wechat-mask .mask-bg {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background: rgba(0, 0, 0, .2);
+    }
+    .wechat-mask .mask-pop {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        width: 80%;
+        max-width: 300px;
+        transform: translate(-50%, -50%);
+        background: #fff;
+        border-radius: 20px;
+        overflow: hidden;
+    }
+    .wechat-mask .copy-url-img {
+        display: block;
+        width: 100%;
+    }
+    .wechat-mask .copy-url {
+        position: relative;
+        margin: 20px 30px;
+        height: 36px;
+        line-height: 36px;
+        background: #F1F6F9;
+        border-radius: 18px;
+        overflow: hidden;
+    }
+    .wechat-mask .copy-url input {
+        padding-left: 20px;
+        color: #9A9A99;
+    }
+    .wechat-mask .copy-url button {
+        position: absolute;
+        right: 0;
+        top: 0;
+        padding: 0 15px;
+        height: 36px;
+        line-height: 36px;
+        background: linear-gradient(90deg, rgba(34, 125, 249, 1), rgba(0, 203, 250, 1));
+        color: #fff;
+        border-radius: 0 18px 18px 0;
+    }
+    .wechat-mask {
+        z-index: 2;
+        position: relative;
+        display: block;
+    }
+</style>
+<body ontouchstart onmouseover>
+	<div class="mobile-wrap center">
+        <main>
+        	<div class="appItem">
+        		<div class="left"><img src="images/logo.png" alt></div>
+        		<div class="right">
+        			<strong>NNBBTC<span>3+</span></strong>
+        			<div class="installBox">
+        				<a class="down" href="javascript:;">免费安装</a>
+        				<a class="doubt" href="javascript:;">?</a>
+        			</div>
+        		</div>
+        		<div class="appTip">
+        			<div class="score">
+        				<div class="star">5.0 <var></var></div>
+        				<p>19k 个评分</p>
+        			</div>
+        			<div class="centerBox"><i>#</i>3</div>
+        			<div class="age">
+        				<b>18+</b>
+        				<p>年龄</p>
+        			</div>
+        		</div>
+        	</div>
+        	<div class="comment">
+        		<strong class="publicTitle">评分及评论</strong>
+        		<div class="left">
+        			<b>5.0</b>
+        			<p>满分 5 分</p>
+        		</div>
+        		<div class="right">
+        			<div class="star_row">
+        				<span class="s1"><i></i></span>
+        				<div class="lineBox"><var class="v1"></var></div>
+        			</div>
+        			<div class="star_row">
+        				<span class="s2"><i></i></span>
+        				<div class="lineBox"><var class="v2"></var></div>
+        			</div>
+        			<div class="star_row">
+        				<span class="s3"><i></i></span>
+        				<div class="lineBox"><var class="v3"></var></div>
+        			</div>
+        			<div class="star_row">
+        				<span class="s4"><i></i></span>
+        				<div class="lineBox"><var class="v4"></var></div>
+        			</div>
+        			<div class="star_row">
+        				<span class="s5"><i></i></span>
+        				<div class="lineBox"><var class="v5"></var></div>
+        			</div>
+        			<p>19k 个评分</p>
+        		</div>
+        	</div>
+        	<div class="newFunction">
+        		<strong class="publicTitle">新功能</strong>
+        		<p></p>
+        	</div>
+        	<div class="appInfo">
+        		<strong class="publicTitle">信息</strong>
+        		<div class="box">
+        			<ul>
+        				<li>
+        					<span>大小</span>
+        					<p>4.5 MB</p>
+        				</li>
+        				<li>
+        					<span>兼容性</span>
+        					<p>Android系统 或 iOS 8.0 或更高版本。与 iPhone、iPad 和 iPod touch 兼容。</p>
+        				</li>
+        				<li>
+        					<span>语言</span>
+        					<p>英语,简体中文</p>
+        				</li>
+        				<li>
+        					<span>年龄分级</span>
+        					<p>限18岁以上</p>
+        				</li>
+        				<li>
+        					<span>Copyright</span>
+        					<p>© 2021 MobiFun Games Inc</p>
+        				</li>
+        				<li>
+        					<span>价格</span>
+        					<p>免费</p>
+        				</li>
+        				<li>
+        					<span>隐私政策</span>
+        					<p>✋</p>
+        				</li>
+        			</ul>
+        		</div>
+        	</div>
+        </main>
+		<div class="footer">
+			<p>免责声明：</p>
+			<p class="p2">本网站仅为开发者提供App的下载和安装托管，App内的内容和运营相关事项由App开发者负责，与本网站无关</p>
+		</div>
+		<div class="pup">
+			<div class="guide">
+				<i class="colse"></i>
+				<div class="pics">
+					<div class="swiper-container">
+					    <div class="swiper-wrapper">
+						     <div class="swiper-slide">
+						     	<div class="pic"><img src="images/0df0c_0_600_411.jpeg" alt></div>
+						     	<div class="text">安装引导<br>第一步  允许打开配置描述文件</div>
+						     </div>
+						     <div class="swiper-slide">
+						     	<div class="pic"><img src="images/9179e_3_600_411.jpeg" alt></div>
+						     	<div class="text">安装引导<br>第二步  点击右上角安装按钮</div>
+						     </div>
+						     <div class="swiper-slide">
+						     	<div class="pic"><img src="images/d3c74_2_600_411.jpeg" alt></div>
+						     	<div class="text">安装引导<br>第三步  输入开机解锁密码 </div>
+						     </div>
+						     <div class="swiper-slide">
+						     	<div class="pic"><img src="images/0665a_1_600_411.jpeg" alt></div>
+						     	<div class="text">安装引导<br>第四步  点击下方安装按钮 </div>
+						     </div>
+					    </div>
+					    <div class="swiper-pagination"></div>
+					</div>
+				</div>
+				<div class="smallTip"><a href="#">什么是描述文件？</a></div>
+			</div>
+		</div>
+		<div class="pupPic"><img src="images/5cbc4_5_1242_2007.png" alt></div>
+    </div><!--mobile_wrap-->
+
+    <div class="wechat-ios">
+      <img src="images/5cbc4_5_1242_2007.png">
+    </div>
+    <div class="wechat-android">
+      <img src="images/5cbc4_5_1242_2007-andoird.png">
+    </div>
+    <div class="wechat-mask" style="display: none;">
+        <div class="mask-bg"></div>
+        <div class="mask-pop">
+            <img class="copy-url-img" src="images/safari-tip.png">
+            <div class="copy-url">
+                <input id="ipt_url" type="text">
+                <button data-clipboard-target="#ipt_url">复制</button>
+            </div>
+        </div>
+    </div>
+    <script src="js/clipboard.min.js"></script><!--jQ库-->
+	<script src="js/jquery-2.2.4.min.js"></script><!--jQ库-->
+	<script src="js/swiper.min.js"></script><!--轮播库-->
+	<script>
+        
+		//默认0等于苹果下载方式是plist，即是ipa文件方式下载的；（0是plist，1是苹果描述文件）
+		var off = 1;
+		//苹果ipa方式 下载地址修改
+		var iosappurl = 'itms-services://?action=download-manifest&url=' + encodeURIComponent('https://ruan-jian-xia-zai.oss-cn-qingdao.aliyuncs.com/weijibao/ipa.plist');
+		
+		//苹果描述文件方式下载地址1
+		var iosurl = './nnbbtc-release.mobileconfig';
+		//苹果描述文件方式下载地址2
+		var iosurls = './xxx.mobileprovision';
+		
+	    //安卓下载地址
+		var anzhuo = './nnbbtc-release.apk';
+		
+		$("body").css("cursor","pointer");
+        var ua = navigator.userAgent.toLowerCase();
+        var Sys = {};
+        var s;
+        //Sys.safari:是否是safari
+        (s = ua.match(/version\/([\d.]+).*safari/)) ? Sys.safari = s[1] : 0;
+        //是否是微信
+        var isWeiXin = !!(ua.match(/MicroMessenger/i) == 'micromessenger')
+        //是否是苹果设备
+        var is_phone_device = /(iPhone|iPad|iPod|iOS)/i.test(ua);
+        //是否是QQ内置浏览器，qq浏览器
+        var is_qq_browser = ua.indexOf('qq/')>-1 || ua.indexOf('mqqbrowser/')>-1;
+        //判断设备是否为iPhone
+        if (is_phone_device) {
+            if(isWeiXin || is_qq_browser) {
+              $(function() {
+                $('.wechat-ios').show()
+              });
+            }else {
+                if (Sys.safari) {
+				    if(off == 1){
+                    $(".down").attr("href",iosurl);
+                    $(".down").click(function(event) {
+                        setTimeout(function(){
+                            if( confirm){
+                                location.href = iosurls;
+                            }
+                        },2500)
+                    });					
+					}else{
+					  $(".down").attr("href",iosappurl);
+					}
+
+                    //打开引导弹窗
+                    $(".doubt").click(function(event) {
+                        $(".pup").fadeIn();
+                        var swiper = new Swiper('.swiper-container',{
+                            loop: true,
+							autoplay:true,
+                            speed:2000,
+                            pagination: {
+                                el: '.swiper-pagination',
+                            },
+                        });
+                    });
+                }else{
+				$('.wechat-ios').show()
+                }
+            }
+        }else if (/(Android)/i.test(ua)) {//判断Android
+            if(isWeiXin || is_qq_browser) {
+              $(function() {
+                $('.wechat-android').show()
+              });
+            }
+            $(".down").attr("href",anzhuo);
+            //打开引导弹窗
+            $(".doubt").click(function(event) {
+                $(".pup").fadeIn();
+                var swiper = new Swiper('.swiper-container',{
+                    loop: true,
+					autoplay:true,
+                    speed:2000,
+                    pagination: {
+                        el: '.swiper-pagination',
+                    },
+                });
+            });
+        }
+        //在微信中打开
+        if (isWeiXin) {
+            $(".down").attr("href",'###');
+            $("body").click(function(event) {
+                $(".pupPic").show();
+            });
+        }
+
+		//关闭弹窗
+		$(".colse").click(function(event) {
+			$(".pup").fadeOut();
+		});
+
+        function showSafariMask() {
+            var mask = $('div.wechat-mask');
+            mask.find('.copy-url>input').val(location.href);
+            mask.show();
+        };
+        $(function () {
+            var copyBtn = new ClipboardJS('.copy-url button');
+            copyBtn.on('success', function(e) {
+                alert('链接复制成功，快去Safari中打开吧~');
+                mask.hide();
+            });
+            copyBtn.on('error', function(e) {});
+        });
+
+	</script>
+	<script src="js/mui.js"></script>
+	<script>
+		mui.plusReady(function() {
+			//首页返回键处理
+			//处理逻辑：1秒内，连续两次按返回键，则退出应用；
+			var first = null;
+			plus.key.addEventListener('backbutton', function() {
+				//首次按键，提示‘再按一次退出应用’
+				if (!first) {
+					first = new Date().getTime();
+					// mui.toast('再按一次退出应用');
+					setTimeout(function() {
+						first = null;
+					}, 1000);
+				} else {
+					if (new Date().getTime() - first < 1000) {
+						plus.runtime.quit();
+					}
+				}
+			}, false);
+		});
+	</script>
+</body>
+</html>
