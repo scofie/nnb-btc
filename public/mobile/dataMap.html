@@ -90,7 +90,7 @@
                             <img v-else width="10" src="images/sell.png" alt="">
                         </div>
                         <div style="width:49%;float:right;padding-right:10px;text-align:center;">
-                            {{item.handled_at || '0.00' | toFixed4}}
+                            {{item.handled_at}}
                         </div>
                     </div>
                     <div class="between" style="width:100%;padding: 0px 24px;height:56px;">
@@ -139,8 +139,6 @@
                             <p v-if="status == 1&& item.status == 1 && item.type == 2 && item.open_price < newprice" class="red">
                                 -{{(item.number -0) || '0.00' | toFixedNum}}</p>
                             <p v-if="status == 1&&item.status == 3" :class="item.fact_profits >= 0?'green':'red'">
-                                {{item.fact_profits || '0' | toFixedNum}}</p>
-                            <p v-if="status == -1&&item.remain_milli_seconds<=0" :class="item.fact_profits >= 0?'green':'red'">
                                 {{item.fact_profits || '0' | toFixedNum}}</p>
                             <p v-if="status == 1&&item.status == 1 && item.type == 2 && item.open_price > newprice"
                                class="green">
