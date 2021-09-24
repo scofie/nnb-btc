@@ -713,3 +713,4 @@ color: #fff!important;
 .buys .orders-list span,.sells .orders-list span{
 	margin-top: 0;
 }
+.freeClass li {border-bottom: none;}
