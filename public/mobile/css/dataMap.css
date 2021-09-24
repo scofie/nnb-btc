@@ -495,8 +495,6 @@ select {
 }
 
 .time-num input {
-	height: 29px;
-	font-size: 12px;
 	height: 30px;
 	line-height: 30px;
 	text-align: center;
@@ -553,7 +551,6 @@ select {
 	width: 22.7%;
 	height: 30px;
 	line-height: 30px;
-	text-align: center;
 	margin: 0 1.5% 10px;
 	
 
@@ -713,4 +710,7 @@ color: #fff!important;
 .buys .orders-list span,.sells .orders-list span{
 	margin-top: 0;
 }
-.freeClass li {border-bottom: none;}
+.freeClass li {border-bottom: none;padding:1px 0;}
+.btn-border{border-bottom:1px solid #f1f1f1;}
+.box-padding-top{ padding-top: 5px;}
+.box-width-four{width: 40%;}

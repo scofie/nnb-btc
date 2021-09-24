@@ -123,7 +123,7 @@
 
         <div class="order-list" v-show="!tradeId && tabList.length>0">
             <p v-show="false">{{CountDown}}</p>
-            <div class="flex order-list-header between" style="border-bottom:1px solid #f1f1f1; ">
+            <div class="flex order-list-header between btn-border" †>
                 <p class="tc" data-localize="contract.inPosition" style="width:100%;text-align:left;margin-left: 10px;">持仓中</p>
             </div>
             <div class="flex order-list-header between " v-show="status==1">
@@ -132,7 +132,7 @@
             </div>
             <ul class="list bgColor">
                 <li v-for="(item,index) in tabList" class="bgColor pl10 pr10 pb10" style="padding-left: 10px;padding-right: 10px;">
-                    <div @click="listShow = !listShow, showIndex=index" >
+                    <div class="box-padding-top">
                         <div class="list-header flex between" :class="[{'bdt':status==1}]">
                             <span>{{item.type == 1? getlg('buy'):getlg('sell')}} {{item.symbol}}</span>
                             <p>
@@ -148,13 +148,13 @@
                             <p>{{item.handle_time}}</p>
                         </div>
                     </div>
-                    <ul class="mt10 pb10 ft10 freeClass"  v-show="listShow">
-                        <li class="flex between" >
+                    <ul class="mt10 pb10 ft10 freeClass">
+                        <li class="flex between mt5" >
                             <div class="tl flex" >
                                 <p class="colorGrey" data-localize="deals.weprice">{{getlg('entrustPrice')}}</p>：
                                 <p class="ftColor">{{item.origin_price || '0.0000' | toFixed4}}</p>
                             </div>
-                            <div class="tr flex">
+                            <div class="tr flex box-width-four">
                                 <p class="colorGrey" data-localize="deals.nowprice">{{getlg('tnowprice')}}</p>：
                                 <p class="ftColor now">{{item.update_price || '0.0000' | toFixed4}}</p>
                             </div>
@@ -164,7 +164,7 @@
                                 <p class="colorGrey" data-localize="deals.zyprice">{{getlg('zyprice')}}</p>：
                                 <p class="ftColor ying">{{item.target_profit_price || '0.0000' | toFixed4}}</p>
                             </div>
-                            <div class="tr flex">
+                            <div class="tr flex box-width-four" >
                                 <p class="colorGrey" data-localize="deals.bond">{{getlg('bond')}}</p>：
                                 <p class="ftColor">{{item.origin_caution_money || '0.0000' | toFixed4}}</p>
                             </div>
@@ -174,21 +174,18 @@
                                 <p class="colorGrey" data-localize="deals.zsprice">{{getlg('zsprice')}}</p>：
                                 <p class="ftColor zhi">{{item.stop_loss_price || '0.0000' | toFixed4}}</p>
                             </div>
-                            <div class="tr flex" v-if="!item.handle_time">
+                            <div class="tr flex box-width-four" >
                                 <p class="colorGrey" data-localize="deals.fee">{{getlg('fee')}}</p>：
                                 <p class="ftColor">{{item.trade_fee || '0.0000' | toFixed4}}</p>
                             </div>
-                            <div class="tr flex" v-if="item.handle_time">
-                                <p class="colorGrey" data-localize="deals.fee">{{getlg('fee')}}</p>：
-                                <p class="ftColor">{{item.trade_fee || '0.0000' | toFixed4}}</p>
-                            </div>
+
                         </li>
                         <li class="flex between mt5">
                             <div class="tl flex">
                                 <p class="colorGrey" data-localize="deals.gprice">{{getlg('gprice')}}</p>：
                                 <p class="ftColor">{{item.overnight_money || '0.0000' | toFixed4}}</p>
                             </div>
-                            <div class="tr flex">
+                            <div class="tr flex box-width-four">
                                 <p class="colorGrey" data-localize="deals.znum">{{getlg('znum')}}</p>：
                                 <p class="ftColor">{{item.number || '0.0000' | toFixed4}}</p>
                             </div>
