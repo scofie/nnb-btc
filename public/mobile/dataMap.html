@@ -110,7 +110,7 @@
                     <div class="list-content" style="height: 50px;border-bottom: 1px solid #f1f1f1;">
                         <div class="content-left">
                             <p style="width:100%;text-align:left;" data-localize="deals.bond">保证金</p>
-                            <p style="width:100%;text-align:left;">{{ (item.number+item.fee) ||"0.00" | toFixed4}}</p>
+                            <p style="width:100%;text-align:left;">{{ (item.number) ||"0.00" | toFixed4}}</p>
                         </div>
                         <div v-show="status == -1" class="content-center">
                             <p style="width: 100%;" data-localize="deals.fee">手续费</p>
