@@ -104,7 +104,7 @@
                             <p style="width: 100%;" data-localize="assets.num">数量</p>
                             <p style="width: 100%;" v-if="item.is_insurance == 1">{{item.number || '0' | toFixedNum}}{{getlg('just')}}</p>
                             <p style="width: 100%;" v-else-if="item.is_insurance == 2">{{item.number || '0' | toFixedNum}}{{getlg('back')}}</p>
-                            <p cstyle="width: 100%;" v-else>{{item.number || '0' | toFixedNum}}</p>
+                            <p style="width: 100%;" v-else>{{item.number || '0' | toFixedNum}}</p>
                         </div>
                     </div>
                     <div class="list-content">
