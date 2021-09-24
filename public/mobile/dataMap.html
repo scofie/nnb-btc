@@ -71,18 +71,18 @@
 			</div>
 
 			<ul class="lists">
-				<li class="flex between ft10">
-					<p data-localize="assets.num">数量</p>
-					<p data-localize="contract.purchasePrice">购买价</p>
-					<p v-show="status == 1"  data-localize="deals.nowprice">{{getlg('tnowprice')}}</p>
-					<p v-show="status == -1" data-localize="contract.transactionPrice">成交价</p>
-					<p v-show="status == 1" data-localize="contract.estimated">预计盈亏</p>
-					<p v-show="status == -1" data-localize="deals.fee">手续费</p>
-					<p v-show="status == 1" data-localize="contract.countDown">倒计时</p>
-					<p v-show="status == -1" data-localize="contract.profitAndLoss">盈亏</p>
-				</li>
-                <li v-if="orderList.length > 0" v-for="(item,index) in orderList" :key="item.id" class="flex between ft10">
-                    <div class="between" style="width:100%;height:56px;line-height: 55px;padding: 0px 24px;border:1px solid #F00">
+<!--				<li class="flex between ft10">-->
+<!--					<p data-localize="assets.num">数量</p>-->
+<!--					<p data-localize="contract.purchasePrice">购买价</p>-->
+<!--					<p v-show="status == 1"  data-localize="deals.nowprice">{{getlg('tnowprice')}}</p>-->
+<!--					<p v-show="status == -1" data-localize="contract.transactionPrice">成交价</p>-->
+<!--					<p v-show="status == 1" data-localize="contract.estimated">预计盈亏</p>-->
+<!--					<p v-show="status == -1" data-localize="deals.fee">手续费</p>-->
+<!--					<p v-show="status == 1" data-localize="contract.countDown">倒计时</p>-->
+<!--					<p v-show="status == -1" data-localize="contract.profitAndLoss">盈亏</p>-->
+<!--				</li>-->
+                <li v-if="orderList.length > 0" v-for="(item,index) in orderList" :key="item.id" class=" between ft10">
+                    <div class="between" style="width:100%;height:56px;line-height: 55px;padding: 0px 24px;">
                         <div style="width:50%;float:left; padding-left:5px; ">
                             <span v-if="item.type == 1">买涨</span>
                             <span v-else>买跌</span>
@@ -93,7 +93,7 @@
                             {{item.handled_at || '0.00' | toFixed4}}
                         </div>
                     </div>
-                    <div class="between" style="width:100%;padding: 0px 24px;height:56px;border:1px solid #F00;">
+                    <div class="between" style="width:100%;padding: 0px 24px;height:56px;">
                         <div style="width:33%;float:left;padding-left:5px;line-height: 21px;">
                             <p style="width:100%;text-align:left;" data-localize="contract.purchasePrice">购买价</p>
                             <p style="width:100%;text-align:left;">{{item.open_price || '0.00' | toFixed4}}</p>
