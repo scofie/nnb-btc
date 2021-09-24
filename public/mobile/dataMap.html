@@ -110,7 +110,7 @@
                     <div class="list-content" style="height: 50px;border-bottom: 1px solid #f1f1f1;">
                         <div class="content-left">
                             <p style="width:100%;text-align:left;" data-localize="deals.bond">保证金</p>
-                            <p style="width:100%;text-align:left;">{{ item.number *item.open_price /10 ||"0.00" | toFixed4}}</p>
+                            <p style="width:100%;text-align:left;">{{ item.number*item.open_price ||"0.00" | toFixed4}}</p>
                         </div>
                         <div v-show="status == -1" class="content-center">
                             <p style="width: 100%;" data-localize="deals.fee">手续费</p>
@@ -124,17 +124,16 @@
                                 {{item.fact_profits || '0' | toFixedNum}}
                             </p>
                             <p style="width: 100%;" v-if="status == -1 && item.remain_milli_seconds>0">--</p>
-
                             <p style="width: 100%;" v-if="status == 1&&item.status == 1 && item.type == 2 && item.open_price < newprice"
-                               class="red">-{{(item.number -0) || '0.00' | toFixedNum}}</p>
+                               class="red">-{{(item.number * item.profit_ratio* item.open_price) /100 || '0.00' | toFixedNum}}</p>
                             <p style="width: 100%;" v-if="status == 1&&item.status == 1 && item.type == 2 && item.open_price > newprice"
-                               class="green">{{(item.number * item.profit_ratio -0) /100 || '0.00' | toFixedNum}}</p>
+                               class="green">{{(item.number * item.profit_ratio* item.open_price) /100 || '0.00' | toFixedNum}}</p>
                             <p style="width: 100%;" v-if="status == 1&&item.status == 3" :class="item.fact_profits >= 0?'green':'red'">
-                                {{item.fact_profits || '0' | toFixedNum}}</p>
+                                {{(item.number * item.profit_ratio* item.open_price) /100 || '0' | toFixedNum}}</p>
                             <p style="width: 100%;" v-if="status == 1&&item.status == 1 && item.type == 1 && item.open_price < newprice"
-                               class="green">{{(item.number * item.profit_ratio -0) /100 || '0.00' | toFixedNum}}</p>
+                               class="green">{{(item.number * item.profit_ratio* item.open_price) /100 || '0.00' | toFixedNum}}</p>
                             <p style="width: 100%;" v-if="status == 1&&item.status == 1 && item.type == 1 && item.open_price > newprice"
-                               class="red">{{(item.number * item.profit_ratio -0) /100 || '0.00' | toFixedNum}}</p>
+                               class="red">{{(item.number * item.profit_ratio* item.open_price) /100 || '0.00' | toFixedNum}}</p>
                         </div>
                         <div v-show="status == 1" class="content-right">
                             <p style="width: 100%;" data-localize="contract.countDown">倒计时</p>
