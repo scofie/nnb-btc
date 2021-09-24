@@ -296,7 +296,7 @@
 					<p class="colorGrey ft12" data-localize="deals.optime">开仓时间</p>
 					<div class="flex warps1 currency-list mt10">
 						<p :class="[{'active':seconds == item.seconds}]" v-for="item in timeList" :key="item.id"
-							@click="selectTime(item.seconds,item.profit_ratio)">{{item.seconds/86400}}H</p>
+							@click="selectTime(item.seconds,item.profit_ratio)">{{item.seconds/3600}}Hour</p>
 					</div>
 				</div>
 				<!-- <div class="flex around">
@@ -331,7 +331,7 @@
 					</p>
 					<p class="mt10">
 						<span data-localize="assets.time">时间</span>：
-						<span>{{seconds}} S</span>
+						<span>{{seconds/3600}} Hour</span>
 					</p>
 					<p class="mt10">
 						<span data-localize="contract.profitRate">盈利率</span>：
