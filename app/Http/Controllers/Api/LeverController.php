@@ -181,7 +181,7 @@ class LeverController extends Controller
             'hazard_rate' => $hazard_rate,//风险率
             'caution_money_total' => $caution_money_all,
             'origin_caution_money_total' => $origin_caution_money_all,
-            'profits_total' => $profits_all,//持仓总盈亏
+            'profits_total' => $profits_all,//持仓盈亏
             'caution_money' => $caution_money,
             'origin_caution_money' => $origin_caution_money,
             'profits' => $profits,
@@ -203,7 +203,7 @@ class LeverController extends Controller
         $status = Input::get("status", -1);
         $limit = Input::get("limit", 10);
 
-        //接入风险率和持仓总盈亏
+        //接入风险率和持仓盈亏
 //        if (empty($legal_id) || empty($currency_id)) {
 //            return $this->error("参数错误");
 //        }
@@ -235,7 +235,7 @@ class LeverController extends Controller
             'hazard_rate' => $hazard_rate,
             'profits_total' => $profits_all,
         ];
-        //接入风险率和持仓总盈亏end
+        //接入风险率和持仓盈亏end
 
         $param = compact('status', 'legal_id', 'currency_id');
         $lever_transaction['message'] = LeverTransaction::where(function ($query) use ($param) {

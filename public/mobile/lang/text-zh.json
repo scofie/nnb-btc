@@ -147,7 +147,7 @@
     "balance":"余额",
     "type":"类型",
     "risk":"风险率",
-    "total":"持仓总盈亏：",
+    "total":"持仓盈亏：",
     "onekey":"一键平仓",
     "makemore":"(做多)",
     "makeless":"(做空)",
