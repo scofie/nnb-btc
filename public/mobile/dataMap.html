@@ -71,16 +71,6 @@
 			</div>
 
 			<ul class="lists tab-list-body">
-<!--				<li class="flex between ft10">-->
-<!--					<p data-localize="assets.num">数量</p>-->
-<!--					<p data-localize="contract.purchasePrice">购买价</p>-->
-<!--					<p v-show="status == 1"  data-localize="deals.nowprice">{{getlg('tnowprice')}}</p>-->
-<!--					<p v-show="status == -1" data-localize="contract.transactionPrice">成交价</p>-->
-<!--					<p v-show="status == 1" data-localize="contract.estimated">预计盈亏</p>-->
-<!--					<p v-show="status == -1" data-localize="deals.fee">手续费</p>-->
-<!--					<p v-show="status == 1" data-localize="contract.countDown">倒计时</p>-->
-<!--					<p v-show="status == -1" data-localize="contract.profitAndLoss">盈亏</p>-->
-<!--				</li>-->
                 <li v-if="orderList.length > 0" v-for="(item,index) in orderList" :key="item.id" class=" between ft10">
                     <div class="list-content" style="height:56px;">
                         <div style="width:50%;float:left; padding-left:5px; ">
@@ -94,11 +84,11 @@
                         </div>
                     </div>
                     <div class="list-content" >
-                        <div class="content-l">
+                        <div class="content-left">
                             <p style="width:100%;text-align:left;" data-localize="contract.purchasePrice">购买价</p>
                             <p style="width:100%;text-align:left;">{{item.open_price || '0.00' | toFixed4}}</p>
                         </div>
-                        <div class="content-c">
+                        <div class="content-center">
                             <p class="f10" v-show="status == 1"  data-localize="deals.nowprice">{{getlg('tnowprice')}}({{item.currency_name}})</p>
                             <p class="f10" v-show="status == -1" data-localize="contract.transactionPrice">成交价({{item.currency_name}})</p>
                             <!---成交价格-->
@@ -110,7 +100,7 @@
                             <p class="f10" v-if="status == 1&&item.status == 1 && item.open_price == newprice" class="green">0</p>
 
                         </div>
-                        <div class="content-r">
+                        <div class="content-right">
                             <p class="f10" data-localize="assets.num">数量</p>
                             <p class="f10" v-if="item.is_insurance == 1">{{item.number || '0' | toFixedNum}}{{getlg('just')}}</p>
                             <p class="f10" v-else-if="item.is_insurance == 2">{{item.number || '0' | toFixedNum}}{{getlg('back')}}</p>
@@ -118,16 +108,16 @@
                         </div>
                     </div>
                     <div class="list-content">
-                        <div class="content-l">
+                        <div class="content-left">
                             <p style="width:100%;text-align:left;">保证金</p>
                             <p style="width:100%;text-align:left;">4678.1200</p>
                         </div>
-                        <div v-show="status == -1" class="content-c">
+                        <div v-show="status == -1" class="content-center">
                             <p class="f10">手续费</p>
                             <p class="f10" v-if="status == -1&&item.remain_milli_seconds>0">--</p>
                             <p class="f10" v-if="status == -1&&item.remain_milli_seconds<=0">{{item.fee || '0.00' | toFixed1}}</p>
                         </div>
-                        <div class="content-c">
+                        <div class="content-center">
                             <p class="f10" v-show="status == 1" data-localize="contract.estimated">预计盈亏</p>
                             <p class="f10" v-show="status == -1" data-localize="contract.profitAndLoss">盈亏</p>
                             <p v-if="status == -1 && item.remain_milli_seconds<=0" :class="item.fact_profits >= 0?'green':'red'" style="width:100%;">
@@ -145,7 +135,7 @@
                                class="green">
                                 {{(item.number * item.profit_ratio -0) /100 || '0.00' | toFixedNum}}</p>
                         </div>
-                        <div v-show="status == 1" class="content-c">
+                        <div v-show="status == 1" class="content-center">
                             <p class="f10" data-localize="contract.countDown">倒计时</p>
                             <p class="f10" v-if="status == 1&&item.status == 1" class="times">
                                 {{countDown(item.endTime,index,item.seconds,item.remain_milli_seconds,item.id)}}s</p>
