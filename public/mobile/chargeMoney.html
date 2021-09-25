@@ -22,21 +22,22 @@
     .tab-list{
     	flex-direction: row;
     	margin:1rem 5% 0;
+        border-bottom: 1px solid #ddd;
     }
     .tab-list span:last-child{
     	margin-left: 5%;
     }
     .tab-list span{
     	width: 47%;
-	    border-radius: 20px;
+	    border-radius: 5px;
 	    padding: 0.5rem 0;
 	    text-align: center;
 	    border:1px solid #588bf7;
 	    color:#333;
     }
     .tabactive{
-    	color:#fff !important;
-    	background: #588bf7;
+    	color:#588bf7 !important;
+    	background: #FFFFFF;
     }
     .cz-row {
 	    display: flex;
@@ -86,12 +87,12 @@
 	    text-align: center;
 	}
     .changeTabActive{
-        width: 47%;
-        border-radius: 20px;
+        width: 50%;
+        border-radius: 5px;
         padding: 0.5rem 0;
         text-align: center;
         border:1px solid #588bf7;
-        color:#333;
+        margin-left: 25%;
     }
 </style>
 
@@ -233,7 +234,7 @@
                     		var num=0;
                     		for(let i in data){
                     			if(num==0){
-	                    			$(".tab-list").append($("<div onclick='tabCode(this)' class='tabactive changeTabActive' data-address="+data[i]+">"+i+"</div>"));
+	                    			$(".tab-list").append($("<div onclick='tabCode(this)' class='tabactive changeTabActive' data-address="+data[i]+">USDT-ERC20</div>"));
 	                    			code(data[i]);
 		                        	copy(data[i]);	
                     				$(".address").html(data[i]);
