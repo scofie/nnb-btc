@@ -16,7 +16,7 @@ var vue = new Vue({
         areaCode:'',
         areaText:'',
         langBool:false,
-        langtxt:[{"txt":getlg('zwft'),"lang":"hk"},{"txt":getlg('zwjt'),'lang':"zh"},{"txt":getlg('yy'),"lang":"en"},{"txt":getlg('hy'),"lang":"kor"},{"txt":getlg('ry'),"lang":"jp"},{"txt":getlg('ty'),"lang":"th"}],
+        langtxt:[{"txt":getlg('yy'),"lang":"en"},{"txt":getlg('zwft'),"lang":"hk"},{"txt":getlg('zwjt'),'lang':"zh"},{"txt":getlg('hy'),"lang":"kor"},{"txt":getlg('ry'),"lang":"jp"},{"txt":getlg('ty'),"lang":"th"}],
         listShow:false,
         status:'mobile'
     },
