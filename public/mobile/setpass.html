@@ -127,8 +127,7 @@
                         layer_msg(getlg('twonot'));
                     }
                 }
-                var areaCode = get_param('areaCode');
-                var areaCodeId = get_param('areaCodeId');
+
                 var name = $('#name').val();
                 var verify = $("#verificate").val();
                 var pass = $('#setpassword').val();
@@ -146,8 +145,6 @@
                             type: "post",
                             url: _API + "user/register",
                             data: {
-                                "area_code": areaCode,
-                                "area_code_id": areaCodeId,
                                 "user_string": name,
                                 "password": pass,
                                 "extension_code": extensionCode,
