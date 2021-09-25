@@ -203,7 +203,7 @@ class WalletController extends Controller
         }
         $currency = Db::table('currency')->where('id',$currency_id)->first();
         if(!$currency) {
-        		return $this->error('参数错误');
+            return $this->error('参数错误');
         }
 
         $data = [

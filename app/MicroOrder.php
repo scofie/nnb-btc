@@ -108,7 +108,7 @@ class MicroOrder extends Model
     public function getAccountAttribute()
     {
         $user = $this->user();
-        return $user->value('phone') ?? $user->value('email');
+        return $user->value('account_number');
     }
 
     public function setPreProfitResultAttribute($value)
