@@ -80,16 +80,16 @@
             ,cols: [[
                 {field: '', type: 'checkbox'}
                 ,{field: 'id', title: 'ID', width: 100}
-                ,{field:'phone', title:'手机号', width:150}
+                ,{field:'account_number', title:'交易账号', width:150,}
                 ,{field:'userreal_name', title:'真实姓名', width:120}
-                ,{field:'account_number', title:'交易账号', width:150, hide: true}
+                ,{field:'phone', title:'手机号码', width:150,hide: true}
                 ,{field:'email', title:'邮箱', width:150, hide: true}
                 ,{field:'card_id', title: '身份证号',width: 180, hide: true}
-                ,{field:'extension_code', title:'邀请码', width:100}
+                ,{field:'extension_code', title:'邀请码', width:90}
                 ,{field: 'risk_name', title: '风控类型', width: 90}
                 ,{field: 'status', title: '状态', width: 90, templet:"#status_t"}
                 // ,{field:'status', title:'是否锁定', width:90, templet: '#switchTpl'}
-                ,{field:'last_login_ip', title:'上次登录IP', width:200} 
+                ,{field:'last_login_ip', title:'上次登录IP', width:200, hide: true}
                 ,{field:'time', title:'注册时间', width:200} 
                 ,{fixed: 'right', title: '操作', width: 190, align: 'center', toolbar: '#barDemo'}
             ]]
