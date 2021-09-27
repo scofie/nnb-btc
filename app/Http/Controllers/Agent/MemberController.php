@@ -36,7 +36,6 @@ class MemberController extends Controller
 
             if (empty($username) || empty($password)) return $this->error("参数错误");
             $agent = DB::table('agent')->where("username", $username)->first();
-
             if ($agent == null || empty($agent)) return $this->error("代理商未找到");
             if ($agent->is_lock == 1) return $this->error("账号被锁定，禁止登录");
             if (Users::MakePassword($password) != $agent->password) {

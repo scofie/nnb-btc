@@ -455,7 +455,8 @@ class LeverController extends Controller
         if ($share != intval($share) || !is_numeric($share) || $share <= 0) {
             return $this->error('手数必须是大于0的整数');
         }
-        if (bc_comp($currency_match->lever_min_share, $share) > 0) {
+        //限制为0 的时候为不限制
+        if (bc_comp($currency_match->lever_min_share, $share) > 0 && $currency_match->lever_min_share >0 ) {
             return $this->error($this->returnStr('手数不能低于') . $currency_match->lever_min_share);
         }
         if (bc_comp($currency_match->lever_max_share, $share) < 0 && bc_comp($currency_match->lever_max_share, 0) > 0) {

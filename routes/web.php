@@ -897,8 +897,6 @@ Route::group([ 'middleware' => ['lang', /*'check_user'*/]], function () {
 
  //管理后台
      Route::group(['prefix' => 'agent', 'middleware' => ['agent_auth']], function () {
-
-
          //代理商权限管理
          Route::get('/manager/manager_index', function () {
              return view('agent.manager.index');
