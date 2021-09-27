@@ -173,19 +173,21 @@ var vue = new Vue({
 						var index1 = 0;
 						var index2 = 0;
 						var leverData = getlocal_storage('lever');
+						var shareNumber = 1;
 						for (var i = 0; i < datas.length; i++) {
 							if (that.legalId == datas[i].id) {
 								index1 = i;
 							}
 							for (var j = 0; j < datas[i].quotation.length; j++) {
 								if (that.currencyId == datas[i].quotation[j].currency_id) {
-									index2 = j;
+									shareNumber = datas[i].quotation[j].lever_share_num;
+									break;
 								}
 							}
 						}
 						// 初始化法币、币种渲染
 						if (get_param('id1')) {
-							that.leverDatas.shareNum = iTofixed(datas[index1].quotation[index2].lever_share_num,2);
+							that.leverDatas.shareNum = iTofixed(shareNumber,4);
 							that.leverDatas.spread = datas[index1].quotation[index2].spread;
 							that.leverDatas.transactionFee = datas[index1].quotation[index2].lever_trade_fee;
 							// $('.share-num').text(share_num);

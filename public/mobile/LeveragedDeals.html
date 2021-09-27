@@ -63,9 +63,11 @@
 								@click="selectMult(item.value)">{{item.value}}{{getlg('times')}}</span>
 						</p>
 						<div class="num mt10">
-							<p class="colorGrey"><b data-localize="deals.onehand">1手等于</b><b class="share-num"
-									style="font-weight:normal;">{{leverDatas.shareNum || '0.00' | toFixeds}}</b><b class="share-name"
-									style="font-weight:normal;">{{leverDatas.currencyName}}</b></p>
+							<p class="colorGrey">
+                                <b data-localize="deals.onehand">1手等于</b>
+                                <b class="share-num" style="font-weight:normal;">{{leverDatas.shareNum || '0.00' | toFixeds}}</b>
+                                <b class="share-name" style="font-weight:normal;">{{leverDatas.currencyName}}</b>
+                            </p>
 							<input class="share-input" v-model="leverDatas.share" type="number" @input="inputNum"
 								:placeholder="getlg('oneHanded')" />
 							<span v-for="(item,index) in shareList"
