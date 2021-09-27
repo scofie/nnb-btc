@@ -878,119 +878,119 @@ Route::group([ 'middleware' => ['lang', /*'check_user'*/]], function () {
     });
 
 
-// //代理商管理员操作后台
-// Route::get('agent', function () {
-//     session()->put('agent_username', '');
-//     session()->put('agent_id', '');
-//     return view('agent.login');
-// })->name('agent');
+ //代理商管理员操作后台
+ Route::get('agent', function () {
+     session()->put('agent_username', '');
+     session()->put('agent_id', '');
+     return view('agent.login');
+ })->name('agent');
 
-//     Route::get('agent', function () {
-//         return view('agent.index');
-//     })->name('agent');
+     Route::get('agent', function () {
+         return view('agent.index');
+     })->name('agent');
 
-//     Route::post('agent/login', 'Agent\MemberController@login');//登录
-//     Route::any('order/order_excel', 'Agent\OrderController@order_excel');//导出订单记录Excel
-//     Route::any('order/users_excel', 'Agent\OrderController@user_excel');//导出用户记录Excel
+     Route::post('agent/login', 'Agent\MemberController@login');//登录
+     Route::any('order/order_excel', 'Agent\OrderController@order_excel');//导出订单记录Excel
+     Route::any('order/users_excel', 'Agent\OrderController@user_excel');//导出用户记录Excel
 
-//     Route::any('agent/dojie', 'Agent\ReportController@dojie');//阶段订单图表
+     Route::any('agent/dojie', 'Agent\ReportController@dojie');//阶段订单图表
 
-// //管理后台
-//     Route::group(['prefix' => 'agent', 'middleware' => ['agent_auth']], function () {
-
-
-//         //代理商权限管理
-//         Route::get('/manager/manager_index', function () {
-//             return view('agent.manager.index');
-//         });
-//         Route::get('/manager/users', 'Agent\AgentController@users');
-//         Route::get('/manager/add', 'Agent\AgentController@add');//添加管理员
-//         Route::post('/manager/add', 'Agent\AgentController@postAdd');//添加管理员
-//         Route::post('/manager/delete', 'Agent\AgentController@del');//删除管理员
-//         Route::get('/manager/manager_roles', function () {
-//             return view('agent.manager.admin_roles');
-//         });
-//         // Route::any('addjuese', 'Agent\AgentRoleController@addJuese');
-//         Route::get('/manager/manager_roles_api', 'Agent\AgentRoleController@users');
-//         Route::get('/manager/role_add', 'Agent\AgentRoleController@add');
-//         Route::any('/manager/show', 'Agent\AgentRoleController@show');//展示角色
-//         Route::any('/manager/role_add', 'Agent\AgentRoleController@postAdd');
-//         Route::post('/manager/role_delete', 'Agent\AgentRoleController@del');
-//         Route::get('/manager/role_permission', 'Agent\AgentRolePermissionController@update');
-//         Route::post('/manager/role_permission', 'Agent\AgentRolePermissionController@postUpdate');
-
-//         //代理商管理员
-//         Route::any('/agentadmin_add_show', 'Agent\AgentAdminController@agentadmin_add_show');//添加代理商管理员显示角色
-//         Route::any('/agentadmin_list', 'Agent\AgentAdminController@list1');
-//         // Route::any('agentadmin_add', 'Agent\AgentAdminController@show');//
-//         Route::any('agentadmin_add', 'Agent\AgentAdminController@postAdd');
-//         // Route::post('agentadmin_add', 'Agent\AgentAdminController@del');
-
-//         //首页
-//         Route::any('get_statistics', 'Agent\AgentIndexController@getStatistics');//首页获取统计信息
-
-//         Route::post('change_password', 'Agent\MemberController@changePWD');//修改密码
-
-//         Route::get('user_info', 'Agent\MemberController@getUserInfo');//获取用户信息
-//         Route::post('save_user_info', 'Agent\MemberController@saveUserInfo');//保存用户信息
-//         Route::any('lists', 'Agent\MemberController@lists');//代理商列表addSonAgent
-//         Route::post('addagent', 'Agent\MemberController@addAgent');//添加代理商
-//         Route::post('addsonagent', 'Agent\MemberController@addSonAgent');//添加代理商
-//         Route::post('update', 'Agent\MemberController@updateAgent');//添加代理商
-//         Route::post('searchuser', 'Agent\MemberController@searchuser');//查询用户
-//         Route::post('search_agent_son', 'Agent\MemberController@search_agent_son');//查询用户
-//         Route::get('user/all_child_agent', 'Agent\MemberController@allChildAgent'); //查询所有下级代理
-
-//         Route::any('logout', 'Agent\MemberController@logout');//退出登录
-//         Route::any('menu', 'Agent\MemberController@getMenu');//获取指定身份的菜单
-
-//         Route::post('jie', 'Agent\ReportController@jie');//阶段订单图表
-
-//         Route::post('day', 'Agent\ReportController@day');//阶段订单图表
-
-//         Route::post('order', 'Agent\ReportController@order');//阶段订单图表
-//         Route::post('order_num', 'Agent\ReportController@order_num');//阶段订单图表
-//         Route::post('order_money', 'Agent\ReportController@order_money');//阶段订单图表
-
-//         Route::post('user', 'Agent\ReportController@user');//阶段订单图表
-//         Route::post('user_num', 'Agent\ReportController@user_num');//阶段订单图表
-//         Route::post('user_money', 'Agent\ReportController@user_money');//阶段订单图表
-
-//         Route::post('agental', 'Agent\ReportController@agental');//阶段订单图表
-//         Route::post('agental_t', 'Agent\ReportController@agental_t');//阶段订单图表
-//         Route::post('agental_s', 'Agent\ReportController@agental_s');//阶段订单图表
+ //管理后台
+     Route::group(['prefix' => 'agent', 'middleware' => ['agent_auth']], function () {
 
 
-//         Route::post('order/list', 'Agent\OrderController@order_list');//团队所有订单
-//         Route::post('order/info', 'Agent\OrderController@order_info');//订单详情
-//         Route::post('jie/list', 'Agent\OrderController@jie_list');//团队所有结算
-//         Route::post('jie/info', 'Agent\OrderController@jie_info');//结算详情
+         //代理商权限管理
+         Route::get('/manager/manager_index', function () {
+             return view('agent.manager.index');
+         });
+         Route::get('/manager/users', 'Agent\AgentController@users');
+         Route::get('/manager/add', 'Agent\AgentController@add');//添加管理员
+         Route::post('/manager/add', 'Agent\AgentController@postAdd');//添加管理员
+         Route::post('/manager/delete', 'Agent\AgentController@del');//删除管理员
+         Route::get('/manager/manager_roles', function () {
+             return view('agent.manager.admin_roles');
+         });
+         // Route::any('addjuese', 'Agent\AgentRoleController@addJuese');
+         Route::get('/manager/manager_roles_api', 'Agent\AgentRoleController@users');
+         Route::get('/manager/role_add', 'Agent\AgentRoleController@add');
+         Route::any('/manager/show', 'Agent\AgentRoleController@show');//展示角色
+         Route::any('/manager/role_add', 'Agent\AgentRoleController@postAdd');
+         Route::post('/manager/role_delete', 'Agent\AgentRoleController@del');
+         Route::get('/manager/role_permission', 'Agent\AgentRolePermissionController@update');
+         Route::post('/manager/role_permission', 'Agent\AgentRolePermissionController@postUpdate');
 
-//         Route::post('get_order_account', 'Agent\OrderController@get_order_account');
-//         Route::post('get_user_num', 'Agent\UserController@get_user_num');
-//         Route::post('get_my_invite_code', 'Agent\UserController@get_my_invite_code');
+         //代理商管理员
+         Route::any('/agentadmin_add_show', 'Agent\AgentAdminController@agentadmin_add_show');//添加代理商管理员显示角色
+         Route::any('/agentadmin_list', 'Agent\AgentAdminController@list1');
+         // Route::any('agentadmin_add', 'Agent\AgentAdminController@show');//
+         Route::any('agentadmin_add', 'Agent\AgentAdminController@postAdd');
+         // Route::post('agentadmin_add', 'Agent\AgentAdminController@del');
 
-//         Route::any('user/lists', 'Agent\UserController@lists');//用户列表
-//         Route::any('lever_transaction/lists', 'Agent\LeverTransactionController@lists');//用户的订单
-//         Route::any('account/money_log', 'Agent\AccountController@moneyLog');//结算
-//         Route::any('agent/info', 'Agent\AgentController@info');//代理商信息
+         //首页
+         Route::any('get_statistics', 'Agent\AgentIndexController@getStatistics');//首页获取统计信息
+
+         Route::post('change_password', 'Agent\MemberController@changePWD');//修改密码
+
+         Route::get('user_info', 'Agent\MemberController@getUserInfo');//获取用户信息
+         Route::post('save_user_info', 'Agent\MemberController@saveUserInfo');//保存用户信息
+         Route::any('lists', 'Agent\MemberController@lists');//代理商列表addSonAgent
+         Route::post('addagent', 'Agent\MemberController@addAgent');//添加代理商
+         Route::post('addsonagent', 'Agent\MemberController@addSonAgent');//添加代理商
+         Route::post('update', 'Agent\MemberController@updateAgent');//添加代理商
+         Route::post('searchuser', 'Agent\MemberController@searchuser');//查询用户
+         Route::post('search_agent_son', 'Agent\MemberController@search_agent_son');//查询用户
+         Route::get('user/all_child_agent', 'Agent\MemberController@allChildAgent'); //查询所有下级代理
+
+         Route::any('logout', 'Agent\MemberController@logout');//退出登录
+         Route::any('menu', 'Agent\MemberController@getMenu');//获取指定身份的菜单
+
+         Route::post('jie', 'Agent\ReportController@jie');//阶段订单图表
+
+         Route::post('day', 'Agent\ReportController@day');//阶段订单图表
+
+         Route::post('order', 'Agent\ReportController@order');//阶段订单图表
+         Route::post('order_num', 'Agent\ReportController@order_num');//阶段订单图表
+         Route::post('order_money', 'Agent\ReportController@order_money');//阶段订单图表
+
+         Route::post('user', 'Agent\ReportController@user');//阶段订单图表
+         Route::post('user_num', 'Agent\ReportController@user_num');//阶段订单图表
+         Route::post('user_money', 'Agent\ReportController@user_money');//阶段订单图表
+
+         Route::post('agental', 'Agent\ReportController@agental');//阶段订单图表
+         Route::post('agental_t', 'Agent\ReportController@agental_t');//阶段订单图表
+         Route::post('agental_s', 'Agent\ReportController@agental_s');//阶段订单图表
+
+
+         Route::post('order/list', 'Agent\OrderController@order_list');//团队所有订单
+         Route::post('order/info', 'Agent\OrderController@order_info');//订单详情
+         Route::post('jie/list', 'Agent\OrderController@jie_list');//团队所有结算
+         Route::post('jie/info', 'Agent\OrderController@jie_info');//结算详情
+
+         Route::post('get_order_account', 'Agent\OrderController@get_order_account');
+         Route::post('get_user_num', 'Agent\UserController@get_user_num');
+         Route::post('get_my_invite_code', 'Agent\UserController@get_my_invite_code');
+
+         Route::any('user/lists', 'Agent\UserController@lists');//用户列表
+         Route::any('lever_transaction/lists', 'Agent\LeverTransactionController@lists');//用户的订单
+         Route::any('account/money_log', 'Agent\AccountController@moneyLog');//结算
+         Route::any('agent/info', 'Agent\AgentController@info');//代理商信息
         
-//         Route::get('capital/recharge', 'Agent\CapitalController@rechargeList');
-//         Route::get('capital/withdraw', 'Agent\CapitalController@withdrawList');
-//         //划转出入列表
-//         Route::any('user/huazhuan_lists', 'Agent\UserController@huazhuan_lists');//用户列表
+         Route::get('capital/recharge', 'Agent\CapitalController@rechargeList');
+         Route::get('capital/withdraw', 'Agent\CapitalController@withdrawList');
+         //划转出入列表
+         Route::any('user/huazhuan_lists', 'Agent\UserController@huazhuan_lists');//用户列表
 
-//         Route::any('order/order_excel', 'Agent\OrderController@order_excel');//导出订单记录Excel
+         Route::any('order/order_excel', 'Agent\OrderController@order_excel');//导出订单记录Excel
 
-//         //期权
-//         Route::get('micro/currency_show', 'Agent\OrderController@microCurrency');
-//         Route::post('micro/list', 'Agent\OrderController@microList');
+         //期权
+         Route::get('micro/currency_show', 'Agent\OrderController@microCurrency');
+         Route::post('micro/list', 'Agent\OrderController@microList');
 
-//         Route::prefix('common')->namespace('Agent')->group(function () {
-//             Route::get('legal_currency', 'CommonController@legalCurrency');
-//         });
-//     });
-//     Route::any('order/churu_excel', 'Agent\OrderController@churu_excel');//导出出入金记录Excel
+         Route::prefix('common')->namespace('Agent')->group(function () {
+             Route::get('legal_currency', 'CommonController@legalCurrency');
+         });
+     });
+     Route::any('order/churu_excel', 'Agent\OrderController@churu_excel');//导出出入金记录Excel
     
 
 });
