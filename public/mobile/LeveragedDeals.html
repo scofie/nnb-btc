@@ -65,7 +65,7 @@
 						<div class="num mt10">
 							<p class="colorGrey">
                                 <b data-localize="deals.onehand">1手等于</b>
-                                <b class="share-num" style="font-weight:normal;">{{leverDatas.shareNum || '0.00' | toFixeds}}</b>
+                                <b class="share-num" style="font-weight:normal;">{{leverDatas.shareNum || '0.001' | toFixeds}}</b>
                                 <b class="share-name" style="font-weight:normal;">{{leverDatas.currencyName}}</b>
                             </p>
 							<input class="share-input" v-model="leverDatas.share" type="number" @input="inputNum"

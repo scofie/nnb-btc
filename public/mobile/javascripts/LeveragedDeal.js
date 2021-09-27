@@ -198,7 +198,7 @@ var vue = new Vue({
 								that.leverDatas.legalId = leverData.legal_id;
 								that.leverDatas.legalName = leverData.legal_name;
 								if (!leverData.share_num) {
-									that.leverDatas.shareNum = iTofixed(datas[index1].quotation[index2].lever_share_num,2);
+									that.leverDatas.shareNum = iTofixed(datas[index1].quotation[index2].lever_share_num,4);
 								} else {
 									that.leverDatas.shareNum = leverData.share_num;
 								}
@@ -220,7 +220,7 @@ var vue = new Vue({
 								that.leverDatas.currencyName = datas[index1].quotation[index2].currency_name;
 								that.leverDatas.legalId = datas[index1].quotation[index2].legal_id;
 								that.leverDatas.legalName = datas[index1].quotation[index2].legal_name;
-								that.leverDatas.shareNum = iTofixed(datas[index1].quotation[index2].lever_share_num,2);
+								that.leverDatas.shareNum = iTofixed(datas[index1].quotation[index2].lever_share_num,4);
 								that.leverDatas.spread = datas[index1].quotation[index2].spread;
 								that.leverDatas.transactionFee = datas[index1].quotation[index2].transactionFee;
 							}
