@@ -43,20 +43,20 @@ class MicroOrder extends Model
         'parent_agent_name',
     ];
 
-    protected static $typeList = [
+    public static $typeList = [
         '',
         self::TYPE_RISE => '涨',
         self::TYPE_FALL => '跌',
     ];
 
-    protected static $statusList = [
+    public static $statusList = [
         '',
         self::STATUS_OPENED => '交易中',
         self::STATUS_CLOSING => '平仓中',
         self::STATUS_CLOSED => '已平仓',
     ];
 
-    protected static $resultList = [
+    public static $resultList = [
         self::RESULT_LOSS => '亏损',
         self::RESULT_BALANCE => '无',
         self::RESULT_PROFIT => '盈利',

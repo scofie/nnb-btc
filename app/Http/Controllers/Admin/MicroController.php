@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\AccountLog;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -303,6 +304,69 @@ class MicroController extends Controller
                     'pre_profit_result' => $risk,
                 ]);
             return $this->success('本次提交:' . count($ids) . '条,设置成功:' . $affect_rows . '条');
+        } catch (\Throwable $th) {
+            return $this->error($th->getMessage());
+        }
+    }
+
+    public function flipped(Request $request)
+    {
+        try {
+            $microId = $request->input('micro_id', 0);
+            if ( empty($microId)) {
+                throw new \Exception('请先选择要处理的交易');
+            }
+
+            $microOrder = MicroOrder::find($microId);
+            if( $microOrder->profit_result ==MicroOrder::RESULT_BALANCE){
+                return $this->success('本次交易无须进行逆反操作！！');
+            }
+            $change_profits = $profit_result = $fact_profits = 0;
+            $old_micro_type  = $microOrder->type;
+            $old_profit_result = $microOrder->profit_result;
+            if( $old_micro_type == MicroOrder::TYPE_RISE ){
+                $change_micro_type = MicroOrder::TYPE_FALL;
+            }else{
+                $change_micro_type = MicroOrder::TYPE_RISE;
+            }
+            //重新计算期权收益
+            if( $microOrder->profit_result == MicroOrder::RESULT_LOSS ){
+                $profit_result = MicroOrder::RESULT_PROFIT;
+                $fact_profits = abs($microOrder->fact_profits);
+                $change_profits = bc_add($microOrder->number,$fact_profits);
+            }
+            if( $microOrder->profit_result == MicroOrder::RESULT_PROFIT ){
+                $profit_result = MicroOrder::RESULT_LOSS;
+                $fact_profits = -abs($microOrder->fact_profits);
+                $change_profits = -bc_add($microOrder->number * 2 ,abs($microOrder->fact_profits));
+            }
+
+            if( $microOrder-> status !=MicroOrder::STATUS_OPENED){
+                $wallet = UsersWallet::where('currency', $microOrder->currency_id)
+                    ->where('user_id', $microOrder->user_id)
+                    ->first();
+
+                $lock_fields = "lock_micro_balance";
+                if( $microOrder->is_insurance){
+                    $lock_fields = "lock_insurance_balance";
+                }
+                $before_micro_balance = $wallet->$lock_fields;
+                if( $before_micro_balance >=abs($change_profits)) {
+                    $wallet->$lock_fields = bc_add($before_micro_balance, $change_profits);
+                    $wallet->save();
+                }
+            }
+            $microOrder->type = $change_micro_type;
+            $microOrder->profit_result = $profit_result;
+            $microOrder->fact_profits = $fact_profits;
+            $microOrder->pre_profit_result = $profit_result;
+            $microOrder->save();
+            $type_List = MicroOrder::$typeList;
+            $profit_result_list = MicroOrder::$resultList;
+            $message = "本次翻转由";
+            $message .= '【'. $type_List[$old_micro_type]."】调整为【".$type_List[$change_micro_type]."],";
+            $message .="盈亏结果：由【".$profit_result_list[$old_profit_result]."】调整为【".$profit_result_list[$profit_result]."】";
+            return $this->success($message);
         } catch (\Throwable $th) {
             return $this->error($th->getMessage());
         }

@@ -691,7 +691,7 @@ class MicroTradeLogic
             });
             // echo date('Y-m-d H:i:s ') . '+++开始平仓+++' . PHP_EOL;
             foreach ($closing_oreders as $key => $value) {
-
+                $fact_profit = 0;
                 // 根据盈亏生成相关参数
                 if ($value->profit_type == 1) {
                     //结算本金和利息
@@ -708,9 +708,8 @@ class MicroTradeLogic
                     $memo =  '期权订单平仓结算,平局结算';
                 } elseif ($value->profit_type == -1) {
                     //本金填补亏损
-                    $capital = 0;
                     $fact_profit = -$value->number;
-                    $change = $capital;
+                    $change = $fact_profit;
                     $memo =  '期权订单,亏损结算';
                 }
                 $value->profit_result = $value->profit_type;

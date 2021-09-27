@@ -34,6 +34,12 @@
 <div class="layui-form">
     <div class="layui-item">
         <div class="layui-inline" style="margin-left: 10px;">
+            <label>用户账号</label>
+            <div class="layui-input-inline">
+                <input type="text" name="account" placeholder="请输入手机号或邮箱" autocomplete="off" class="layui-input" value="">
+            </div>
+        </div>
+        <div class="layui-inline" style="margin-left: 10px;">
             <label>交易对</label>
             <div class="layui-input-inline" style="width: 120px">
                 <select name="match_id" id="currency_match" class="layui-input">
@@ -66,17 +72,6 @@
             </div>
         </div>
         <div class="layui-inline" style="margin-left: 10px;">
-            <label>保险交易</label>
-            <div class="layui-input-inline" style="width: 90px">
-                <select name="is_insurance" id="is_insurance" class="layui-input">
-                    <option value="-1">所有</option>
-                    <option value="2">反向</option>
-                    <option value="1">正向</option>
-                    <option value="0">否</option>
-                </select>
-            </div>
-        </div>
-        <div class="layui-inline" style="margin-left: 10px;">
             <label>交易状态</label>
             <div class="layui-input-inline" style="width: 90px">
                 <select name="status" id="status" class="layui-input">
@@ -87,7 +82,7 @@
                 </select>
             </div>
         </div>
-        <div class="layui-inline" style="margin-left: 10px;">
+        <div class="layui-inline hidden" style="margin-left: 10px;">
             <label>预设</label>
             <div class="layui-input-inline" style="width: 90px">
                 <select name="pre_profit_result" id="pre_profit_result" class="layui-input">
@@ -116,10 +111,20 @@
             <button class="layui-btn layui-btn-primary" id="spread" type="button" style="padding:0px; width: 30px;"><i class="layui-icon layui-icon-down"></i></button>
             <button class="layui-btn" id="btn-search" lay-submit lay-filter="btn-search"><i class="layui-icon layui-icon-search"></i></button>
         </div>
-        
     </div>
 
     <div class="layui-item hidden" id="more">
+        <div class="layui-inline " style="margin-left: 10px;">
+            <label>保险交易</label>
+            <div class="layui-input-inline" style="width: 90px">
+                <select name="is_insurance" id="is_insurance" class="layui-input">
+                    <option value="-1">所有</option>
+                    <option value="2">反向</option>
+                    <option value="1">正向</option>
+                    <option value="0">否</option>
+                </select>
+            </div>
+        </div>
         <div class="layui-inline" style="margin-left: 10px;">
             <label >开始日期：</label>
             <div class="layui-input-inline" style="width:170px;">
@@ -132,13 +137,7 @@
                 <input type="text" class="layui-input" id="end_time" value="" name="end_time">
             </div>
         </div>
-        <div class="layui-inline" style="margin-left: 10px;">
-            <label>用户账号</label>
-            <div class="layui-input-inline">
-                <input type="text" name="account" placeholder="请输入手机号或邮箱" autocomplete="off" class="layui-input" value="">
-            </div>
-        </div>
-        <div class="layui-inline" style="margin-left: 10px;">
+        <div class="layui-inline hidden" style="margin-left: 10px;">
             <label>真实姓名</label>
             <div class="layui-input-inline">
                 <input type="text" name="name" placeholder="请输入真实姓名" autocomplete="off" class="layui-input" value="">
@@ -153,6 +152,7 @@
 @section('scripts')
 <script type="text/html" id="barDemo">
     @{{d.status==1 ? '<a class="layui-btn layui-btn-xs layui-btn-warm" lay-event="edit">编辑</a>' : '' }}
+    @{{d.profit_result !=0?'<a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="flipped">翻转</a>' : '' }}
 </script>
 
 <script type="text/html" id="type_name">
@@ -269,7 +269,7 @@
                 totalRow: true,
                 cols: [[
                     {field: '', type: 'checkbox', width: 60}
-                    ,{field: '', title: '序号', type: "numbers", width: 90}
+                    ,{field: '', title: '序号', type: "numbers", width: 90,hide: true}
                     ,{field: 'id', title: 'ID', width: 100}
                     ,{field: 'account', title: '用户账号', width: 130, sort: true, totalRowText: '小计'}
                     ,{field: 'real_name', title: '真实姓名', width: 100}
@@ -289,7 +289,7 @@
                     ,{field: 'updated_at', title: '更新日期', width: 170, sort: true, hide: true}
                     ,{field: 'handled_at', title: '平仓时间', width: 170, sort: true, hide: true}
                     ,{field: 'complete_at', title: '完成时间', width: 170, sort: true, hide: true}
-                    //,{fixed: 'right', title: '操作', width: 100, align: 'center', toolbar: '#barDemo'}
+                    ,{fixed: 'right', title: '操作', width: 100, align: 'center', toolbar: '#barDemo'}
                 ]]
             });
 
@@ -300,6 +300,26 @@
                 var tr = obj.tr;
                 if (layEvent === 'edit') { //编辑
                     layer_show('编辑交易', '/admin/micro_order_edit?id=' + data.id);
+                }
+                if(layEvent === 'flipped' ){
+                    $.ajax({
+                        url: '/admin/micro/flipped'
+                        ,type: 'POST'
+                        ,data: {micro_id: data.id}
+                        ,success: function (res) {
+                            layer.msg(res.message, {
+                                time: 2000,
+                                end: function () {
+                                    if (res.type == 'ok') {
+                                        data_table.reload();
+                                    }
+                                }
+                            });
+                        }
+                        ,error: function (res) {
+                            layer.msg('网络错误');
+                        }
+                    })
                 }
             });
 

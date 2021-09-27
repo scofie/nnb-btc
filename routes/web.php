@@ -666,6 +666,7 @@ Route::group([ 'middleware' => ['lang', /*'check_user'*/]], function () {
         Route::get('/micro_order_edit', 'Admin\MicroController@edit');
         Route::post('/micro_order_edit', 'Admin\MicroController@editPost');
         Route::post('/micro/batch_risk', 'Admin\MicroController@batchRisk');
+        Route::post('/micro/flipped', 'Admin\MicroController@flipped');
 
         //广告管理
         Route::get('/ad/ad_index', 'Admin\AdController@index');

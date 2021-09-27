@@ -583,7 +583,6 @@
 									that.inputValueTest = that.tradeNUm[0].number;
 								}
 							}
-
 						}
 					})
 					initDataTokens({
@@ -597,7 +596,6 @@
 								that.secondsTest = res.message[0].seconds;
 								that.profitRatioTest = res.message[0].profit_ratio
 							}
-
 						}
 					})
 				},
@@ -687,9 +685,6 @@
 						// clearTimeout(that.set)
 						return 0.0;
 					}
-
-
-
 				},
 				Djs_time: function () {
 					this.sets = setInterval(() => {
@@ -808,7 +803,6 @@
 						area: ['100%', 'auto'],
 						skin: 'confirm-modal btn-text second-modal',
 						content: $('.time-modal'),
-						shadeClose: true,
 						fixed: true,
 						offset: 'b',
 						closeBtn: 0,
@@ -932,7 +926,6 @@
 								}
 							});
 							socketio.on('closed_microorder', function (msg) {
-
 								if (msg.type == 'closed_microorder') {
 									var datas = msg.data;
 									for (var i = 0; i < that.orderList.length; i++) {
@@ -947,8 +940,6 @@
 											return false;
 										}
 									}
-
-
 								}
 							})
 
