@@ -15,6 +15,8 @@ use App\Currency;
 use App\LeverTransaction;
 use App\TransactionOrder;
 use App\TransactionOrdercopy;
+use App\UsersWallet;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
@@ -397,6 +399,152 @@ class TransactionController extends Controller{
             });
         })->download('xlsx');
     }
+    
+    public function change(Request $request)
+    {
+        $change_type = $request->input("change", "");
+        $id = $request->input("id",0);
+        $change_type_lists = LeverTransaction::changeTypeList();
+        if( empty($change_type) || !isset($change_type_lists[$change_type])){
+            return $this->error("操作类型不符合要求，请核实一下!!");
+        }
+        if( empty($id) ) {
+            return $this->error("不存的操作记录");
+        }
+        $leverModel = LeverTransaction::lockForupdate()->find($id);
+        if( is_null($leverModel) ){
+            return $this->error("不存的交易记录");
+        }
+        switch ($change_type){
+            case LeverTransaction::RESET:
+                $result = $this->doReset($leverModel);
+                break;
+            case LeverTransaction::CLOSEOPTION:
+                $result = $this->closeOption($leverModel);
+                break;
+            case LeverTransaction::TRADE:
+                $result = $this->doTrade($leverModel);
+                break;
+        }
+        return $result;
+    }
 
+    /**
+     * @param LeverTransaction $transaction
+     * @desc 撤回
+     */
+    protected function doReset(LeverTransaction $transaction)
+    {
+        $id = $transaction->id;
+        $user_id = $transaction->user_id;
+        try {
+            //退手续费和保证金
+            DB::transaction(function () use ($user_id, $id) {
+                $lever_trade = LeverTransaction::where('user_id', $user_id)
+                    ->where('status', LeverTransaction::ENTRUST)
+                    ->lockForUpdate()
+                    ->find($id);
+                if (!$lever_trade) {
+                    throw new \Exception('交易不存在或已撤单,请刷新后重试');
+                }
+                $legal_id = $lever_trade->legal;
+                $refund_trade_fee = $lever_trade->trade_fee;
+                $refund_caution_money = $lever_trade->caution_money;
+                $legal_wallet = UsersWallet::where('user_id', $user_id)
+                    ->where('currency', $legal_id)
+                    ->first();
+                if (!$legal_wallet) {
+                    throw new \Exception('撤单失败:用户钱包不存在');
+                }
+                $result = change_wallet_balance(
+                    $legal_wallet,
+                    3,
+                    $refund_trade_fee,
+                    AccountLog::LEVER_TRANSACTIO_CANCEL,
+                    '杠杆' . $lever_trade->type_name . '委托撤单,退回手续费',
+                    false,
+                    0,
+                    0,
+                    '',
+                    true
+                );
+                if ($result !== true) {
+                    throw new \Exception($this->returnStr('撤单失败:') . $result);
+                }
+                $result = change_wallet_balance(
+                    $legal_wallet,
+                    3,
+                    $refund_caution_money,
+                    AccountLog::LEVER_TRANSACTIO_CANCEL,
+                    '杠杆' . $lever_trade->type_name . '委托撤单,退回保证金',
+                    false,
+                    0,
+                    0,
+                    '',
+                    true
+                );
+                if ($result !== true) {
+                    throw new \Exception($this->returnStr('撤单失败:') . $result);
+                }
+                $lever_trade->status = LeverTransaction::CANCEL;
+                $lever_trade->complete_time = time();
+                $result = $lever_trade->save();
+                if (!$result) {
+                    throw new \Exception('撤单失败:变更状态失败');
+                }
+            });
+            return $this->success('撤单成功');
+        } catch (\Exception $e) {
+            return $this->error($e->getMessage());
+        }
+    }
+
+    /**
+     * @param LeverTransaction $transaction
+     * @desc 平仓
+     */
+    protected function closeOption(LeverTransaction $transaction)
+    {
+        if (empty($transaction)) {
+            throw new \Exception("数据未找到");
+        }
+
+        DB::beginTransaction();
+        try {
+            if ($transaction->status != LeverTransaction::TRANSACTION) {
+                throw new \Exception("交易状态异常,请勿重复提交");
+            }
+            $return = LeverTransaction::leverClose($transaction);
+            if (!$return) {
+                throw new \Exception("平仓失败,请重试");
+            }
+            if($transaction->origin_price <= 0){
+                throw new \Exception("交易异常，无法平仓");
+            }
+            DB::commit();
+            return $this->success("操作成功");
+        } catch (\Exception $ex) {
+            DB::rollBack();
+            return $this->error($ex->getMessage());
+        }
+    }
+
+    /**
+     * @param LeverTransaction $transaction
+     * @desc 强制交易
+     * @throws Exception
+     */
+    protected function doTrade(LeverTransaction $transaction)
+    {
+        DB::beginTransaction();
+        try {
+            $transaction->status = LeverTransaction::TRANSACTION;
+            $transaction->transaction_time = microtime(true);
+            return $transaction->save();
+        } catch (\Exception $ex) {
+            DB::rollBack();
+            return $this->error($ex->getMessage());
+        }
+    }
 }
 ?>

@@ -512,6 +512,7 @@ Route::group([ 'middleware' => ['lang', /*'check_user'*/]], function () {
         Route::any('Leverdeals/Leverdeals_show', 'Admin\TransactionController@Leverdeals_show');
         Route::any('Leverdeals/list', 'Admin\TransactionController@Leverdeals');//杠杆交易 团队所有订单
         Route::get('Leverdeals/csv', 'Admin\TransactionController@csv');//导出杠杆交易 团队所有订单
+        Route::post('Leverdeals/change', 'Admin\TransactionController@change');//导出杠杆交易 团队所有订单
 
         ///LDH
         Route::get('/legal', 'Admin\LegalDealSendController@index')->middleware(['demo_limit']);

@@ -426,6 +426,10 @@ class LeverController extends Controller
 //        }
 //    }
 
+    /**
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Exception
+     */
     public function submit()
     {
         $user_id = Users::getUserId();

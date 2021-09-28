@@ -89,9 +89,9 @@
 @section('scripts')
     <script type="text/html" id="barDemo">
         @{{d.status == 0 ? '<a class="layui-btn layui-btn-xs layui-btn-sm" lay-event="trade">交易</a>' : '' }}
-        @{{d.status == 0 ? '<a class="layui-btn layui-btn-xs layui-btn-warm" lay-event="reset">撤销</a>' : '' }}
-        @{{d.status == 1 ?'<a class="layui-btn layui-btn-xs layui-btn-default" lay-event="closeOption">平仓</a>' : '' }}
-        @{{d.status == 3 ?'<a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="flipped">翻转</a>' : '' }}
+        @{{d.status == 0 ? '<a class="layui-btn layui-btn-xs layui-btn-warning" lay-event="reset">撤销</a>' : '' }}
+        @{{d.status == 1 || status == 2 ?'<a class="layui-btn layui-btn-xs layui-btn-default" lay-event="closeOption">平仓</a>' : '' }}
+
     </script>
     <script>
         window.onload = function() {
@@ -141,12 +141,12 @@
                             ,{field: 'share', title: '手数', sort: true, width: 90}
                             ,{field: 'multiple', title: '倍数', sort: true, width: 90}
                             ,{field: 'origin_caution_money', title: '初始保证金', width: 120}
-                            ,{field: 'caution_money', title: '当前可用保证金', sort: true, width: 170}
+                            ,{field: 'caution_money', title: '可用保证金', sort: true, width: 120}
                             ,{field: 'profits', title: '动态盈亏', width: 120,hide:true}
                             ,{field: 'time', title: '创建时间', width: 170}
-                            ,{field: 'update_time', title: '价格刷新时间', sort: true, width: 170,hide:true}
-                            ,{field: 'handle_time', title: '平仓时间', sort: true, width: 170}
-                            ,{field: 'complete_time', title: '完成时间', width: 170,hide: true}
+                            ,{field: 'update_time', title: '价格刷新时间', sort: true, width: 120,hide:true}
+                            ,{field: 'handle_time', title: '平仓时间', sort: true, width: 120}
+                            ,{field: 'complete_time', title: '完成时间', width: 120,hide: true}
                             ,{fixed: 'right', title: '操作', width: 100, align: 'center', toolbar: '#barDemo'}
                         ]]
                     });
@@ -175,37 +175,22 @@
                 table.on('tool(userlist)', function (obj) { //注：tool是工具条事件名，test是table原始容器的属性 lay-filter="对应的值"
                     var data = obj.data;
                     var layEvent = obj.event;
-                    var tr = obj.tr;
-                    if (layEvent === 'delete') { //删除
-                        layer.confirm('真的要删除吗？', function (index) {
-                            //向服务端发送删除指令
-                            $.ajax({
-                                url: "{{url('admin/user/del')}}",
-                                type: 'post',
-                                dataType: 'json',
-                                data: {id: data.id},
-                                success: function (res) {
-                                    if (res.type == 'ok') {
-                                        obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
-                                        layer.close(index);
-                                    } else {
-                                        layer.close(index);
-                                        layer.alert(res.message);
-                                    }
-                                }
-                            });
-                        });
-                    }else if (layEvent === 'edit'){ //编辑
-                        layer_show('编辑会员','{{url('admin/user/edit')}}?id='+data.id);
-                    }else if (layEvent === 'users_wallet') {
-                        var index = layer.open({
-                            title: '账户管理'
-                            , type: 2
-                            , content: '{{url('/admin/user/users_wallet')}}?id=' + data.id
-                            , maxmin: true
-                        });
-                        layer.full(index);
-                    }
+
+                    $.ajax({
+                        url: "{{url('admin/Leverdeals/change')}}",
+                        type: 'post',
+                        dataType: 'json',
+                        data: {id: data.id,type:layEvent},
+                        success: function (res) {
+                            if (res.type == 'ok') {
+                                obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
+                                layer.close(index);
+                            } else {
+                                layer.close(index);
+                                layer.alert(res.message);
+                            }
+                        }
+                    });
                 });
                 
 

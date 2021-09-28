@@ -19,6 +19,10 @@ class LeverTransaction extends Model
     const CLOSING = 2; //平仓中
     const CLOSED = 3; //已平仓
     const CANCEL = 4; //已撤单
+    //['trade',"reset","closeOption",'flipped']
+    const TRADE = "trade"; //强制交易
+    const RESET = "reset"; //强制撤销
+    const CLOSEOPTION = "closeOption"; //强制平仓
 
     protected $table = 'lever_transaction';
     public $timestamps = false;
@@ -40,11 +44,25 @@ class LeverTransaction extends Model
         '已撤单',
     ];
 
+    protected static $changeTypeList = [
+        self::TRADE => "交易",
+        self::RESET => "撤销",
+        self::CLOSEOPTION=> "平仓"
+    ];
+
     protected static $typeList = [
         '',
         '买入',
         '卖出',
     ];
+
+    /**
+     * @return string[]
+     */
+    public static function changeTypeList()
+    {
+        return self::$changeTypeList;
+    }
 
     public static function enumStatus()
     {
