@@ -126,7 +126,8 @@ class TransactionController extends Controller{
         return $this->layuiData($result);
     }
 
-    public function Leverdeals_show(){
+    public function Leverdeals_show()
+    {
 //        $currency = Currency::all();
         return view("admin.leverdeals.list");
     }
@@ -193,18 +194,11 @@ class TransactionController extends Controller{
         // $parent_name = $request->input("parent_name",'');
         // $parent_account = $request->input("parent_account",'');
         $legal_id = $request->input('legal_id',-1);
-
         $start = $request->input("start", '');
         $end = $request->input("end", '');
 
-
-
-
-            $query =LeverTransaction::whereHas('user', function ($query) use ($username) {
-                
+            $query = LeverTransaction::whereHas('user', function ($query) use ($username) {
                 $username != '' && $query->where('account_number', $username)->orWhere('phone', $username);
-
-                
             })->where(function ($query) use ($id,$status,$type,$legal_id) {
              
                 $id !=0 && $query->where('id', $id);
@@ -220,19 +214,16 @@ class TransactionController extends Controller{
                 !empty($end) && $query->where('create_time','<=',strtotime($end . ' 23:59:59'));
 
             });
-            
-
 
             $query_total = clone $query;
             $total = $query_total->select([
                 //DB::raw('sum(fact_profits) as balance1'),
-                 DB::raw('SUM((CASE `type` WHEN 1 THEN `update_price` - `price` WHEN 2 THEN `price` - `update_price` END) * `number`) AS `balance1`'),
+                DB::raw('SUM((CASE `type` WHEN 1 THEN `update_price` - `price` WHEN 2 THEN `price` - `update_price` END) * `number`) AS `balance1`'),
                 DB::raw('sum(origin_caution_money) as balance2'),
                 DB::raw('sum(trade_fee) as balance3'),
                 
             ])->first();
             $total && $total = $total->setAppends([]);
-
             $order_list =$query->orderBy('id', 'desc')->paginate($limit);
             $items = $order_list->getCollection();
             $items->transform(function ($item, $key){

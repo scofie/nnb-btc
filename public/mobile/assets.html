@@ -183,7 +183,7 @@
             <span :class="[{'active': type== 'lever'}]" @click="tabClick('lever')" data-localize="assets.contractAccount">合约账户</span>
             <span :class="[{'active': type== 'micro'}]" @click="tabClick('micro')" data-localize="assets.secondContractAccount">期权账户</span>
             <span :class="[{'active': type== 'match'}]" @click="tabClick('match')" data-localize="assets.curAccount">币币账户</span>
-            <span :class="[{'active': type== 'legal'}]" @click="tabClick('legal')" data-localize="assets.legalAccount">法币账户</span>
+<!--            <span :class="[{'active': type== 'legal'}]" @click="tabClick('legal')" data-localize="assets.legalAccount">法币账户</span>-->
         </div>
     </div>
     <!--<header class="header" :class="[{'level01':type== 'lever','level02':type== 'micro','level03':type== 'match','level04':type== 'legal'}]">-->
@@ -349,7 +349,7 @@
             </a>
           </li>
         </ul>
-        <ul class="deal_lists" v-show="type == 'legal'">
+        <ul class="deal_lists" v-show="type == 'legal'" style="display: none;">
           <li v-for="item in Lists" :key="item.id" v-if="item.is_legal == 1">
             <a href="javascript:;" @click="links(item.currency)">
               <p class="flex between">

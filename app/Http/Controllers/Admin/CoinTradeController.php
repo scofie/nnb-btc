@@ -11,7 +11,8 @@ use App\Logic\CoinTradeLogic;
 
 class CoinTradeController extends Controller
 {
-    public function tradeList(Request $request){
+    public function tradeList(Request $request)
+    {
         $where = [];
         $account = $request->get('search','');
         $limit = $request->get('limit', 20);

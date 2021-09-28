@@ -83,9 +83,7 @@
         已平仓
         @{{#} else if(d.status == 4) { }}
         已撤单
-
         @{{#}}}
-
     </script>
 
 @endsection

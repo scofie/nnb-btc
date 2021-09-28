@@ -619,7 +619,6 @@ Route::group([ 'middleware' => ['lang', /*'check_user'*/]], function () {
         Route::post('/invite/edit', 'Admin\InviteController@doedit');
         Route::post('/invite/bgdel', 'Admin\InviteController@bgdel');
 
-
         Route::get('/transaction/tran_index', 'Admin\TransactionController@index');
         Route::get('/transaction/list', 'Admin\TransactionController@lists');
 
