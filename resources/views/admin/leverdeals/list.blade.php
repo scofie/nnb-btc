@@ -147,7 +147,7 @@
                             ,{field: 'update_time', title: '价格刷新时间', sort: true, width: 120,hide:true}
                             ,{field: 'handle_time', title: '平仓时间', sort: true, width: 120}
                             ,{field: 'complete_time', title: '完成时间', width: 120,hide: true}
-                            ,{fixed: 'right', title: '操作', width: 100, align: 'center', toolbar: '#barDemo'}
+                            ,{fixed: 'right', title: '操作', width: 170, align: 'center', toolbar: '#barDemo'}
                         ]]
                     });
                 }

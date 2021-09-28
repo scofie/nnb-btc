@@ -399,7 +399,7 @@ class TransactionController extends Controller{
             });
         })->download('xlsx');
     }
-    
+
     public function change(Request $request)
     {
         $change_type = $request->input("change", "");
