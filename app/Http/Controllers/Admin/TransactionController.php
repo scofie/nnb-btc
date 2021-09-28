@@ -402,7 +402,7 @@ class TransactionController extends Controller{
 
     public function change(Request $request)
     {
-        $change_type = $request->input("change", "");
+        $change_type = $request->input("type", "");
         $id = $request->input("id",0);
         $change_type_lists = LeverTransaction::changeTypeList();
         if( empty($change_type) || !isset($change_type_lists[$change_type])){
