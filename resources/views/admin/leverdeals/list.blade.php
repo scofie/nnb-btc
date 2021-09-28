@@ -184,9 +184,8 @@
                         success: function (res) {
                             if (res.type == 'ok') {
                                 obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
-                                layer.close(index);
+                                layer.alert(res.message);
                             } else {
-                                layer.close(index);
                                 layer.alert(res.message);
                             }
                         }
