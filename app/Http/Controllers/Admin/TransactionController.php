@@ -540,7 +540,9 @@ class TransactionController extends Controller{
         try {
             $transaction->status = LeverTransaction::TRANSACTION;
             $transaction->transaction_time = microtime(true);
-            return $transaction->save();
+            $transaction->save();
+            DB::commit();
+            return $this->success("交易成功！！");
         } catch (\Exception $ex) {
             DB::rollBack();
             return $this->error($ex->getMessage());
