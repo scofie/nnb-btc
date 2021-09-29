@@ -21,11 +21,11 @@
 					<img onclick="javascript:history.go(-1);" class="return" src="images/return1.png" alt="">
 					<span class="tabs-data-map" @click="showLeft">
 						<img src="images/list.png" alt="">
-						<b class="coinname " v-if="tradeId">{{currencyName}}</b>
+						<b class="coinname " v-if="coinType==2">{{currencyName}}</b>
 						<b class="coinname" v-else>{{symbol}}</b>
 					</span>
 				</p>
-				<div class="pull-right flex insure-header tr" v-show="tradeId">
+				<div class="pull-right flex insure-header tr" v-show="coinType==2">
 					<p data-localize="contract.insuredAssets">受保资产：</p>
 					<div class="insure">
 						<div class="flex">
@@ -63,7 +63,7 @@
 		</div>
 		<div id="tv_chart_container" style="width:100%;height:55.0vh;margin-top: 5px;padding-bottom: 10px;"></div>
 		<!--订单列表 -->
-		<div class="order-list" v-show="tradeId ">
+		<div class="order-list" v-show="coinType==2 ">
 			<p v-show="false">{{CountDown}}</p>
 			<div class="flex order-list-header between">
 				<p class="tc" :class="[{'active':status == 1}]" @click="selectOrder(1)" data-localize="contract.positionList">持仓列表</p>
@@ -148,7 +148,7 @@
 			<div v-if="orderList.length == 0" class="tc mt10" data-localize="transaction.nodata">暂无记录</div>
 		</div>
 
-        <div class="order-list" v-show="!tradeId && tabList.length>0">
+        <div class="order-list" v-show="coinType==1 && tabList.length>0">
             <p v-show="false">{{CountDown}}</p>
             <div class="flex order-list-header between btn-border">
                 <p class="tc" data-localize="contract.inPosition" style="width:100%;text-align:left;margin-left: 10px;">持仓中</p>
@@ -224,7 +224,7 @@
         </div>
 		<div style="height:160px;"></div>
 
-		<div id="bottom" class="flex between" v-if="tradeId">
+		<div id="bottom" class="flex between" v-if="coinType==2">
 			<div class="flex bottom-left between" @click="slectedTime()">
 				<div class="tc">
 					<p data-localize="assets.num">数量</p>
@@ -252,7 +252,7 @@
 			<button class="goTranbuy" @click="buyModals(1)" data-localize="transaction.buy">买入</button>
 			<button class="goTransell" @click="buyModals(2)" data-localize="transaction.sell">卖出</button>
 		</div>
-		<div id="sideColumn" class="bgColor" v-if="tradeId">
+		<div id="sideColumn" class="bgColor" v-if="coinType==2">
 			<h4>
 			</h4>
 			<div class="ft20 bold bdb pl20 texts-lever" data-localize="contract.secondContract">期权</div>
@@ -432,6 +432,7 @@
 				legal_id: get_param('legal_id'),
 				currency_id: get_param('currency_id'),
 				tradeId: get_param('tradeId'),
+                coinType:get_param('coinType'),
 				sellType: 'buy',
 				multipleList: [],
 				legal_name: '',
@@ -520,7 +521,7 @@
 			mounted() {
 				this.createWidget();
                 let that = this;
-				if( that.tradeId ){
+				if( that.coinType==2 ){
                     this.getList();
                 }else {
 				    this.getUserTrade()
