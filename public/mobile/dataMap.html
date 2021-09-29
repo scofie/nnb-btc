@@ -21,8 +21,9 @@
 					<img onclick="javascript:history.go(-1);" class="return" src="images/return1.png" alt="">
 					<span class="tabs-data-map" @click="showLeft">
 						<img src="images/list.png" alt="">
-						<b class="coinname " v-if="coinType==2">{{currencyName}}</b>
-						<b class="coinname" v-else>{{symbol}}</b>
+                        <b class="coinname ">{{currencyName}}</b>
+<!--						<b class="coinname " v-if="coinType==2">{{currencyName}}</b>-->
+<!--						<b class="coinname" v-else>{{symbol}}</b>-->
 					</span>
 				</p>
 				<div class="pull-right flex insure-header tr" v-show="coinType==2">
@@ -270,7 +271,7 @@
 				</li>
 			</ul>
 		</div>
-		<div id="sideColumn" class="bgColor" v-else>
+		<div id="sideColumn" class="bgColor" v-if="coinType==1">
 			<h4>
 			</h4>
 			<div class="ft20 bold bdb pl20 texts-lever" data-localize="contract.contract">合约</div>
