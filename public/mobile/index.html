@@ -407,7 +407,7 @@
                                 if (usdtData[i].is_display == 1) {
                                     html +=
                                         `<li class="swiper-slide">
-                                        <a href="dataMap.html?legal_id=${usdtData[i].legal_id}&currency_id=${usdtData[i].currency_id}&symbol=${usdtData[i].currency_name}/USDT">
+                                        <a href="dataMap.html?coinType=1&tradeId=2${usdtData[i].id}&legal_id=${usdtData[i].legal_id}&currency_id=${usdtData[i].currency_id}&symbol=${usdtData[i].currency_name}/USDT">
                                         <small class="usdt">${usdtData[i].currency_name}/USDT</small>
                                         <h4 style="color:${usdtData[i].change<0?'#ff3e60':'#00c087'}">${iTofixed(usdtData[i].now_price,4) || '0.00'}<span>${iTofixed(usdtData[i].change,2) || '0.00'}%</span></h4>
                                         
