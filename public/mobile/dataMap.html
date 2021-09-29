@@ -149,17 +149,17 @@
 			<div v-if="orderList.length == 0" class="tc mt10" data-localize="transaction.nodata">暂无记录</div>
 		</div>
 
-        <div class="order-list" v-show="coinType==1 && tabList.length>0">
+        <div class="order-list" v-show="coinType==1">
             <p v-show="false">{{CountDown}}</p>
             <div class="flex order-list-header between btn-border">
                 <p class="tc" data-localize="contract.inPosition" style="width:100%;text-align:left;margin-left: 10px;">持仓中</p>
             </div>
             <div class="flex order-list-header between " v-show="status==1">
-                <p style="padding-left: 10px;"><span>{{getlg('balance')}}{{useLegalNum | toFixed4}}{{legal_name}} </p>
+                <p style="padding-left: 10px;"><span>{{getlg('balance')}}{{useLegalNum | toFixed4}}{{legal_name}} </span></p>
                 <p style="text-align: right;padding-right: 10px;"><span data-localize="deals.total">持仓盈亏：</span>{{totalRate|| '0.00' | toFixeds}}</p>
             </div>
-            <ul class="list bgColor">
-                <li v-for="(item,index) in tabList" class="bgColor pl10 pr10 pb10" style="padding-left: 10px;padding-right: 10px;">
+            <ul class="list bgColor" >
+                <li v-if="tabList.length>0" v-for="(item,index) in tabList" class="bgColor pl10 pr10 pb10" style="padding-left: 10px;padding-right: 10px;">
                     <div class="box-padding-top">
                         <div class="list-header flex between" :class="[{'bdt':status==1}]">
                             <span>{{item.type == 1? getlg('buy'):getlg('sell')}} {{item.symbol}}</span>
@@ -225,8 +225,8 @@
         </div>
 		<div style="height:160px;"></div>
 
-		<div id="bottom" class="flex between" v-if="coinType==2">
-			<div class="flex bottom-left between" @click="slectedTime()">
+		<div id="bottom" class="flex between" >
+			<div v-if="coinType==2" class="flex bottom-left between" @click="slectedTime()">
 				<div class="tc">
 					<p data-localize="assets.num">数量</p>
 					<p class="ftColor">{{inputValue || '0.00' | toFixedNum}}</p>
@@ -243,24 +243,21 @@
 					<img src="images/downs.png" alt="">
 				</div>
 			</div>
-			<div class="flex">
+			<div class="flex" v-if="coinType==2">
 				<button class="second-buy" @click="buyModal(1)" data-localize="contract.buyUp">买涨</button>
 				<button class="second-sell" @click="buyModal(2)" data-localize="contract.buyAll">买跌</button>
 			</div>
-
+            <button v-if="coinType==1" class="goTranbuy" @click="buyModals(1)" data-localize="transaction.buy">买入</button>
+            <button v-if="coinType==1" class="goTransell" @click="buyModals(2)" data-localize="transaction.sell">卖出</button>
 		</div>
-		<div id="bottom" class="flex between" v-else>
-			<button class="goTranbuy" @click="buyModals(1)" data-localize="transaction.buy">买入</button>
-			<button class="goTransell" @click="buyModals(2)" data-localize="transaction.sell">卖出</button>
-		</div>
-		<div id="sideColumn" class="bgColor" v-if="coinType==2">
-			<h4>
-			</h4>
-			<div class="ft20 bold bdb pl20 texts-lever" data-localize="contract.secondContract">期权</div>
-			<ol class="tabs hide">
+		<div id="sideColumn" class="bgColor"  >
+			<h4></h4>
+			<div v-if="coinType==2" class="ft20 bold bdb pl20 texts-lever" data-localize="contract.secondContract">期权</div>
+            <div v-if="coinType==1" class="ft20 bold bdb pl20 texts-lever" data-localize="contract.contract">合约</div>
+            <ol class="tabs hide">
 				<li class="currency_name side side2" data-id="3">USDT</li>
 			</ol>
-			<ul class="ul">
+			<ul class="ul" v-if="coinType==2">
 				<li v-for="item in currencyList" :key="item.id" v-if="item.is_display == 1&&item.open_microtrade == 1"
 					:class="['legal_name flex between',{'bg_active':currency_id==item.currency_id}]"
 					@click="selectCurrencys(item.id,item.legal_id,item.currency_id,item.legal_name,item.currency_name)">
@@ -270,28 +267,17 @@
 					</p>
 				</li>
 			</ul>
+            <ul class="ul" v-if="coinType==1">
+                <li v-for="item in currencyList" :key="item.id" v-if="item.is_display == 1&&item.open_lever == 1"
+                    :class="['legal_name flex between',{'bg_active':currency_id==item.currency_id}]"
+                    @click="selectCurrencys(item.id,item.legal_id,item.currency_id,item.legal_name,item.currency_name)">
+                    <strong><span>{{item.currency_name}}</span></strong>
+                    <p :class="['fontC',{'gre':item.now_price>=0}]">
+                        <span>{{item.now_price}}<b>{{item.legal_name}}</b></span>
+                    </p>
+                </li>
+            </ul>
 		</div>
-		<div id="sideColumn" class="bgColor" v-if="coinType==1">
-			<h4>
-			</h4>
-			<div class="ft20 bold bdb pl20 texts-lever" data-localize="contract.contract">合约</div>
-			<ol class="tabs hide">
-				<li class="currency_name side side2" data-id="3">USDT</li>
-			</ol>
-			<ul class="ul">
-				<li v-for="item in currencyList" :key="item.id" v-if="item.is_display == 1&&item.open_lever == 1"
-					:class="['legal_name flex between',{'bg_active':currency_id==item.currency_id}]"
-					@click="selectCurrencys(item.id,item.legal_id,item.currency_id,item.legal_name,item.currency_name)">
-					<strong><span>{{item.currency_name}}</span></strong>
-					<p :class="['fontC',{'gre':item.now_price>=0}]">
-						<span>{{item.now_price}}<b>{{item.legal_name}}</b></span>
-					</p>
-				</li>
-			</ul>
-		</div>
-
-
-
 		<!-- 倒计时下单弹窗 -->
 		<div class="time-modal">
 			<div class="time-header">
@@ -301,9 +287,7 @@
 						<p :class="[{'active':tradeCurrencyId == item.id}]" v-for="item in tradeCurrency" :key="item.id"
 							@click="tradeCurrencyClick(item.id,item.name)">{{item.name}}</p>
 					</div>
-
 				</div>
-
 			</div>
 			<div class="time-content mt10">
 				<p class="colorGrey ft12" data-localize="contract.openQuantity">开仓数量</p>
@@ -369,7 +353,6 @@
 			</div>
 		</div>
 		<div id="mask1" @click="closeLeft"></div>
-
 	</div>
 	<script type="text/javascript" src="lib/vue.min.js"></script>
 	<script type="text/javascript" src="lib/jquery-2.1.1.min.js"></script>
@@ -565,7 +548,6 @@
 								for (var i = 0; i < res.message.length; i++) {
 									if (res.message[i].name == 'YMT') {
 										that.bmbBalance = res.message[i].user_wallet.insurance_balance;
-
 										that.insurancType = res.message[i].insurance_types;
 										if (res.message[i].user_insurance) {
 											that.userInsurancId = res.message[i].user_insurance.insurance_type_id;
@@ -614,7 +596,7 @@
                     }, that.currencyQuotationSuccess);
                 },currencyQuotationSuccess(res) {
                     let that = this;
-                    if (res.type == 'ok') {
+                    if ( res.type == 'ok' ) {
                         let datas = res.message.message.data;
                         that.rate = res.message.rate_profits_total.hazard_rate;
                         that.totalRate = res.message.rate_profits_total.profits_total;
@@ -665,7 +647,6 @@
                         setTimeout(function(){
 								that.widget.setSymbol(that.couponSelected,5, function onReadyCallback() {});
 								}, 1200);
-                            //
 						}
 					})
 				},
@@ -690,8 +671,7 @@
 				},
 				Djs_time: function () {
 					this.sets = setInterval(() => {
-						var presentTime = new Date().getTime();
-						this.CountDown = presentTime
+						this.CountDown = new Date().getTime();
 					}, 200);
 				},
 				// 选择期权订单类型
@@ -723,7 +703,7 @@
 					that.tradeCurrencyId = num;
 					that.tradeCurrencyName = names;
 					for (var i = 0; i < that.tradeCurrency.length; i++) {
-						if (that.tradeCurrency[i].id == num) {
+						if ( that.tradeCurrency[i].id == num ) {
 							that.tradeNUm = that.tradeCurrency[i].micro_numbers;
 							if (that.tradeCurrency[i].user_wallet) {
 								that.balance = that.tradeCurrency[i].user_wallet.micro_with_insurance;
@@ -896,13 +876,13 @@
 					initDataTokens({
 						url: 'user/info'
 					}, function (res) {
-						if (res.type == 'ok') {
+						if ( res.type == 'ok' ) {
 							socketio.emit('login', res.message.id);
 							socketio.on('kline', function (msg) {
 								if (msg.type == 'kline') {
 									let obj = {}
 									var types = localStorage.getItem('type');
-									if (that.symbol == msg.symbol&&types==msg.period) {
+									if ( that.symbol == msg.symbol && types==msg.period ) {
 										obj.open = Number(msg.open)
 										obj.low = Number(msg.low)
 										obj.high = Number(msg.high)
@@ -911,15 +891,13 @@
 										obj.time = Number(msg.time)
 										that.newprice = msg.close
 										real(obj)
-
 									}
 								}
 							});
 							socketio.on('daymarket', function (msg) {
 								if (msg.type == 'daymarket') {
 									let obj = {}
-									if (that.symbol == msg.symbol) {
-
+									if ( that.symbol == msg.symbol ) {
 										that.maxprice = msg.high
 										that.minprice = msg.low
 										that.dayvom = iTofixed(msg.volume,4);
@@ -957,7 +935,6 @@
 						if (msg.type == 'daymarket') {
 							let obj = {}
 							if (that.symbol == msg.symbol) {
-
 								that.maxprice = msg.high
 								that.minprice = msg.low
 								that.dayvom = iTofixed(msg.volume,4);
