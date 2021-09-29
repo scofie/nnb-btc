@@ -21,9 +21,8 @@
 					<img onclick="javascript:history.go(-1);" class="return" src="images/return1.png" alt="">
 					<span class="tabs-data-map" @click="showLeft">
 						<img src="images/list.png" alt="">
-                        <b class="coinname ">{{currencyName}}</b>
-<!--						<b class="coinname " v-if="coinType==2">{{currencyName}}</b>-->
-<!--						<b class="coinname" v-else>{{symbol}}</b>-->
+                        <b class="coinname " v-if="coinType==2">{{currencyName}}</b>
+                        <b class="coinname" v-else>{{symbol}}</b>
 					</span>
 				</p>
 				<div class="pull-right flex insure-header tr" v-show="coinType==2">
@@ -149,7 +148,7 @@
 			<div v-if="orderList.length == 0" class="tc mt10" data-localize="transaction.nodata">暂无记录</div>
 		</div>
 
-        <div class="order-list" v-show="coinType==1">
+        <div class="order-list" v-show="coinType==1" >
             <p v-show="false">{{CountDown}}</p>
             <div class="flex order-list-header between btn-border">
                 <p class="tc" data-localize="contract.inPosition" style="width:100%;text-align:left;margin-left: 10px;">持仓中</p>
