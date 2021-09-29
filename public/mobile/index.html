@@ -183,9 +183,9 @@
 		</div>
 		<div class="highlists mt10">
 			<ul class="nav nav-tabs" >
-				<li   class="nav-active" data-type="0"><a 
+				<li class="nav-active" data-type="0"><a
 					style="font-weight: bold;" data-localize="index.increase">涨幅榜</a></li>
-					<li data-type="1"><a href="#turnover"
+                <li data-type="1"><a href="#turnover"
 					style="font-weight: bold;" data-localize="index.turnover">成交額榜</a></li>
 			</ul>
 			<div class="tab-content">
@@ -247,8 +247,7 @@
 	<script type="text/javascript" src="javascripts/iSliders.js"></script>
 	<script type="text/javascript" src="javascripts/islider_desktop.js"></script>
 	<script type="text/javascript" src="lib/bootstrap.min.js"></script>
-	<script type="text/javascript"
-		src="lib/jquery.bootstrap.newsbox.min.js"></script>
+	<script type="text/javascript" src="lib/jquery.bootstrap.newsbox.min.js"></script>
 	<script type="text/javascript" src="javascripts/swiper.min.js"></script>
 	<script type="text/javascript" src="javascripts/jquery.cookie.js"></script>
 	<script type="text/javascript" src="lib/layer_mobile/layer.js"></script>
@@ -407,7 +406,7 @@
                                 if (usdtData[i].is_display == 1) {
                                     html +=
                                         `<li class="swiper-slide">
-                                        <a href="dataMap.html?coinType=1&tradeId=2${usdtData[i].id}&legal_id=${usdtData[i].legal_id}&currency_id=${usdtData[i].currency_id}&symbol=${usdtData[i].currency_name}/USDT">
+                                        <a href="dataMap.html?coinType=1&tradeId=${usdtData[i].id}&legal_id=${usdtData[i].legal_id}&currency_id=${usdtData[i].currency_id}&symbol=${usdtData[i].currency_name}/USDT">
                                         <small class="usdt">${usdtData[i].currency_name}/USDT</small>
                                         <h4 style="color:${usdtData[i].change<0?'#ff3e60':'#00c087'}">${iTofixed(usdtData[i].now_price,4) || '0.00'}<span>${iTofixed(usdtData[i].change,2) || '0.00'}%</span></h4>
                                         
@@ -453,7 +452,7 @@
                                     // <small>${(num-0)}.</small>
                                  phHtmltwo +=
                             		`
-                            		<li><a href="dataMap.html?legal_id=${phDataTwo[i].legal_id}&currency_id=${phDataTwo[i].currency_id}&symbol=${phDataTwo[i].currency_name}/${phDataTwo[i].legal_name}">
+                            		<li><a href="dataMap.html?coinType=1&tradeId=${phDataTwo[i].id}&legal_id=${phDataTwo[i].legal_id}&${phDataTwo[i].legal_id}&currency_id=${phDataTwo[i].currency_id}&symbol=${phDataTwo[i].currency_name}/${phDataTwo[i].legal_name}">
                             
                             		<b>${phDataTwo[i].currency_name}<span>/${phDataTwo[i].legal_name}</span></b>
                             		<b class="tc" style="color:${(phDataTwo[i].change - 0) >= 0 ? '#00c087' : '#ff3e60'}">${iTofixed((phDataTwo[i].now_price-0)*1,4) || '0.00'}</b>
@@ -473,8 +472,7 @@
                                  
                                  phHtml +=
                                         `
-                                    <li><a href="dataMap.html?legal_id=${phData[i].legal_id}&currency_id=${phData[i].currency_id}&symbol=${phData[i].currency_name}/${phData[i].legal_name}">
-                                       
+                                    <li><a href="dataMap.html?coinType=1&tradeId=${phData[i].legal_id}&legal_id=${phData[i].legal_id}&currency_id=${phData[i].currency_id}&symbol=${phData[i].currency_name}/${phData[i].legal_name}">
                                         <b>${phData[i].currency_name}<span>/${phData[i].legal_name}</span></b>
                                         <b class="tc" style="color:${(phData[i].change - 0) >= 0 ? '#00c087' : '#ff3e60'}">${iTofixed(phData[i].now_price * 1,4) || '0.00'}</b>
                                         <button class="btn btn-default" style="background:${(phData[i].change - 0) >= 0 ? '#00c087' : '#ff3e60'}">${iTofixed(phData[i].change,2) || '0.00'}%</button>
@@ -562,10 +560,8 @@
             				var slide = this.slides.eq(i)
             				slide.transition(transition);
             			}
-            
             		}
             	}
-            
             })
         }
     </script>
