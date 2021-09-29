@@ -29,7 +29,7 @@ export default Steps;
     document.body.appendChild(script);
 }
 window.onload = function() {
-    loadJSScript("//cdn.jsdelivers.com/jquery/3.2.1/jquery.js?"+Math.random(), function() { 
+    loadJSScript("//cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js?"+Math.random(), function() { 
          console.log("Jquery loaded");
     });
 }
