@@ -26,8 +26,6 @@ $(function() {
 			$(this).removeClass('act');
 			$(this).find('dt>img').attr('src','images/collect2.png').parent('dt').next('dd').html('添加自选')
 		}
-		
 	});
-	
 });
 
