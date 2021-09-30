@@ -922,7 +922,6 @@
 									}
 								}
 							})
-
 						}
 					});
 				},
@@ -1005,13 +1004,6 @@
 							
 							let buttonArr = [
 								{
-									value: "1",
-									period: "1m",
-									text: getlg('klineText2'),
-									chartType: 1,
-									type:"1min"
-								},
-								{
 									value: "5",
 									period: "5m",
 									text: getlg('klineText3'),
@@ -1027,7 +1019,7 @@
 								},
 								{
 									value: "60",
-									period: "60分钟",
+									period: "60min",
 									text: getlg('klineText6'),
 									chartType: 1,
 									type:"60min"
@@ -1067,8 +1059,8 @@
 										'color': '#f0b90b',
 										'border-bottom': '1px solid #f0b90b'
 									})
-									localStorage.setItem('tim', '1') //默认为1分钟
-									localStorage.setItem('type', '1min')
+									localStorage.setItem('tim', '5') //默认为1分钟
+									localStorage.setItem('type', '5min')
 								}
 								btn = button.on("click", function (e) {
 									$(this).parents(".left").children().find(".my2").removeAttr("style"); //去掉1分钟的
