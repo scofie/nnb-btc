@@ -37,7 +37,6 @@
 						</div>
 					</div>
 				</div>
-
 			</div>
 			<div class="CNY bgWhite">
 				<div class="pull-left">
@@ -149,7 +148,6 @@
 		</div>
 
         <div class="order-list" v-show="coinType==1" >
-            <p v-show="false">{{CountDown}}</p>
             <div class="flex order-list-header between btn-border">
                 <p class="tc" data-localize="contract.inPosition" style="width:100%;text-align:left;margin-left: 10px;">持仓中</p>
             </div>
@@ -505,7 +503,7 @@
 				this.createWidget();
                 let that = this;
                 if( that.coinType == 1 ){
-                    // this.getUserTrade()
+                    this.getUserTrade()
                 }
 				if( that.coinType == 2 ){
                     this.getList();
@@ -644,9 +642,9 @@
 								that.Djs_time();
 								that.set = setTimeout(that.countDown, 200);
 							}
-                        setTimeout(function(){
-								that.widget.setSymbol(that.couponSelected,5, function onReadyCallback() {});
-								}, 1200);
+                            setTimeout(function(){
+                                that.widget.setSymbol(that.couponSelected,5, function onReadyCallback() {});
+                            }, 1200);
 						}
 					})
 				},
@@ -696,7 +694,6 @@
 					that.init();
 					that.createWidget();
 					that.getList();
-
 				},
 				tradeCurrencyClick(num, names) {
 					var that = this;
@@ -735,7 +732,6 @@
 						left: '-70%'
 					}, 100);
 				},
-
 
 				// 买入/卖出按钮点击
 				buyModal(types) {
@@ -805,7 +801,6 @@
 					if (!that.seconds) {
 						layer_msg(getlg('chooseTime'));
 						return false;
-
 					}
 					if (!that.inputValue) {
 						layer_msg(getlg('selectQuantities'));
@@ -933,7 +928,7 @@
 					socketio.on('daymarket', function (msg) {
 						if (msg.type == 'daymarket') {
 							let obj = {}
-							if (that.symbol == msg.symbol) {
+							if ( that.symbol == msg.symbol ) {
 								that.maxprice = msg.high
 								that.minprice = msg.low
 								that.dayvom = iTofixed(msg.volume,4);
@@ -1173,7 +1168,6 @@
 
 					Datafeed.DataPulseUpdater.prototype.periodLengthSeconds = function (resolution, requiredPeriodsCount) {
 						var daysCount = 0;
-
 						if (resolution === 'D') {
 							daysCount = requiredPeriodsCount;
 						} else if (resolution === 'M') {
@@ -1200,7 +1194,6 @@
 								listeners: []
 							};
 						}
-
 						this._subscribers[listenerGUID].listeners.push(newDataCallback);
 					};
 
@@ -1297,7 +1290,6 @@
 									'3D', '1W',
 									'1M'
 								]
-
 							});
 						})
 					};
@@ -1356,21 +1348,17 @@
 					};
 
 					Datafeed.Container.prototype.unsubscribeBars = function (listenerGUID) {
-
 						this._barsPulseUpdater.unsubscribeDataListener(listenerGUID);
-
 					};
-
 					return new Datafeed.Container;
 				},
-
 				updateWidget(item) {
 					this.symbolInfo = {
 						name: item,
 						ticker: item,
 						description: "",
 						session: "24x7",
-						supported_resolutions: ['1', '5', '30', '60', '240', '1D', '3D', '1W', '1M'],
+						supported_resolutions: [ '5', '30', '60', '240', '1D', '3D', '1W', '1M'],
 						has_intraday: true,
 						has_daily: true,
 						has_weekly_and_monthly: true,
@@ -1428,7 +1416,6 @@
 						"mainSeriesProperties.candleStyle.barColorsOnPrevClose": false,
 						"mainSeriesProperties.hollowCandleStyle.upColor": style.up,
 						"mainSeriesProperties.hollowCandleStyle.downColor": style.down,
-
 						"mainSeriesProperties.hollowCandleStyle.drawWick": true,
 						"mainSeriesProperties.hollowCandleStyle.drawBorder": true,
 						"mainSeriesProperties.hollowCandleStyle.borderColor": style.border,
@@ -1458,7 +1445,6 @@
 						"mainSeriesProperties.areaStyle.priceSource": "close"
 					}
 				},
-
 				chose() {
 					this.widget.setLanguage('en') //设置语言
 				},
