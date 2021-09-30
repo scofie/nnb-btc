@@ -13,7 +13,6 @@ if(("standalone" in window.navigator) && window.navigator.standalone){
 }
 
 var _PROTOCOL = window.location.protocol;
-console.log(window.location)
 var _HOST = window.location.host;
 var _DOMAIN = _PROTOCOL + '//' + _HOST;
 var _SERVER = _DOMAIN + "/mobile/"; //域名
@@ -420,10 +419,7 @@ document.addEventListener('plusready', function () {
     plus.key.addEventListener('backbutton', function () {
         webview.canBack(function (e) {
 
-            console.log(document.referrer.indexOf('login.html'));
             if (e.canBack && (document.referrer.indexOf('login.html') == -1)) {
-                console.log(e, webview, 123);
-                console.log('hbuilder_2');
                 webview.back()
             } else {
                 // webview.close() //hide,quit

@@ -505,7 +505,7 @@
 				this.createWidget();
                 let that = this;
                 if( that.coinType == 1 ){
-                    this.getUserTrade()
+                    // this.getUserTrade()
                 }
 				if( that.coinType == 2 ){
                     this.getList();
@@ -1310,20 +1310,14 @@
 						})
 					};
 
-
 					//初始化数据
 					Datafeed.Container.prototype.getBars = function (symbolInfo, resolution, rangeStartDate, rangeEndDate,
 						onHistoryCallback, onErrorCallback) {
-						// if (rangeStartDate > 0 && (rangeStartDate + '').length > 10) {
-						//   throw new Error(['Got a JS time instead of Unix one.', rangeStartDate, rangeEndDate]);
-						// }
-
 						if (resolution.indexOf('D') == -1 && resolution.indexOf('W') == -1 && resolution.indexOf('M') == -1) {
 							resolution = resolution + 'min'
 						} else if (resolution.indexOf('W') != -1 || resolution.indexOf('M') != -1) {
 							resolution = resolution
 						}
-						console.log(symbolInfo.name)
 						$.ajax({
 							url: _API + 'currency/new_timeshar?' +
 								'from=' + rangeStartDate + '&to=' + rangeEndDate + '&symbol=' + symbolInfo.name + '&period=' +
