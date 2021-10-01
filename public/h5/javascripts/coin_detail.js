@@ -927,12 +927,12 @@ var vue = new Vue({
 		// 跳转k线页面
 		linkLine() {
 			let that = this;
-			window.location.href = 'coin_market.html?legal_id=' + that.leverDatas.legalId + '&currency_id=' + that.leverDatas.currencyId + '&symbol=' + $('.trade-name').text();
+			window.location.href = 'coinMarket.html?legal_id=' + that.leverDatas.legalId + '&currency_id=' + that.leverDatas.currencyId + '&symbol=' + $('.trade-name').text();
 
 		},
 		recordList() {
 			let that = this;
-			window.location.href = 'coin_history.html';
+			window.location.href = 'coinHistory.html';
 		},
         selectShow(){
             this.select_tab=!this.select_tab;
