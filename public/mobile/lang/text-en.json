@@ -58,8 +58,7 @@
     "personal":"My"
   },
   "index": {
-      
-        "24hturnover": "24H turnover 10K",
+      "24hturnover": "24H turnover 10K",
       "product":"product",
      "turnover":"Turnover list",
     "helpcenter":"Help center",
@@ -512,6 +511,7 @@
     "rawCurrency":"Record of raw currency"
   },
   "contract":{
+    "currencyAccount": "currency",
     "chicang":"Position",
     "currentContract":"Current contract",
     "pairs":"Transaction pairs",

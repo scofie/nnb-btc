@@ -510,6 +510,7 @@
     "rawCurrency":"生币记录"
   },
   "contract":{
+    "currencyAccount":"币币",
     "chicang":"持仓",
     "currentContract":"当前合约",
     "pairs":"交易对",

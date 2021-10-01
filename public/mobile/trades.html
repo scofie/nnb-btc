@@ -21,10 +21,9 @@
         <div class="content">
             <!-- 合约 -->
             <div class="content-tab flex">
+                <p :class="[{'active':tabType == 'currencytrade'}]" @click="selectTab('currencytrade')" data-localize="contract.currencyAccount">币币</p>
                 <p :class="[{'active':tabType == 'lever'}]" @click="selectTab('lever')" data-localize="contract.contract">合约</p>
-            <!--    <p :class="[{'active':tabType == 'microtrade'}]" @click="selectTab('microtrade')" data-localize="contract.secondContract">期权</p>-->
-                  <p :class="[{'active':tabType == 'microtrade'}]" @click="selectTab('microtrade')" data-localize="contract.secondContract">期权</p>
- 
+                <p :class="[{'active':tabType == 'microtrade'}]" @click="selectTab('microtrade')" data-localize="contract.secondContract">期权</p>
             </div>
             <div class="content-lever" v-show="tabType == 'lever'">
                 <ul>
@@ -53,9 +52,7 @@
                                         {{item.now_price * item.rmb_relation || 0.00 | toFixed2}}CNY</div>
                                 </div>
                                 <div class="main-rate">
-                                    <div :class="['rate_green',{'bg2':item.change < 0}]">
-                                        {{item.change|| 0.000}}%
-                                    </div>
+                                    <div :class="['rate_green',{'bg2':item.change < 0}]">{{item.change|| 0.000}}%</div>
                                 </div>
                             </div>
 
@@ -63,7 +60,7 @@
                     </li>
                 </ul>
             </div>
-            <!-- 期权交易 -->
+            <!-- 币币交易 -->
             <div class="content-seconds" v-show="tabType == 'microtrade'">
                 <ul>
                     <li>
@@ -91,9 +88,7 @@
                                         {{item.now_price * item.rmb_relation || 0.00 | toFixed2}}CNY</div>
                                 </div>
                                 <div class="main-rate">
-                                    <div :class="['rate_green',{'bg2':item.change < 0}]">
-                                        {{item.change|| 0.000}}%
-                                    </div>
+                                    <div :class="['rate_green',{'bg2':item.change < 0}]">{{item.change|| 0.000}}%</div>
                                 </div>
                             </div>
 
@@ -101,6 +96,41 @@
                     </li>
                 </ul>
             </div>
+            <div class="content-seconds" v-show="tabType == 'currencytrade'">
+            <ul>
+                <li>
+                    <a v-for="item in detailList.quotation" :key="item.id"
+                       v-if="item.is_display == 1 && item.open_coin_trade == 1"
+                       :href="'dataMap.html?coinType=2&tradeId='+item.id+'&legal_id='+item.legal_id+'&currency_id='+item.currency_id+'&symbol='+item.currency_name+'/'+item.legal_name+''"
+                       class="main-asset" data-currentId="item.id">
+                        <div class="flex between">
+                            <!-- <div class="logos flex alcenter">
+                                <img width="22" height="22" :src="item.logo" alt="">
+                            </div> -->
+                            <div class="main-name">
+                                <div class="name_1" style="margin-top:8px;">
+                                    <h5>{{item.currency_name}}</h5>
+                                    <span>/{{item.legal_name}}</span>
+                                </div>
+                                <div class="name_2">
+                                    <span>{{getlg('voltxt')}}</span>
+                                    <span class='volume'>{{item.volume || 0 | toFixed4s}}</span>
+                                </div>
+                            </div>
+                            <div class="main-price">
+                                <div class="name_1 usdprice">{{item.now_price || 0.00 | toFixed4}}</div>
+                                <div class="name_2 cnyprice">≈
+                                    {{item.now_price * item.rmb_relation || 0.00 | toFixed2}}CNY</div>
+                            </div>
+                            <div class="main-rate">
+                                <div :class="['rate_green',{'bg2':item.change < 0}]">{{item.change|| 0.000}}%</div>
+                            </div>
+                        </div>
+
+                    </a>
+                </li>
+            </ul>
+        </div>
         </div>
         <div style="height: 51px;"></div>
         <footer>

@@ -506,6 +506,7 @@
     "rawCurrency":" 생화 레코드 "
   },
   "contract":{
+    "currencyAccount": "화폐",
 	"chicang":"위치",
     "currentContract":" 현재 계약", 
     "pairs":" 거래 쌍", 

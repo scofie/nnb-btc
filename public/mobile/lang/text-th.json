@@ -505,6 +505,7 @@
     "rawCurrency":"เร็กคอร์ดสกุลเงิน"
   },
   "contract":{
+    "currencyAccount":"สกุลเงิน",
 	"chicang":"ตำแหน่ง",
     "currentContract":"สัญญาปัจจุบัน",
     "pairs":"คู่ค้า",

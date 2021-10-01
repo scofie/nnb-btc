@@ -503,6 +503,7 @@
         "safetest":"安全検証"
   },
   "contract":{
+    "currencyAccount":"貨貨",
 	"chicang":"ポジション",
     "currentContract":"現在の契約",
     "pairs":"取引のペア",
