@@ -48,100 +48,93 @@
 						<p data-localize="index.vol">24H量</p><span class="dayVom">{{dayvom | toFixeds}}</span>
 					</li>
 				</ul>
-
 			</div>
 		</div>
 		<div id="tv_chart_container" style="width:100%;height:55.0vh;margin-top: 5px;padding-bottom: 10px;"></div>
-		<div class="pk-box" v-if="!tradeId">
-		<div class="pk">
-			<span class="pk-list" :class="[tabIndex==0?'pk-active':'']" @click="tabpk(0)">盘口深度</span>
-			<span class="pk-list"  :class="[tabIndex==1?'pk-active':'']"  @click="tabpk(1)">简介</span>
-			<span class="pk-list" v-if="!hide_buy" :class="[tabIndex==2?'pk-active':'']"  @click="tabpk(2)">当前持仓</span>
+		<div class="pk-box">
+            <div class="flex order-list-header between">
+                <span class="pk-list tc" :class="[tabIndex==0?'active':'']" @click="tabpk(0)">盘口深度</span>
+                <span class="pk-list tc"  :class="[tabIndex==1?'active':'']"  @click="tabpk(1)">简介</span>
+                <span class="pk-list tc" v-if="!hide_buy" :class="[tabIndex==2?'active':'']"  @click="tabpk(2)">当前持仓</span>
+            </div>
+            <div class="pk-content" v-show="tabIndex==0">
+                <div class="pk-ftitle">
+                    <span>数量</span><span style="text-align:center">价格</span><span style="text-align:right">数量</span>
+                </div>
+                <div class="pk-ftxt" v-for="(item,index) in pkList">
+                    <span style="width:33.33%">{{item[1] || 0.0000 | toFixed4}}</span>
+                    <div style="width:53.33%">
+                        <span style="margin-right:10px;color:#00c087">{{item[0]  || 0.00 | toFixeds}}</span>
+                        <span style="color:#fd5151">{{item[2]  || 0.00 | toFixed}}</span>
+                    </div>
+                    <span style="width:13.33%;text-align:right">{{item[3]  || 0.0000 | toFixed4}}</span>
+                </div>
+            </div>
+            <div class="hy-content"  v-show="tabIndex==1">
+                <div class="hy-title"><span>{{jianjiedom.title}}</span></div>
+                <div class="hy-list">
+                    <h2>计价货币</h2><span>USDT</span>
+                </div>
+                <div class="hy-list">
+                    <h2>结算货币</h2><span>USDT</span>
+                </div>
+                <div class="hy-list">
+                    <h2>发行时间</h2>
+                    <span>{{jianjiedom.create_time}}</span>
+                </div>
+                <div class="hy-list">
+                    <h2>发行总量</h2>
+                    <span>{{jianjiedom.create_num}}</span>
+                </div>
+                <div class="hy-list">
+                    <h2>众筹价格</h2>
+                    <span>{{jianjiedom.price}}</span>
+                </div>
+                <div class="hy-list">
+                    <h2>白皮书</h2> <span>{{jianjiedom.book}}</span>
+                </div>
+                <div class="hy-list">
+                    <h2>官网</h2> <span>{{jianjiedom.website}}</span>
+                </div>
+                <div class="hy-list">
+                    <h2>区块查询</h2>
+                    <span>{{jianjiedom.serach}}</span>
+                </div>
+                <div class="hy-jj">
+                    <h2>简介</h2>
+                    <span>{{jianjiedom.content}}</span>
+                </div>
+            </div>
 		</div>
-		<div class="pk-content" v-show="tabIndex==0">
-			<div class="pk-ftitle">
-				<span>数量</span>
-				<span style="text-align:center">价格</span>
-				<span style="text-align:right">数量</span>
-			</div>
-			<div class="pk-ftxt" v-for="(item,index) in pkList">
-				<span style="width:33.33%">{{item[1] || 0.0000 | toFixed4}}</span>
-				<div style="width:53.33%">
-					<span style="margin-right:10px;color:#00c087">{{item[0]  || 0.00 | toFixeds}}</span>
-					<span style="color:#fd5151">{{item[2]  || 0.00 | toFixed}}</span>
-				</div>
-				<span style="width:13.33%;text-align:right">{{item[3]  || 0.0000 | toFixed4}}</span>
-			</div>
-		</div>
-		<div class="hy-content"  v-show="tabIndex==1">
-			<div class="hy-title"><span>{{jianjiedom.title}}</span></div>
-			<div class="hy-list">
-				<h1>计价货币</h1>
-				<span>USDT</span>
-			</div>
-			<div class="hy-list">
-				<h1>结算货币</h1>
-				<span>USDT</span>
-			</div>
-			<div class="hy-list">
-				<h1>发行时间</h1>
-				<span>{{jianjiedom.create_time}}</span>
-			</div>
-			<div class="hy-list">
-				<h1>发行总量</h1>
-				<span>{{jianjiedom.create_num}}</span>
-			</div>
-			<div class="hy-list">
-				<h1>众筹价格</h1>
-				<span>{{jianjiedom.price}}</span>
-			</div>
-			<div class="hy-list">
-				<h1>白皮书</h1>
-				<span>{{jianjiedom.book}}</span>
-			</div>
-			<div class="hy-list">
-				<h1>官网</h1>
-				<span>{{jianjiedom.website}}</span>
-			</div>
-			<div class="hy-list">
-				<h1>区块查询</h1>
-				<span>{{jianjiedom.serach}}</span>
-			</div>
-			<div class="hy-jj">
-				<h1>简介</h1>
-				<span>{{jianjiedom.content}}</span>
-			</div>
-		</div>
-		</div>
-		<div id="entrust"  class="bgColor" v-show="tabIndex==2">
-			<div>
-				<ul class="list_ul">
-					<li class="ft12 clearfix colorGrey bdb">
-						<span class="width1 tc fl pb5" data-localize="deals.type">类型</span>
-						<span class="width2 tc fl pb5" data-localize="assets.time">时间</span>
-						<span class="width2 tc fl pb5" data-localize="transaction.price">价格</span>
-						<span class="width2 tc fl pb5" data-localize="assets.num">数量</span>
-					</li>
-					<li>
-						<ul class="conplete_list colorGrey ft12" style="padding: 10px 0;">
-							<li class="clearfix" v-for="item in completeList" :key="item.id" style="padding:5px 0;">
-								<span class="width1 tc fl">{{item.type == 1 ? getlg('kd'):getlg('zk')}}</span>
-								<span class="width2 tc fl">{{item.time}}</span>
-								<span class="width2 tc fl" v-if="item.type==1">{{item.price || '0.0000' | toFixed4}}<img style="width:10px;margin-left:3px" src="images/buy.png" alt=""></span>
-								<span class="width2 tc fl" v-if="item.type!=1">{{item.price || '0.0000' | toFixed4}}<img style="width:10px;margin-left:3px" src="images/sell.png" alt=""></span>
-								<span class="width2 tc fl">{{item.number || '0.00' | toFixeds}}</span>
-								<a class='pingcang white tc width1 fl' @click="sellLoss(item.id)">{{getlg('pcang')}}</a>
-							</li>
-						</ul>
-					</li>
-					<li class="clickMore tc colorGrey" v-if="!completeList.length"  @click="reload">暂无数据</li>
-				</ul>
-			</div>
-			<div class="no_record" style="display:none;">
-				<p><img src="images/anonymous.png" /></p>
-				<p data-localize="transaction.nodata">暂无记录</p>
-			</div>
-		</div>
+        <div id="entrust"  class="bgColor" v-show="tabIndex==2">
+            <div>
+                <ul class="list_ul">
+                    <li class="ft12 clearfix colorGrey bdb">
+                        <span class="width1 tc fl pb5" data-localize="deals.type">类型</span>
+                        <span class="width2 tc fl pb5" data-localize="assets.time">时间</span>
+                        <span class="width2 tc fl pb5" data-localize="transaction.price">价格</span>
+                        <span class="width2 tc fl pb5" data-localize="assets.num">数量</span>
+                    </li>
+                    <li>
+                        <ul class="conplete_list colorGrey ft12" style="padding: 10px 0;">
+                            <li class="clearfix" v-for="item in completeList" :key="item.id" style="padding:5px 0;">
+                                <span class="width1 tc fl">{{item.type == 1 ? getlg('kd'):getlg('zk')}}</span>
+                                <span class="width2 tc fl">{{item.time}}</span>
+                                <span class="width2 tc fl" v-if="item.type==1">{{item.price || '0.0000' | toFixed4}}<img style="width:10px;margin-left:3px" src="images/buy.png" alt=""></span>
+                                <span class="width2 tc fl" v-if="item.type!=1">{{item.price || '0.0000' | toFixed4}}<img style="width:10px;margin-left:3px" src="images/sell.png" alt=""></span>
+                                <span class="width2 tc fl">{{item.number || '0.00' | toFixeds}}</span>
+                                <a class='pingcang white tc width1 fl' @click="sellLoss(item.id)">{{getlg('pcang')}}</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="clickMore tc colorGrey" v-if="!completeList.length"  @click="reload">暂无数据</li>
+                </ul>
+            </div>
+            <div class="no_record" style="display:none;">
+                <p><img src="images/anonymous.png" /></p>
+                <p data-localize="transaction.nodata">暂无记录</p>
+            </div>
+        </div>
 
 		<div style="height:100px;"></div>
 		<div class="btm-chart btm-chart-status"> </div>

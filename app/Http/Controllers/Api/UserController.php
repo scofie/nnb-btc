@@ -678,12 +678,7 @@ class UserController extends Controller
     //我的  
     public function info(Request $request)
     {
-        $request_user_id = $request->get('user_id', 0);
         $user_id = Users::getUserId();
-        if($request_user_id){
-            $user_id = $request_user_id;
-        }
-
         $currency_usdt_id = Currency::where('name','USDT')->select(['id','name'])->first();
 
         //$user = Users::where("id",$user_id)->first(['id','phone','email','head_portrait','status']);
@@ -702,10 +697,7 @@ class UserController extends Controller
             $user['name'] = $res['name'];
         }
         $seller = Seller::where('user_id', $user_id)->get()->toArray();
-        if (!empty($seller))
-        {
-            $user['seller']=$seller;
-        }
+        !empty($seller) && $user['seller']=$seller;
        
         $user['tobe_seller_lockusdt']=Setting::getValueByKey("tobe_seller_lockusdt");
         $user['currency_usdt_id']=$currency_usdt_id->id;
@@ -848,8 +840,6 @@ class UserController extends Controller
 
         }
 
-
-
         if (!empty($user['card_id'])) {
             $user['card_id'] = mb_substr($user['card_id'], 0, 2) . '******' . mb_substr($user['card_id'], -2, 2);
         }
@@ -912,41 +902,7 @@ class UserController extends Controller
         Token::deleteToken($user_id, $token);
 
         return $this->success('退出登录成功');
-
-
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     public function vip()
     {
         $user_id = Users::getUserId(Input::get("user_id"));
