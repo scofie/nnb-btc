@@ -176,7 +176,8 @@
     "volumeTwo":"成交量",
     "balances":"余额：0.0000",
     "currentPosition":"当前持仓",
-    "clickLoad":"点击加载"
+    "clickLoad":"点击加载",
+    "profile": "简介"
   },
   "assets":{
     "currency":"币币",
@@ -484,6 +485,7 @@
   },
   "personal":{
     "statement":"解释说明",
+
     "complaint":"投诉建议"
   },
   "exchange":{

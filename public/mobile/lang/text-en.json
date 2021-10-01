@@ -177,7 +177,8 @@
     "volumeTwo":"Trading volume",
     "balances":"balance：0.0000",
     "currentPosition":"Current position",
-    "clickLoad":"Click load"
+    "clickLoad":"Click load",
+    "profile": "Introduction"
   },
   "assets": {
     "currency": "Exchange",

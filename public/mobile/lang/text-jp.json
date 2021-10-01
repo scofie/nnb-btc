@@ -176,7 +176,8 @@
     "volumeTwo":"ボリューム",
     "balances":"残高：0.0000",
     "currentPosition":"現在位置",
-    "clickLoad":"クリックしてロード"
+    "clickLoad":"クリックしてロード",
+    "profile":"概要"
   },
   "assets":{
     "currency":"貨幣",

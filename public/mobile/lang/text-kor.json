@@ -173,7 +173,8 @@
     "volume":" 거래량",
     "balances":"잔액：0.0000",
     "currentPosition":" 현재 보유중", 
-    "clickLoad": "클릭 로드"
+    "clickLoad": "클릭 로드",
+    "profile": "간단 한 소개"
   },
   "assets":{
     "currency":" 통화 통화", 

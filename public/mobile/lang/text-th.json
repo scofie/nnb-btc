@@ -172,7 +172,8 @@
     "volume":"ปริมาณการซื้อขาย",
     "balances":"ยอดคงเหลือ：0.0000",
     "currentPosition":"ตำแหน่งปัจจุบัน",
-    "clickLoad":"คลิกโหลด"
+    "clickLoad":"คลิกโหลด",
+    "profile": "โดยสังเขป"
   },
   "assets":{
     "currency":"สกุลเงิน",

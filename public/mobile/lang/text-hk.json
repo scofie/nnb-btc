@@ -176,7 +176,8 @@
       "volumeTwo":"成交量",
       "balances":"餘額：0.0000",
       "currentPosition":"當前持倉",
-      "clickLoad":"點擊加載"
+      "clickLoad":"點擊加載",
+      "profile":"簡介"
     },
     "assets":{
       "currency":"幣幣",
