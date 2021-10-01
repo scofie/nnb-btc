@@ -221,3 +221,12 @@ div#entrust div:nth-child(2) p img {
 .pk-ftxt{
 	margin-bottom: 3px;
 }
+.hy-list,.hy-jj {
+	padding-left: 5px;
+	padding-top: 5px;
+	padding-right: 5px;
+
+}
+.hy-list span,.hy-jj span{
+	font-size: 12px;
+}

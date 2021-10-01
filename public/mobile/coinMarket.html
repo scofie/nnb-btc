@@ -104,24 +104,30 @@
 		</div>
         <div id="entrust"  class="bgColor " v-show="tabIndex==2">
             <div class="pk-content">
-                <div class="pk-ftitle">
-                    <span data-localize="deals.type">类型</span>
-                    <span data-localize="assets.time">时间</span>
-                    <span style="text-align:center" data-localize="transaction.pricee">价格</span>
-                    <span style="text-align:right" data-localize="assets.num">数量</span>
-                </div>
-                <ul class="conplete_list colorGrey ft12" style="padding: 10px 0;">
-                    <li class="clearfix" v-for="item in completeList" :key="item.id" style="padding:5px 0;">
-                        <span class="width1 tc fl">{{item.type == 1 ? getlg('domore'):getlg('doless')}}</span>
-                        <span class="width2 tc fl">{{item.time}}</span>
-                        <span class="width2 tc fl" v-if="item.type==1">{{item.price || '0.0000' | toFixed4}}<img style="width:10px;margin-left:3px" src="images/buy.png" alt=""></span>
-                        <span class="width2 tc fl" v-if="item.type!=1">{{item.price || '0.0000' | toFixed4}}<img style="width:10px;margin-left:3px" src="images/sell.png" alt=""></span>
-                        <span class="width2 tc fl">{{item.number || '0.00' | toFixeds}}</span>
-<!--                        <a class='pingcang white tc width1 fl' @click="sellLoss(item.id)">{{getlg('pcang')}}</a>-->
+                <ul class="list_ul" style="margin-top:35px;">
+                    <li class="ft12 clearfix colorGrey bdb">
+                        <span class="width1 tc fl pb5" data-localize="deals.type">类型</span>
+                        <span class="width2 tc fl pb5" data-localize="assets.time">时间</span>
+                        <span class="width2 tc fl pb5" data-localize="transaction.price">价格</span>
+                        <span class="width2 tc fl pb5" data-localize="assets.num">数量</span>
+                        <span class="width11 tc fl pb5" data-localize="transaction.option">操作</span>
                     </li>
+                    <li>
+                        <ul class="conplete_list colorGrey ft12" style="padding: 10px 0;">
+                            <li class="clearfix" v-for="item in completeList" :key="item.id" style="padding:5px 0;">
+                                <span class="width1 tc fl">{{item.type == 1 ? getlg('buy'):getlg('sell')}}</span>
+                                <span class="width2 tc fl">{{item.time}}</span>
+                                <span class="width2 tc fl" v-if="item.type==1">{{item.price || '0.0000' | toFixed4}}<img style="width:10px;margin-left:3px" src="images/buy.png" alt=""></span>
+                                <span class="width2 tc fl" v-if="item.type!=1">{{item.price || '0.0000' | toFixed4}}<img style="width:10px;margin-left:3px" src="images/sell.png" alt=""></span>
+                                <span class="width2 tc fl">{{item.number || '0.00' | toFixeds}}</span>
+        <!--                        <a class='pingcang white tc width1 fl' @click="sellLoss(item.id)">{{getlg('pcang')}}</a>-->
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="clickMore tc colorGrey" data-localize="deals.clickLoad" @click="reload">点击加载</li>
                 </ul>
             </div>
-            <div class="no_record" v-if="!completeList.length" @click="reload">
+            <div class="no_record" style="display:none;" v-show="completeList.length<=0">
                 <p><img src="images/anonymous.png" /></p>
                 <p data-localize="transaction.nodata">暂无记录</p>
             </div>
