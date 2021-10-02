@@ -177,7 +177,14 @@
     "balances":"余额：0.0000",
     "currentPosition":"当前持仓",
     "clickLoad":"点击加载",
-    "profile": "简介"
+    "profile": "简介",
+    "quoteCurrency": "计价货币",
+    "settlementCurrency": "结算货币",
+    "releaseTime": "发行时间",
+    "summation": "发行总量",
+    "whitePaper": "白皮书",
+    "website": "官网",
+    "block": "区块查询"
   },
   "assets":{
     "currency":"币币",
@@ -485,12 +492,11 @@
   },
   "personal":{
     "statement":"解释说明",
-
     "complaint":"投诉建议"
   },
   "exchange":{
     "title":"资产兑换",
-    "holdAssets":"持有资产",
+    "holddeals":"持有资产",
     "dangerousCurrency":"持险生币",
     "convertibleQuantity":"可兑换数量",
     "currencyExchange":"币币兑换率：",

@@ -178,7 +178,14 @@
     "balances":"balance：0.0000",
     "currentPosition":"Current position",
     "clickLoad":"Click load",
-    "profile": "Introduction"
+    "profile": "Introduction",
+    "quoteCurrency": "Quote Currency",
+    "settlementCurrency": "Settlement Currency",
+    "releaseTime": "Release Time",
+    "summation": "Summation",
+    "whitePaper": "White Paper",
+    "website": "Website",
+    "block": "Block"
   },
   "assets": {
     "currency": "Exchange",

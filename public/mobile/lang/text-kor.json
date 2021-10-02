@@ -174,7 +174,14 @@
     "balances":"잔액：0.0000",
     "currentPosition":" 현재 보유중", 
     "clickLoad": "클릭 로드",
-    "profile": "간단 한 소개"
+    "profile": "간단 한 소개",
+    "quoteCurrency": "가격 계산 화폐",
+    "settlementCurrency": "결제 화폐",
+    "releaseTime": "발행 시간",
+    "summation": "발행 총량",
+    "whitePaper": "백서",
+    "website": "홈 페이지",
+    "block": "블록 조회"
   },
   "assets":{
     "currency":" 통화 통화", 

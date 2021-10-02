@@ -177,7 +177,14 @@
       "balances":"餘額：0.0000",
       "currentPosition":"當前持倉",
       "clickLoad":"點擊加載",
-      "profile":"簡介"
+      "profile":"簡介",
+      "quoteCurrency": "計價貨幣",
+      "settlementCurrency": "結算貨幣",
+      "releaseTime": "發行時間",
+      "summation": "發行總量",
+      "whitePaper": "白皮書",
+      "website": "官網",
+      "block": "區塊査詢"
     },
     "assets":{
       "currency":"幣幣",

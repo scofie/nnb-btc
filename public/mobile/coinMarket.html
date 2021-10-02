@@ -59,7 +59,7 @@
             </div>
             <div class="pk-content" v-show="tabIndex==0">
                 <div class="pk-ftitle">
-                    <span>数量</span><span style="text-align:center">价格</span><span style="text-align:right">数量</span>
+                    <span data-localize="assets.num">数量</span><span style="text-align:center" data-localize="transaction.price">价格</span><span style="text-align:right" data-localize="assets.num">数量</span>
                 </div>
                 <div class="pk-ftxt" v-for="(item,index) in pkList">
                     <span style="width:33.33%">{{item[1] || 0.0000 | toFixed4}}</span>
@@ -73,27 +73,27 @@
             <div class="hy-content"  v-show="tabIndex==1">
                 <div class="hy-title"><span>{{jianjiedom.title}}</span></div>
                 <div class="hy-list flex  between">
-                    <span>计价货币</span><span>USDT</span>
+                    <span data-localize="deals.quoteCurrency">计价货币</span><span>USDT</span>
                 </div>
                 <div class="hy-list flex  between">
-                    <span>结算货币</span><span>USDT</span>
+                    <span data-localize="deals.settlementCurrency">结算货币</span><span>USDT</span>
                 </div>
                 <div class="hy-list flex  between">
-                    <span>发行时间:</span>
+                    <span data-localize="deals.releaseTime">发行时间:</span>
                     <span>{{jianjiedom.create_time}}</span>
                 </div>
                 <div class="hy-list flex  between">
-                    <span>发行总量</span><span>{{jianjiedom.create_num}}</span>
+                    <span data-localize="deals.summation">发行总量</span><span>{{jianjiedom.create_num}}</span>
                 </div>
 
                 <div class="hy-list flex  between">
-                    <span>白皮书</span> <span>{{jianjiedom.book}}</span>
+                    <span data-localize="deals.whitePaper">白皮书</span> <span>{{jianjiedom.book}}</span>
                 </div>
                 <div class="hy-list flex  between">
-                    <span>官网</span> <span>{{jianjiedom.website}}</span>
+                    <span data-localize="deals.website">官网</span> <span>{{jianjiedom.website}}</span>
                 </div>
                 <div class="hy-list flex  between">
-                    <span>区块查询</span>
+                    <span data-localize="deals.block">区块查询</span>
                     <span>{{jianjiedom.serach}}</span>
                 </div>
                 <div class="hy-jj">

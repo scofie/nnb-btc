@@ -321,52 +321,6 @@
 
 <body class="bgColor">
 	<div id="app" v-cloak>
-		<!--<div class="borrow">-->
-		<!--	<div class="borrow-title">-->
-		<!--		<h1>余币宝账户</h1>-->
-		<!--		<img src="images/new/doubt.png">-->
-		<!--	</div>-->
-		<!--	<div class="borrow-total">-->
-		<!--		<article>-->
-		<!--			<h1>余币宝账户总资产</h1>-->
-		<!--			<span>≈{{zhiyaList.usdt_balance || 0}} USDT</span>-->
-		<!--		</article>-->
-		<!--		<article>-->
-					<!--<h1>余币宝总负债（借币+币息）</h1>-->
-		<!--			<h1>余币宝总负债（总借款+总利息）- 已还金额）</h1>-->
-		<!--			<span>≈{{zhiyaList.total_loan || 0}} USDT</span>-->
-		<!--		</article>-->
-		<!--	</div>-->
-		<!--	<div class="borrow-line"></div>-->
-		<!--	<div class="borrow-jie"><h1>USDT交易对借币</h1></div>-->
-		<!--	<div class="borrow-content">-->
-		<!--		<div class="borrow-bi">-->
-		<!--			<span></span>-->
-					<!--<span>BTC</span>-->
-		<!--			<span>USDT</span>-->
-		<!--		</div>-->
-		<!--		<div class="borrow-list">-->
-		<!--			<span>可借额度</span>-->
-					<!--<span>0.00</span>-->
-		<!--			<span>{{zhiyaList.can_loan || 0}}</span>-->
-		<!--		</div>-->
-				<!--<div class="borrow-list">-->
-				<!--	<span>已借</span>-->
-					<!--<span>0.00</span>-->
-				<!--	<span>0.000000</span>-->
-				<!--</div>-->
-		<!--		<div class="borrow-list">-->
-		<!--			<span>币息</span>-->
-					<!--<span>0.00</span>-->
-		<!--			<span>0.003%</span>-->
-		<!--		</div>-->
-		<!--	</div>-->
-			<!--<div class="borrow-btn">-->
-			<!--	<button style="background:#f7f6fb;color:#333">划转</button>-->
-			<!--	<button>借币</button>-->
-			<!--	<button>还币</button>-->
-			<!--</div>-->
-		<!--</div>-->
 		<div id="header" class="bgColor">
 			<div class="header bgColor">
 				<p class="pull-left sideOpen" @click="leftShows">
@@ -702,48 +656,34 @@
 	</div> -->
 	<!-- 修改弹窗 -->
 	<div style="height:50px;"></div>
-	 <footer>
+	 <footer id="footer">
 		<a href="index.html">
 			<div>
 				<p class="img img0"></p>
-				<!-- <i class="iconfont icon-yemian-copy"></i> -->
 				<span data-localize="footer.home">首页</span>
 			</div>
 		</a>
-		<!-- <a href="market.html">
-            <div>
-                <p class="img img1"></p>
-                <span data-localize="footer.quotation">行情</span>
-            </div>
-        </a> -->
-		<a href="assets.html">
-			<div>
-				<p class="img img1"></p>
-				<!-- <i class="iconfont icon-jiaoyihangqing"></i> -->
-				<span data-localize="footer.assets">资产</span>
-			</div>
-		</a> <a href="trades.html">
+         <a href="trades.html">
 			<div>
 				<p class="img img3"></p>
 				<span data-localize="footer.transaction">交易</span>
 			</div>
 		</a>
-		<!-- <a href="LeveragedDeals.html">
-            <div>
-                <p class="img img3"></p>
-                <span data-localize="contract.contract">合约</span>
-            </div>
-        </a> -->
 		<a href="fiatrad.html" style="display: none;">
 			<div>
 				<p class="img img2"></p>
-				<!-- <i class="iconfont icon-jiaoyiguanli"></i> -->
 				<span data-localize="index.legal">法币交易</span>
 			</div>
-		</a> <a href="personal.html">
+		</a>
+         <a href="assets.html">
+             <div>
+                 <p class="img img1"></p>
+                 <span data-localize="footer.assets">资产</span>
+             </div>
+         </a>
+         <a href="personal.html">
 			<div>
 				<p class="img img4"></p>
-				<!-- <i class="iconfont icon-wode"></i> -->
 				<span data-localize="footer.personal">我的</span>
 			</div>
 		</a>

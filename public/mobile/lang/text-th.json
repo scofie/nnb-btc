@@ -173,7 +173,14 @@
     "balances":"ยอดคงเหลือ：0.0000",
     "currentPosition":"ตำแหน่งปัจจุบัน",
     "clickLoad":"คลิกโหลด",
-    "profile": "โดยสังเขป"
+    "profile": "โดยสังเขป",
+    "quoteCurrency": "สกุลเงินมูลค่า",
+    "settlementCurrency": "สกุลเงินล้าง",
+    "releaseTime": "เวลาปล่อย",
+    "summation": "ปัญหาทั้งหมด",
+    "whitePaper": "กระดาษสีขาว",
+    "website": "เครือข่ายอย่างเป็นทางการ",
+    "block": "บล็อกแบบสอบถาม"
   },
   "assets":{
     "currency":"สกุลเงิน",

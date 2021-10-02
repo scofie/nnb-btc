@@ -177,7 +177,14 @@
     "balances":"残高：0.0000",
     "currentPosition":"現在位置",
     "clickLoad":"クリックしてロード",
-    "profile":"概要"
+    "profile":"概要",
+    "quoteCurrency": "評価貨幣",
+    "settlementCurrency": "通貨を決済する",
+    "releaseTime": "リリース時間",
+    "summation": "発行総量",
+    "whitePaper": "白書",
+    "website": "公式サイト",
+    "block": "ブロッククエリ"
   },
   "assets":{
     "currency":"貨幣",
