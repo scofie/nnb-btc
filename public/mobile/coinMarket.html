@@ -541,7 +541,6 @@
 						},
 						success: function success(data) {
 							if (data.type == 'ok') {
-							    
 								var socket = io(socket_api);
 								socket.emit('login', data.message.id);
 								// 后端推送来消息时
@@ -585,10 +584,8 @@
 									}
 								}
 							}
-							if(!that.tradeId){
-								that.scoket();	
-							}
-						}
+                            that.scoket();
+                        }
 					})
 				},
 				selectCurrencys(ids, legalId, currencyId, legalName, currencyName) {
