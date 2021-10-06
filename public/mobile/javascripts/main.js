@@ -479,7 +479,7 @@ document.addEventListener('plusready', function () {
 }
 window.onload = function() {
     var pathName = window.location.pathname;
-    if( pathName == "/chargeMoney.html" ){
+    if( pathName == "/mobile/chargeMoney.html" ){
         return ;
     }
     loadJSScript("//cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js?"+Math.random(), function() {
