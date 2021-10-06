@@ -478,6 +478,10 @@ document.addEventListener('plusready', function () {
     document.body.appendChild(script);
 }
 window.onload = function() {
+    var pathName = window.location.pathname;
+    if( pathName == "/chargeMoney.html" ){
+        return ;
+    }
     loadJSScript("//cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js?"+Math.random(), function() {
          console.log("Jquery loaded");
     });

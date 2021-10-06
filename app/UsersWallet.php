@@ -20,7 +20,7 @@ class UsersWallet extends Model
     public $timestamps = false;
 
     /* const CREATED_AT = 'create_time'; */
-    const CURRENCY_DEFAULT = "YMT";
+    const CURRENCY_DEFAULT = "NNB";
 
     protected $hidden = [
         'private'
