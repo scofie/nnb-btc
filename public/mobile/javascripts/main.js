@@ -356,7 +356,6 @@ function initDataTokenNo(params, callback) {
             request.setRequestHeader('Authorization', token)
         },
         success: function (res) {
-            // layer_close();
             if (res.type == 'ok') {
                 callback && callback(res)
             } else {
