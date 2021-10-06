@@ -691,7 +691,7 @@
 								if (msg.type == 'kline') {
 									let obj = {}
 									var types = localStorage.getItem('type');
-									if (that.symbol == msg.symbol&&types==msg.period) {
+									if (that.currencyName == msg.currency_name && types==msg.period) {
 										obj.open = Number(msg.open)
 										obj.low = Number(msg.low)
 										obj.high = Number(msg.high)
@@ -700,7 +700,6 @@
 										obj.time = Number(msg.time)
 										that.newprice = msg.close
 										real(obj)
-
 									}
 								}
 							});
@@ -708,7 +707,6 @@
 								if (msg.type == 'daymarket') {
 									let obj = {}
 									if (that.symbol == msg.symbol) {
-
 										that.maxprice = msg.high
 										that.minprice = msg.low
 										that.dayvom = iTofixed(msg.volume,4);
@@ -870,8 +868,6 @@
 									widget.chart().setChartType(v.chartType); //改变K线类型
 								});
 							});
-								
-
 							let more=widget.createButton();
 							more.attr('title','更多')
 									.addClass("my2")
