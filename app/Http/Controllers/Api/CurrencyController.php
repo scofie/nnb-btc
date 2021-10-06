@@ -24,7 +24,11 @@ class CurrencyController extends Controller
 
     public function lists()
     {
-        $currency = Currency::where('is_display', 1)->orderBy('sort', 'asc')->get()->toArray();
+        $currency = Currency::where('is_display', 1)
+                            ->where('name',"<>", UsersWallet::CURRENCY_DEFAULT)
+                            ->orderBy('sort', 'asc')
+                            ->get()
+                            ->toArray();
         $legal = array();
         foreach ($currency as $c) {
             if ($c["is_legal"]) {
@@ -330,6 +334,7 @@ class CurrencyController extends Controller
                 $query->where('is_display', 1);
             })
             ->where('is_display', 1)
+            ->where('name',"<>", UsersWallet::CURRENCY_DEFAULT)
             ->where('is_legal', 1)
             ->get();
             // var_dump($currency);die;

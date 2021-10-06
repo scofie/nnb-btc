@@ -282,7 +282,7 @@ class CurrencyController extends Controller
         if($insurable){
             $result->where('insurancable',1);
         }
-//        $account_number = $request->get('account_number','');
+        $result = $result->where('name',"<>", UsersWallet::CURRENCY_DEFAULT);
 
         $result = $result->orderBy('sort', 'asc')->orderBy('id', 'desc')->paginate($limit);
         return $this->layuiData($result);
