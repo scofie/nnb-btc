@@ -127,18 +127,17 @@
             * <span data-localize="assets.a06">最小充值金额：</span>1000 <span class="titles"></span>。<br>
             * <span data-localize="assets.a10">你的会在3-6个网络确认后到帐。</span> <br>
             * <span data-localize="assets.a11">所有MyToken的充币地址都是多重签名冷钱包地址，所有钱包均不曾被联网的机器读取。</span>
-           
         </div>
 
     </div>
     <script type="text/javascript" src="lib/jquery-2.1.1.min.js"></script>
-    <script type="text/javascript" src="javascripts/main.js"></script>
     <script type="text/javascript" src="javascripts/jquery.cookie.js"></script>
     <script type="text/javascript" src="lib/layer_mobile/layer.js"></script>
     <script type="text/javascript" src="javascripts/jquery.qrcode.min.js"></script>
     <script type="text/javascript" src="javascripts/clipboard.min.js"></script>
     <script type="text/javascript" src="lib/jquery.localize.min.js"></script>
     <script type="text/javascript" src="lib/language_cookie.js"></script>
+    <script type="text/javascript" src="javascripts/main.js"></script>
     <script>
         var token = get_user_login();
         var currency = get_param('id')
@@ -148,7 +147,6 @@
 				var acc = $('#address').val()
 				var money = $('#number').val()
 				var url = _API + 'wallet/charge_req'
-				console.log(money);
 				layer_loading();
 				$.ajax({
 					type:'POST',
