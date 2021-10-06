@@ -222,29 +222,22 @@
                     layer_close();
                     if (res.type == "ok") {
                     	let data=res.message;
-                 //   	if(data.erc20){
-                   // 		$(".tab-list").css('display','flex');
-                    		var num=0;
-                    		for(let i in data){
-                    			if(num==0){
-	                    			$(".tab-list").append($("<div onclick='tabCode(this)' class='tabactive changeTabActive' data-address="+data[i]+">USDT-ERC20</div>"));
-	                    			code(data[i]);
-		                        	copy(data[i]);	
-                    				$(".address").html(data[i]);
-                    			}else{
-                    				$(".tab-list").append($("<div onclick='tabCode(this)' data-address="+data[i]+">"+i+"</div>"));
-                    			}
-                    			num++;
-                    		}
-                    		// code(res.message.erc20);
-	                     //   copy(res.message.erc20);	
-                    //	}else{
-                   // 		$('.address').html(data)
-	               //         code(data);
-	               //         copy(data);	
-                   // 	}
+                 //
+                        var num=0;
+                        for(let i in data){
+                            if(num==0){
+                                $(".tab-list").append($("<div onclick='tabCode(this)' class='tabactive changeTabActive' data-address="+data[i]+">USDT-ERC20</div>"));
+                                code(data[i]);
+                                copy(data[i]);
+                                $(".address").html(data[i]);
+                            }else{
+                                $(".tab-list").append($("<div onclick='tabCode(this)' data-address="+data[i]+">"+i+"</div>"));
+                            }
+                            num++;
+                        }
+
                     } else {
-                        layer_msg(data);
+                        layer_msg(res);
                     }
                 }
             })
