@@ -175,7 +175,7 @@
             // FastClick.attach(document.body);
             $('.titles').html(name)
             getData();
-            getrate();
+            // getrate();
             $('.copy').click(function () {
                 var adre = $('.address').text();
                 copy(adre);
@@ -243,28 +243,28 @@
             })
         }
 
-        function getrate() {
-            $.ajax({
-                type: "POST",
-                url: _API + 'wallet/get_info',
-                data: {
-                    currency: currency
-                },
-                dataType: "json",
-                async: true,
-                beforeSend: function beforeSend(request) {
-                    request.setRequestHeader("Authorization", token);
-                },
-                success: function (res) {
-                    layer_close();
-                    if (res.type == "ok") {
-                        $('.mainnum').html(iTofixed(res.message.min_number,2))
-                    } else {
-                        layer_msg(res.message)
-                    }
-                }
-            })
-        }
+        // function getrate() {
+        //     $.ajax({
+        //         type: "POST",
+        //         url: _API + 'wallet/get_info',
+        //         data: {
+        //             currency: currency
+        //         },
+        //         dataType: "json",
+        //         async: true,
+        //         beforeSend: function beforeSend(request) {
+        //             request.setRequestHeader("Authorization", token);
+        //         },
+        //         success: function (res) {
+        //             layer_close();
+        //             if (res.type == "ok") {
+        //                 $('.mainnum').html(iTofixed(res.message.min_number,2))
+        //             } else {
+        //                 layer_msg(res.message)
+        //             }
+        //         }
+        //     })
+        // }
         function tabCode(that){
         	$(".tab-list span").removeClass('tabactive');
         	$(that).addClass("tabactive");
