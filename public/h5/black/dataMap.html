@@ -32,7 +32,7 @@
 						<div class="flex">
 								<p>{{bmbBalance || '0.00' |toFixed1}}</p>
 						
-							<p>YMT</p>
+							<p>NNB</p>
 							<span class="colorGrey" @click="insure1(item.id)" v-for="item in insurancType" :class="[{'active':item.id == userInsurancId}]">{{item.name}}</span>
 						</div>
 					</div>
@@ -409,7 +409,7 @@
 							that.tradeCurrency = res.message;
 							if (res.message.length > 0) {
 								for (var i = 0; i < res.message.length; i++) {
-									if (res.message[i].name == 'YMT') {
+									if (res.message[i].name == 'NNB') {
 										that.bmbBalance = res.message[i].user_wallet.insurance_balance;
 										that.insurancType = res.message[i].insurance_types;
 										if(res.message[i].user_insurance){
@@ -677,7 +677,7 @@
 											if (res.message[i].id == that.tradeCurrencyId) {
 												that.balance = res.message[i].user_wallet.micro_with_insurance;
 											}
-											if (res.message[i].name == 'YMT') {
+											if (res.message[i].name == 'NNB') {
 												that.bmbBalance = res.message[i].user_wallet.insurance_balance;
 											}
 										}

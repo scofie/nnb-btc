@@ -445,7 +445,7 @@
     "insuranceClaims":"保険請求", 
     "insuranceCancellation":"保険の解約", 
     "coinWallet":"保険金ウォレット", 
-    "bmbWallet":"YMTウォレット", 
+    "bmbWallet":"NNBウォレット",
     "cumulativeCoins":"累積生貨:",
     "availableQuantity":"使用可能数量:",
     "rawCurrency":"コインレコード"

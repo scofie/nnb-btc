@@ -249,7 +249,7 @@
 								<!-- </el-dropdown-menu> -->
 							</el-dropdown>
 						</div>
-						<!-- <p class="tc">YMT</p> -->
+						<!-- <p class="tc">NNB</p> -->
 					</div>
 					<img class="tab-logo" src="images/transer.png" alt="">
 					<div class="tl">
@@ -306,7 +306,7 @@
 				<div class="convertibility-header flex between ml10 mr10 alcenter">
 					<p data-localize="exchange.coinWallet">保险币钱包</p>
 					<img class="tab-logo" src="images/transer.png" alt="">
-					<p data-localize="exchange.bmbWallet">YMT钱包</p>
+					<p data-localize="exchange.bmbWallet">NNB钱包</p>
 				</div>
 				<div class="ml10 mr10">
 					<p class="mt10"><span data-localize="exchange.cumulativeCoins">累计生币：</span>{{moneyData.sum_balance}}</p>
@@ -373,7 +373,7 @@
 			orderList: [],
 			typeTab: 1,
 			leftValue: 'USDT',
-			rightValue: 'YMT',
+			rightValue: 'NNB',
 			rate: '',
 			tradeType: get_param('type') || 'exchange',
 			fee: '',
@@ -469,7 +469,7 @@
 							for (var i = 0; i < datas.length; i++) {
 								if (datas[i].name == 'USDT') {
 									that.usdtId = datas[i].id;
-								} else if (datas[i].name == 'YMT') {
+								} else if (datas[i].name == 'NNB') {
 									that.bmbId = datas[i].id;
 								}
 							}
@@ -509,7 +509,7 @@
 				that.inputPrice = '';
 				if (that.typeTab == 1) {
 					that.leftValue = 'USDT',
-						that.rightValue = 'YMT';
+						that.rightValue = 'NNB';
 					that.rate = that.usdtRate;
 					that.fee = that.usdtFee;
 					that.balance = that.usdtBalance;
@@ -517,7 +517,7 @@
 					that.toCurrencyId = that.bmbId;
 					that.proportion = that.usdtProportion;
 				} else {
-					that.leftValue = 'YMT',
+					that.leftValue = 'NNB',
 						that.rightValue = 'USDT';
 					that.rate = that.bmbRate;
 					that.fee = that.bmbFee;

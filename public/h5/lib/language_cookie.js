@@ -308,7 +308,7 @@ var ts = {
         countDown: "倒计时",
         emregister1: "邮箱登录",
         phregister1: "手机登录",
-        text10:"基于YMT的实时价格"
+        text10:"基于NNB的实时价格"
     },
     hk: {
         zyzs:"止盈止損",
@@ -544,7 +544,7 @@ var ts = {
         countDown: "倒數計時",
         emregister1: "郵箱登錄",
         phregister1: "手機登入",
-        text10:"基於YMT的實时價格"
+        text10:"基於NNB的實时價格"
 
 
 
@@ -782,7 +782,7 @@ var ts = {
         countDown: "Count down",
         emregister1: "Mailbox login",
         phregister1: "Mobile login",
-        text10:"Real-time Price Based on YMT"
+        text10:"Real-time Price Based on NNB"
     },
      jp: {
         zyzs:"ストップロス",
@@ -1018,7 +1018,7 @@ var ts = {
         countDown: "秒読み",
         emregister1: "メールログイン",
         phregister1: "モバイルログイン",
-        text10:"YMTに基づくリアルタイム価格"
+        text10:"NNBに基づくリアルタイム価格"
     },
    
 
