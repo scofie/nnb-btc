@@ -915,7 +915,6 @@
 												arr.splice(i, 1)
 												that.orderList = arr;
 											}, 500)
-
 											return false;
 										}
 									}
@@ -1002,6 +1001,13 @@
 							},{checkLimit:true});
 							
 							let buttonArr = [
+                                {
+                                    value: "1",
+                                    period: "1m",
+                                    text: getlg('klineText2'),
+                                    chartType: 1,
+                                    type:"1min"
+                                },
 								{
 									value: "5",
 									period: "5m",

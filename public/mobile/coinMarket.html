@@ -820,6 +820,13 @@
 						
 							let buttonArr = [
                                 {
+                                    value: "1",
+                                    period: "1m",
+                                    text: getlg('klineText2'),
+                                    chartType: 1,
+                                    type:"1min"
+                                },
+                                {
                                     value: "5",
                                     period: "5m",
                                     text: getlg('klineText3'),
@@ -848,7 +855,7 @@
 								button.attr('title', v.text)
 									.addClass("my2")
 									.text(v.text)
-                                if (v.text == getlg('klineText1')) {
+                                if (v.text == getlg('klineText2')) {
                                     button.css({
                                         'color': '#f0b90b',
                                         'border-bottom': '1px solid #f0b90b'
