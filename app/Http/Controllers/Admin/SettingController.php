@@ -45,13 +45,15 @@ class SettingController extends Controller
         $data['lever_fee_options'] = serialize($lever_fee_options);
         try {
             foreach ($data as $key => $value) {
+                if( empty($value) ){
+                    continue;
+                }
                 $setting = Setting::where('key', $key)->first();
 
                 if (!$setting) {
                     $setting = new Setting();
                     $setting->key = $key;
                 }
-
                 $setting->value = $value;
                 $setting->save();
             }
