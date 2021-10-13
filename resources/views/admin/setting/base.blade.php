@@ -160,21 +160,6 @@
                     </div>
                     <!--基础设置开始-->
                     <div class="layui-tab-item">
-                        <!-- <div class="layui-form-item">
-                            <label class="layui-form-label">成为商家锁定USDT值</label>
-                            <div class="layui-input-block">
-                                <input type="text" name="tobe_seller_lockusdt" autocomplete="off" class="layui-input"
-                                       value="@if(isset($setting['tobe_seller_lockusdt'])){{$setting['tobe_seller_lockusdt'] ?? ''}}@endif">
-                            </div>
-                        </div> -->
-
-                        <!-- <div class="layui-form-item">
-                            <label class="layui-form-label">资产兑换手续费百分比</label>
-                            <div class="layui-input-block">
-                                <input type="text" name="currency_to_usdt_fee" autocomplete="off" class="layui-input"
-                                       value="@if(isset($setting['currency_to_usdt_fee'])){{$setting['currency_to_usdt_fee'] ?? ''}}@endif">
-                            </div>
-                        </div> -->
                         <div class="layui-form-item">
                             <label class="layui-form-label">币币交易手续费系数</label>
                             <div class="layui-input-block">
@@ -773,51 +758,32 @@
                     </div>
                     <!--- 收款设置--->
                     <div class="layui-tab-item">
-                        <div id="email">
-                            <div>
-                                <div class="layui-form-item ecology">
-                                    <div class="layui-inline">
-                                        <label class="layui-form-label">邮箱账号</label>
-                                        <div class="layui-input-inline">
-                                            <input class="layui-input" lay-verify="1" placeholder="" name="phpMailer_username"
-                                                   type="text" onkeyup=""
-                                                   value="@if(isset($setting['phpMailer_username'])){{$setting['phpMailer_username'] ?? ''}}@endif">
-                                        </div>
-                                    </div>
-                                    <div class="layui-inline">
-                                        <label class="layui-form-label">Token密码</label>
-                                        <div class="layui-input-inline">
-                                            <input class="layui-input" lay-verify="required" placeholder="请输入最大值"
-                                                   name="phpMailer_password" onkeyup="" type="password"
-                                                   value="@if(isset($setting['phpMailer_password'])){{$setting['phpMailer_password'] ?? ''}}@endif">
-                                        </div>
-                                    </div>
-                                    <div class="layui-inline">
-                                        <label class="layui-form-label">端口</label>
-                                        <div class="layui-input-inline">
-                                            <input class="layui-input" lay-verify="required" placeholder="请输入比例"
-                                                   name="phpMailer_port" type="text"
-                                                   value="@if(isset($setting['phpMailer_port'])){{$setting['phpMailer_port'] ?? ''}}@endif"><span
-                                                    style="position: absolute;right: 5px;top: 12px;"></span>
-                                        </div>
-                                    </div>
-                                    <div class="layui-inline">
-                                        <label class="layui-form-label">Host</label>
-                                        <div class="layui-input-inline">
-                                            <input class="layui-input" lay-verify="required" placeholder="请输入最小值"
-                                                   name="phpMailer_host" type="text"
-                                                   value="@if(isset($setting['phpMailer_host'])){{$setting['phpMailer_host'] ?? ''}}@endif">
-                                        </div>
-                                    </div>
-                                    <div class="layui-inline">
-                                        <label class="layui-form-label">发件人</label>
-                                        <div class="layui-input-inline">
-                                            <input class="layui-input" lay-verify="1" placeholder="" name="submail_from_name"
-                                                   type="text" onkeyup=""
-                                                   value="@if(isset($setting['submail_from_name'])){{$setting['submail_from_name'] ?? ''}}@endif">
-                                        </div>
-                                    </div>
-                                </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">USDT-BEP20充值</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="USDT-BEP20" autocomplete="off" class="layui-input"
+                                       value="@if(isset($setting['USDT-BEP20'])){{$setting['USDT-BEP20']}}@endif">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">USDT-BEP2充值</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="USDT-BEP2" autocomplete="off" class="layui-input"
+                                       value="@if(isset($setting['USDT-BEP2'])){{$setting['USDT-BEP2']}}@endif">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">USDT-ERC20充值</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="USDT-ERC20" autocomplete="off" class="layui-input"
+                                       value="@if(isset($setting['USDT-ERC20'])){{$setting['USDT-ERC20']}}@endif">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">TRC20充值</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="TRC20" autocomplete="off" class="layui-input"
+                                       value="@if(isset($setting['COIN_TRADE_FEE'])){{$setting['COIN_TRADE_FEE']}}@endif">
                             </div>
                         </div>
                     </div>
