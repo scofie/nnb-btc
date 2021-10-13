@@ -759,31 +759,38 @@
                     <!--- 收款设置--->
                     <div class="layui-tab-item">
                         <div class="layui-form-item">
-                            <label class="layui-form-label">USDT-BEP20充值</label>
+                            <label class="layui-form-label">BEP20充值链</label>
                             <div class="layui-input-block">
                                 <input type="text" name="USDT-BEP20" autocomplete="off" class="layui-input"
                                        value="@if(isset($setting['USDT-BEP20'])){{$setting['USDT-BEP20']}}@endif">
                             </div>
                         </div>
                         <div class="layui-form-item">
-                            <label class="layui-form-label">USDT-BEP2充值</label>
+                            <label class="layui-form-label">BEP2充值链</label>
                             <div class="layui-input-block">
                                 <input type="text" name="USDT-BEP2" autocomplete="off" class="layui-input"
                                        value="@if(isset($setting['USDT-BEP2'])){{$setting['USDT-BEP2']}}@endif">
                             </div>
                         </div>
                         <div class="layui-form-item">
-                            <label class="layui-form-label">USDT-ERC20充值</label>
+                            <label class="layui-form-label">ERC20充值链</label>
                             <div class="layui-input-block">
                                 <input type="text" name="USDT-ERC20" autocomplete="off" class="layui-input"
                                        value="@if(isset($setting['USDT-ERC20'])){{$setting['USDT-ERC20']}}@endif">
                             </div>
                         </div>
                         <div class="layui-form-item">
-                            <label class="layui-form-label">TRC20充值</label>
+                            <label class="layui-form-label">TRC20充值链</label>
                             <div class="layui-input-block">
                                 <input type="text" name="TRC20" autocomplete="off" class="layui-input"
-                                       value="@if(isset($setting['COIN_TRADE_FEE'])){{$setting['COIN_TRADE_FEE']}}@endif">
+                                       value="@if(isset($setting['USDT-TRC20'])){{$setting['USDT-TRC20']}}@endif">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">BTC充值链</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="TRC20" autocomplete="off" class="layui-input"
+                                       value="@if(isset($setting['USDT-BTC'])){{$setting['USDT-BTC']}}@endif">
                             </div>
                         </div>
                     </div>

@@ -205,6 +205,7 @@ Route::group([ 'middleware' => ['lang', /*'check_user'*/]], function () {
             'check_user'
         ]);//提交提币信息
         Route::post('wallet/get_in_address','Api\WalletController@getWalletAddressIn')->middleware(['demo_limit']);//充币地址
+        Route::post('wallet/recharge_address','Api\WalletController@getWalletAddress')->middleware(['demo_limit']);//充币地址
         Route::post('wallet/get_recharge_address','Api\WalletController@getWalletRechargeAddress')->middleware(['demo_limit']);//充币地址
         Route::any('wallet/legal_log', 'Api\WalletController@legalLog');//财务记录
         Route::any('wallet/out_log', 'Api\WalletController@walletOutLog');//提币记录

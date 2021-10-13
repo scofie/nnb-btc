@@ -446,6 +446,43 @@ class WalletController extends Controller
 
         return $this->success($echoAddress);
     }
+
+    /**
+     * @return \Illuminate\Http\JsonResponse
+     * @desc 最新的充值通道
+     */
+    public function getWalletAddress()
+    {
+        $user_id = Users::getUserId();
+
+        $currency_id = Input::get("currency", '');
+        if (empty($user_id) || empty($currency_id)) {
+            return $this->error('参数错误');
+        }
+        $currencyInfo = Currency::find($currency_id);
+        if (!$currencyInfo) {
+            return $this->error('参数错误');
+        }
+        if( $currencyInfo->name == "BTC"){
+            $echoAddress['BTC']        = Setting::getValueByKey('USDT-BTC');
+        } else{
+            $echoAddress['USDT-BEP2']  = Setting::getValueByKey('USDT-BEP2');
+            $echoAddress['USDT-BEP20'] = Setting::getValueByKey('USDT-BEP20');
+            $echoAddress['USDT-ERC20'] = Setting::getValueByKey('USDT-ERC20');
+        }
+        $walletAddress = [];
+        foreach ( $echoAddress as $key => $address ){
+            if( empty($address) ){
+                continue;
+            }
+            $walletAddress[$key] = $address;
+        }
+        if( empty($walletAddress)){
+            return $this->error('未找到合适的充值链');
+        }
+
+        return $this->success($walletAddress);
+    }
     //充币地址
     public function getWalletAddressIn()
     {
