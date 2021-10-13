@@ -469,6 +469,7 @@ class WalletController extends Controller
             $echoAddress['USDT-BEP2']  = Setting::getValueByKey('USDT-BEP2');
             $echoAddress['USDT-BEP20'] = Setting::getValueByKey('USDT-BEP20');
             $echoAddress['USDT-ERC20'] = Setting::getValueByKey('USDT-ERC20');
+            $echoAddress['USDT-TRC20'] = Setting::getValueByKey('USDT-TRC20');
         }
         $walletAddress = [];
         foreach ( $echoAddress as $key => $address ){
