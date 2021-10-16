@@ -141,8 +141,8 @@
                 copy(adre);
             });
 
-            $('.chargeChannel').click(function () {
-                $(".tab-list span").removeClass('tabactive');
+            $('.tab-list .chargeChannel').bind("click",function () {
+                $(".tab-list div").removeClass('tabactive');
                 $(this).addClass("tabactive");
                 let address=$(this).attr('data-address');
                 $("canvas").remove();
