@@ -782,7 +782,7 @@
                         <div class="layui-form-item">
                             <label class="layui-form-label">TRC20充值链</label>
                             <div class="layui-input-block">
-                                <input type="text" name="TRC20" autocomplete="off" class="layui-input"
+                                <input type="text" name="USDT-TRC20" autocomplete="off" class="layui-input"
                                        value="@if(isset($setting['USDT-TRC20'])){{$setting['USDT-TRC20']}}@endif">
                             </div>
                         </div>
