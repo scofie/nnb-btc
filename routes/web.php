@@ -27,22 +27,10 @@ Route::group([ 'middleware' => ['lang', /*'check_user'*/]], function () {
         return redirect('/login');
     });
 
-//    Route::get('/phpinfo', function () {
-//        phpinfo();
-//    });
-
     Route::get('/', function () {
         return redirect('/dist');
     });
 
-//    Route::get('/gzip', function (\Illuminate\Http\Request $request) {
-//        dump($request->getScheme());
-//        $protocol = $request->getScheme();
-//        $host = $request->getHost();
-//
-//        dump($request->getSchemeAndHttpHost());
-//        dump(gzencode('hehe'));
-//    });
 
 //******************************api接口不需要登录的**********************
 //<--LDH-->
@@ -52,9 +40,8 @@ Route::group([ 'middleware' => ['lang', /*'check_user'*/]], function () {
         return json_decode($result, true);
     });   //取env.json
 
-    Route::post('api/notify/wallet','Api\NoticeController@walletNotify');//钱包通知接口
-    Route::get('api/notify/test','Api\NoticeController@test');//钱包测试接口
-    Route::get('api/notify/withdraw','Api\NoticeController@withdrawQueue');//钱包测试接口
+//    Route::post('api/notify/wallet','Api\NoticeController@walletNotify');//钱包通知接口
+//    Route::get('api/notify/withdraw','Api\NoticeController@withdrawQueue');//钱包测试接口
 
     Route::post('api/user/import', 'Api\LoginController@import');//导入会员
     Route::post('api/user/login', 'Api\LoginController@login');//登录
@@ -71,8 +58,6 @@ Route::group([ 'middleware' => ['lang', /*'check_user'*/]], function () {
     Route::get('/api/get_version', 'Api\DefaultController@getVersion');//获取版本号
 
     Route::post('/api/market/market', 'Api\MarketController@marketData');//行情数据
-    // Route::post('/api/sms_send', 'Api\SmsController@smsSubmailSend');//获取短信验证码 赛有短信
-    // Route::post('/api/sms_mail', 'Api\SmsController@submail_sendMail'); //获取邮箱验证码
     Route::post('/api/sms_send', 'Api\SmsController@smsBaoSend');//获取短信验证码
     Route::post('/api/sms_mail', 'Api\SmsController@sendMail'); //获取邮箱验证码
     
@@ -90,11 +75,7 @@ Route::group([ 'middleware' => ['lang', /*'check_user'*/]], function () {
     Route::any('api/currency/quotation_new', 'Api\CurrencyController@newQuotation'); //币种列表带行情(支持交易对)
     Route::post('api/deal/info', 'Api\CurrencyController@dealInfo');//行情详情
 
-    Route::post('api/deal/market_k', 'Api\CurrencyController@market_k');//行情详情  测试接口
 
-
-//Route::any('api/currency/market_day', 'Api\CurrencyController@market_day');//当天行情
-//Route::any('api/currency/new_timeshar', 'Api\CurrencyController@newTimeshars')->middleware(['cross']); //K线分时数据，对接tradeingview
     Route::any('api/currency/new_timeshar',
         'Api\CurrencyController@klineMarket')->middleware(['cross']); //K线分时数据，对接tradeingview
     Route::any('api/currency/kline_market',
@@ -110,15 +91,11 @@ Route::group([ 'middleware' => ['lang', /*'check_user'*/]], function () {
     Route::any('api/currency/one_month', 'Api\CurrencyController@one_month');//一个月
 
     Route::get('api/currency/lever', 'Api\CurrencyController@lever');//行情详情
-    Route::any('api/user/into_users', 'Api\UserController@into_users');//导入用户
-    Route::any('api/user/into_tra', 'Api\UserController@into_tra');//美丽链转入的接口(imc)
-//    Route::any('api/user/test', 'Api\UserController@test');//美丽链转入的接口(imc)
-    Route::any('api/user/e_pwd', 'Api\UserController@e_pwd');//修改密码
-//    Route::any('api/currency/update_date', 'Api\CurrencyController@update_date');//测试
-    Route::any('user/walletaddress', 'Api\UserController@walletaddress');//钱包地址
+//    Route::any('api/user/into_users', 'Api\UserController@into_users');//导入用户
+//    Route::any('api/user/into_tra', 'Api\UserController@into_tra');//美丽链转入的接口(imc)
 
-    Route::any('/test555', 'Api\PrizePoolController@test555');
-
+//    Route::any('api/user/e_pwd', 'Api\UserController@e_pwd');//修改密码
+//    Route::any('user/walletaddress', 'Api\UserController@walletaddress');//钱包地址
     Route::any('api/area_code', 'Api\CurrencyController@area_code');//国家区号
 
     Route::get('api/kline', 'Api\MarketController@test');//行情详情
@@ -369,9 +346,6 @@ Route::group([ 'middleware' => ['lang', /*'check_user'*/]], function () {
             'Api\UserController@myAccountReturn')->middleware(['demo_limit']);//我的邀请返佣列表
         Route::get('user/my_poster', 'Api\UserController@posterBg')->middleware(['demo_limit']);//我的专属海报
         Route::get('user/my_share', 'Api\UserController@share')->middleware(['demo_limit']);//邀请好友分享
-
-        //钱包地址
-        //Route::any('user/walletaddress','Api\UserController@walletaddress');
 
         Route::get('user/info', 'Api\UserController@info');//我的
         Route::get('user/center', 'Api\UserController@userCenter');//个人中心
