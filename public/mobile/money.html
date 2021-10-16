@@ -139,78 +139,78 @@
             $('.copy').click(function () {
                 var adre = $('.address').text();
                 copy(adre);
-            })
-            // 生成二维码
-            function code(addre) {
-                $('#code').qrcode({
-                    width: 200, //宽度
-                    height: 200, //高度
-                    text: addre
-                });
-            }
-            // 复制地址
-            function copy(addre) {
-                var content = addre;
-                var clipboard = new Clipboard('.copy', {
-                    text: function () {
-                        return content;
-                    }
-                });
-                clipboard.on('success', function (e) {
-                    layer_msg(getlg('copys'))
-                });
-                clipboard.on('error', function (e) {
-                    layer_msg(getlg('pcopy'))
-                });
-            }
+            });
 
-            function getData() {
-                layer_loading();
-                $.ajax({
-                    type: "POST",
-                    url: _API + 'wallet/recharge_address',
-                    data: {
-                        currency: currency
-                    },
-                    dataType: "json",
-                    async: true,
-                    beforeSend: function beforeSend(request) {
-                        request.setRequestHeader("Authorization", token);
-                    },
-                    success: function (res) {
-                        layer_close();
-                        if (res.type == "ok") {
-                            let data=res.message;
-                            var num=0;
-                            for(let i in data){
-                                if(num==0){
-                                    $(".tab-list").append($("<div onclick='tabCode(this)' class='tabactive changeTabActive' data-address="+data[i]+">USDT-ERC20</div>"));
-                                    code(data[i]);
-                                    copy(data[i]);
-                                    $(".address").html(data[i]);
-                                }else{
-                                    $(".tab-list").append($("<div onclick='tabCode(this)' data-address="+data[i]+">"+i+"</div>"));
-                                }
-                                num++;
-                            }
-
-                        } else {
-                            layer_msg(res.message);
-                        }
-                    }
-                })
-            }
-
-            function tabCode(that){
+            $('.chargeChannel').click(function () {
                 $(".tab-list span").removeClass('tabactive');
-                $(that).addClass("tabactive");
-                let address=$(that).attr('data-address');
+                $(this).addClass("tabactive");
+                let address=$(this).attr('data-address');
                 $("canvas").remove();
                 code(address);
                 copy(address);
                 $('.address').html(address);
-            }
+            })
         })
+        // 生成二维码
+        function code(addre) {
+            $('#code').qrcode({
+                width: 200, //宽度
+                height: 200, //高度
+                text: addre
+            });
+        }
+        // 复制地址
+        function copy(addre) {
+            var content = addre;
+            var clipboard = new Clipboard('.copy', {
+                text: function () {
+                    return content;
+                }
+            });
+            clipboard.on('success', function (e) {
+                layer_msg(getlg('copys'))
+            });
+            clipboard.on('error', function (e) {
+                layer_msg(getlg('pcopy'))
+            });
+        }
+
+       function getData() {
+            layer_loading();
+            $.ajax({
+                type: "POST",
+                url: _API + 'wallet/recharge_address',
+                data: {
+                    currency: currency
+                },
+                dataType: "json",
+                async: true,
+                beforeSend: function beforeSend(request) {
+                    request.setRequestHeader("Authorization", token);
+                },
+                success: function (res) {
+                    layer_close();
+                    if (res.type == "ok") {
+                    	let data=res.message;
+                        var num=0;
+                        for(let i in data){
+                            if(num==0){
+                                $(".tab-list").append($("<div class='chargeChannel tabactive changeTabActive' data-address="+data[i]+">"+i+"</div>"));
+                                code(data[i]);
+                                copy(data[i]);
+                                $(".address").html(data[i]);
+                            }else{
+                                $(".tab-list").append($("<div class='chargeChannel' data-address="+data[i]+">"+i+"</div>"));
+                            }
+                            num++;
+                        }
+
+                    } else {
+                        layer_msg(res.message);
+                    }
+                }
+            })
+        }
 
     </script>
 </body>
