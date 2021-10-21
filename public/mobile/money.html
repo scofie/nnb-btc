@@ -103,6 +103,7 @@
     </header>
     <div class="header-space"></div>
     <div class="tab-list">
+        <div style="height: 27px;margin-left: -10px;margin-top: -10px;" class="tabs-data-map"><img src="images/list.png" style="height:25px;"></div>
     </div>
     <div class="plr15">
         <div class="codebox">
@@ -117,6 +118,14 @@
             * <span data-localize="assets.a06">最小充值金额：</span>1000 <span class="titles"></span>。<br>
             * <span data-localize="assets.a10">你的会在3-6个网络确认后到帐。</span> <br>
             * <span data-localize="assets.a11">所有MyToken的充币地址都是多重签名冷钱包地址，所有钱包均不曾被联网的机器读取。</span>
+        </div>
+    </div>
+    <div class="time-modal">
+        <div class="time-header">
+            <p>请选择充值的通道</p>
+        </div>
+        <div class="time-content mt10">
+
         </div>
     </div>
     <script type="text/javascript" src="lib/jquery-2.2.4.min.js"></script>
@@ -152,7 +161,7 @@
             })
         })
         // 生成二维码
-        function code(ele,addre) {
+        function code(addre) {
             $('#code').qrcode({
                 width: 200, //宽度
                 height: 200, //高度
