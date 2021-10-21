@@ -31,7 +31,7 @@
         padding: 0.5rem 0;
     }
     .content-tab .close{
-        color: #D2D2D2;
+        background:#e1e7ef;
     }
     .tab-list span:last-child{
     	margin-left: 5%;
@@ -127,9 +127,11 @@
                 copy(adre);
             });
 
-            $('.tab-list ').delegate(".chargeChannel","click",function () {
-                $(".tab-list div").removeClass('tabactive');
+            $('.recharge-list ').delegate(".chargeChannel","click",function () {
+                $(".recharge-list p").removeClass('tabactive');
+                $(".recharge-list p").addClass('close');
                 $(this).addClass("tabactive");
+                $(this).removeClass("close");
                 let address=$(this).attr('data-address');
                 $("canvas").remove();
                 code(address);
