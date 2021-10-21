@@ -28,10 +28,10 @@
         width: 50%;
         line-height: 30px;
         text-align: center;
+        padding: 0.5rem 0;
     }
-    .content-tab .active{
-        border-bottom: 2px solid #f0b90b;
-        color: #f0b90b;
+    .content-tab .close{
+        color: #D2D2D2;
     }
     .tab-list span:last-child{
     	margin-left: 5%;
@@ -70,9 +70,8 @@
 	    color: #f00;
 	}
 
-    .changeTabActive{
+    .tabactive{
         border-radius: 2px;
-        padding: 0.5rem 0;
         border:1px solid #588bf7;
         background: #588bf7;
         color:#FFFFFF !important;
@@ -182,12 +181,12 @@
                         var num=0;
                         for(let i in data){
                             if(num==0){
-                                $(".recharge-list").append($("<p class='chargeChannel tabactive changeTabActive' data-address="+data[i]+">"+i+"</p>"));
+                                $(".recharge-list").append($("<p class='chargeChannel tabactive ' data-address="+data[i]+">"+i+"</p>"));
                                 code(data[i]);
                                 copy(data[i]);
                                 $(".address").html(data[i]);
                             }else{
-                                $(".recharge-list").append($("<p class='chargeChannel' data-address="+data[i]+">"+i+"</p>"));
+                                $(".recharge-list").append($("<p class='chargeChannel close' data-address="+data[i]+">"+i+"</p>"));
                             }
                             num++;
                         }
